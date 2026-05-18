@@ -4,200 +4,442 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KomGIS | AI Automation for Business</title>
-  <meta name="description" content="KomGIS provides AI automation services for business process modelling, custom AI agents, document processing, customer support, finance workflows and internal operations." />
+  <meta name="description" content="We provide AI automation services for business process modelling, custom AI agents, document processing, customer support, finance workflows and internal operations." />
   <style>
     :root{
-      --bg:#07111f;--bg2:#0b1b31;--card:#101f36;--card2:#132942;--line:#263b5c;
-      --text:#f7fbff;--muted:#aab9cc;--cyan:#31d5ff;--green:#35e6a4;--blue:#6d7dff;
-      --shadow:0 24px 70px rgba(0,0,0,.35);--max:1160px;--r:26px
+      --bg:#0c0c0b;--surface:#131312;--line:#252522;
+      --text:#f2f0eb;--muted:#7a7870;--lime:#c6f135;--white:#ffffff;
+      --max:1200px;--r:4px
     }
-    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-    body{font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 85% 0,#153f58 0,transparent 32%),radial-gradient(circle at 0 30%,#17275b 0,transparent 34%),linear-gradient(180deg,var(--bg),#06101d);color:var(--text);line-height:1.6;overflow-x:hidden}
-    a{text-decoration:none;color:inherit}.wrap{width:min(var(--max),calc(100% - 42px));margin:auto}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--green));color:#03121d;box-shadow:0 16px 42px rgba(49,213,255,.18);transition:.2s}.btn:hover{transform:translateY(-2px)}.btn.alt{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--line);box-shadow:none}.grid{display:grid;gap:24px}
-    header{position:sticky;top:0;z-index:20;background:rgba(7,17,31,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-    nav{height:74px;display:flex;align-items:center;justify-content:space-between}.logo{display:flex;align-items:center;gap:12px;font-size:1.35rem;font-weight:900;letter-spacing:-.04em}.logo span{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--green));color:#04111d;font-size:.95rem}.links{display:flex;align-items:center;gap:26px;color:var(--muted);font-size:.95rem}.links a:hover{color:var(--text)}.menu{display:none;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:10px 13px;font-size:1.1rem}
-    .hero{padding:88px 0 70px}.heroGrid{grid-template-columns:1.08fr .92fr;align-items:center}.eyebrow{display:inline-block;color:#dff9ff;background:rgba(49,213,255,.11);border:1px solid rgba(49,213,255,.28);border-radius:999px;padding:8px 14px;font-size:.9rem;margin-bottom:22px}h1{font-size:clamp(2.7rem,6vw,5.7rem);line-height:.96;letter-spacing:-.07em}.lead{max-width:690px;margin:24px 0 32px;color:var(--muted);font-size:1.12rem}.actions{display:flex;gap:14px;flex-wrap:wrap}.stats{grid-template-columns:repeat(3,1fr);margin-top:34px}.stat,.card,.panel,.mock{border:1px solid var(--line);background:rgba(255,255,255,.055);border-radius:var(--r);box-shadow:0 14px 42px rgba(0,0,0,.16)}.stat{padding:20px}.stat b{display:block;font-size:1.28rem;letter-spacing:-.04em}.stat small,.card p,.panel p{color:var(--muted)}
-    .mock{overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.045));box-shadow:var(--shadow)}.bar{height:54px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;padding:0 20px;color:var(--muted);font-size:.9rem}.dot{width:10px;height:10px;border-radius:50%;background:#ff6b6b}.dot:nth-child(2){background:#ffd166}.dot:nth-child(3){background:var(--green)}.screen{padding:24px}.screenTop{display:flex;justify-content:space-between;gap:16px;margin-bottom:18px}.badge{font-size:.78rem;color:#bffff0;background:rgba(53,230,164,.11);border:1px solid rgba(53,230,164,.25);padding:6px 10px;border-radius:999px;height:max-content}.flow{display:grid;gap:12px}.flowItem{display:flex;align-items:center;gap:13px;padding:14px;border:1px solid rgba(255,255,255,.09);background:rgba(7,17,31,.72);border-radius:18px}.num{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:rgba(49,213,255,.13);color:var(--cyan);font-weight:900}.flowItem p{font-size:.88rem;color:var(--muted)}
-    section{padding:78px 0}.sectionAlt{background:rgba(255,255,255,.035);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.head{max-width:780px;margin-bottom:38px}.kicker{color:var(--cyan);text-transform:uppercase;letter-spacing:.22em;font-size:.78rem;font-weight:900;margin-bottom:12px}h2{font-size:clamp(2rem,4vw,3.5rem);line-height:1.06;letter-spacing:-.055em}.cards{grid-template-columns:repeat(3,1fr)}.card{padding:26px;transition:.2s}.card:hover{transform:translateY(-4px);border-color:rgba(49,213,255,.48);background:rgba(255,255,255,.08)}.icon{width:48px;height:48px;border-radius:16px;background:rgba(49,213,255,.13);color:var(--cyan);display:grid;place-items:center;font-weight:900;margin-bottom:18px}.card h3{font-size:1.2rem;margin-bottom:8px;letter-spacing:-.03em}
-    .method{grid-template-columns:.92fr 1.08fr;align-items:start}.steps{display:grid;gap:10px}.stepBtn{width:100%;border:1px solid var(--line);background:rgba(255,255,255,.055);color:var(--text);padding:16px;border-radius:18px;text-align:left;cursor:pointer;transition:.2s}.stepBtn:hover,.stepBtn.active{border-color:rgba(49,213,255,.55);background:rgba(49,213,255,.11)}.stepBtn small{display:block;color:var(--muted);margin-top:2px}.panel{padding:30px;min-height:330px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04))}.panel h3{font-size:2rem;line-height:1.1;letter-spacing:-.05em;margin:16px 0 12px}.decision{grid-template-columns:repeat(3,1fr);margin-top:24px}.decision div{border:1px solid var(--line);background:rgba(7,17,31,.55);border-radius:18px;padding:16px}.decision small{color:var(--muted)}
-    .examples{grid-template-columns:repeat(5,1fr)}.example{padding:20px;border-radius:22px;background:linear-gradient(180deg,var(--card),rgba(16,31,54,.72));border:1px solid var(--line)}.example b{display:block;margin-bottom:8px}.example p{color:var(--muted);font-size:.92rem}
-    .customers{grid-template-columns:repeat(3,1fr)}
-    .customerCard{padding:26px;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));box-shadow:0 14px 42px rgba(0,0,0,.16)}
-    .customerCard p{color:var(--muted);margin:14px 0 18px}
-    .customerTop{display:flex;align-items:center;gap:14px}
-    .avatar{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--green));color:#04111d;font-weight:900}
-    .customerMeta small{color:var(--muted)}
-    .results{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
-    .result{padding:20px;border:1px solid var(--line);border-radius:22px;background:rgba(7,17,31,.55)}
-    .result b{display:block;font-size:1.45rem;color:var(--text)}
-    .result small{color:var(--muted)}
-    .pricing{grid-template-columns:repeat(3,1fr);align-items:stretch}
-    .priceCard{position:relative;padding:28px;border:1px solid var(--line);border-radius:var(--r);background:rgba(255,255,255,.055);box-shadow:0 14px 42px rgba(0,0,0,.16)}
-    .priceCard.featured{border-color:rgba(49,213,255,.55);background:linear-gradient(180deg,rgba(49,213,255,.14),rgba(255,255,255,.055))}
-    .priceBadge{position:absolute;top:18px;right:18px;font-size:.75rem;background:rgba(49,213,255,.15);color:#dff9ff;border:1px solid rgba(49,213,255,.35);border-radius:999px;padding:5px 9px}
-    .price{font-size:2.15rem;font-weight:900;letter-spacing:-.06em;margin:14px 0 6px}
-    .price span{font-size:.95rem;color:var(--muted);font-weight:600;letter-spacing:0}
-    .priceCard p{color:var(--muted);margin-bottom:18px}
-    .priceList{list-style:none;display:grid;gap:10px;margin:20px 0 24px;color:var(--muted)}
-    .priceList li::before{content:"✓";color:var(--green);font-weight:900;margin-right:9px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(var(--max),calc(100% - 56px));margin:auto}
 
-    .tech{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.chip{border:1px solid var(--line);background:rgba(255,255,255,.07);border-radius:999px;padding:9px 13px;color:#e8f5ff;font-size:.9rem}
-    .ctaBox{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;padding:42px;border:1px solid rgba(49,213,255,.24);border-radius:34px;background:radial-gradient(circle at 100% 0,rgba(49,213,255,.18),transparent 35%),rgba(255,255,255,.05);box-shadow:var(--shadow)}.contact{background:rgba(7,17,31,.7);border:1px solid var(--line);border-radius:24px;padding:24px}.contact p{color:var(--muted);margin:8px 0 18px}.contactItem{padding:12px 0;border-bottom:1px solid var(--line);color:var(--muted)}footer{border-top:1px solid var(--line);background:rgba(7,17,31,.72);padding:28px 0;color:var(--muted);font-size:.92rem}.foot{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.footerLinks{display:flex;gap:18px;flex-wrap:wrap}.footerLinks a{color:var(--muted);transition:.2s}.footerLinks a:hover{color:var(--text)}.reveal{opacity:0;transform:translateY(18px);transition:.65s}.reveal.show{opacity:1;transform:none}
-    @media(max-width:980px){.links{display:none}.menu{display:block}.links.open{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;align-items:flex-start;background:#07111f;padding:18px 24px;border-bottom:1px solid var(--line)}.heroGrid,.method,.ctaBox{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}.examples,.customers,.pricing,.results{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:640px){.foot{flex-direction:column;align-items:flex-start}.wrap{width:min(var(--max),calc(100% - 28px))}.hero{padding:56px 0}.actions .btn{width:100%}.stats,.cards,.decision,.examples,.customers,.pricing,.results{grid-template-columns:1fr}.screenTop{display:block}.badge{display:inline-block;margin-top:10px}.ctaBox{padding:24px}}
+    /* NAV */
+    header{position:sticky;top:0;z-index:50;background:rgba(12,12,11,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    nav{height:68px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:1.05rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+    .logoDot{width:8px;height:8px;border-radius:50%;background:var(--lime)}
+    .links{display:flex;align-items:center;gap:32px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+    .links a:hover{color:var(--text)}
+    .navCta{padding:9px 20px;background:var(--lime);color:#0c0c0b;border-radius:var(--r);font-size:.85rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .navCta:hover{background:#d4ff3a}
+    .menu{display:none;background:transparent;border:1px solid var(--line);color:var(--text);border-radius:var(--r);padding:8px 12px;font-size:1rem;cursor:pointer}
+
+    /* HERO */
+    .hero{padding:120px 0 100px;border-bottom:1px solid var(--line)}
+    .heroLabel{font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:40px;display:flex;align-items:center;gap:14px}
+    .heroLabel::before{content:'';display:block;width:32px;height:1px;background:var(--muted)}
+    h1{font-size:clamp(3.2rem,7.5vw,7.8rem);line-height:1.06;letter-spacing:-.055em;font-weight:900;max-width:1100px}
+    h1 .accent{color:var(--lime)}
+    .heroBottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:64px;gap:40px;flex-wrap:wrap}
+    .heroCopy{max-width:520px;color:var(--muted);font-size:1.05rem;line-height:1.7}
+        .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;font-weight:700;font-size:.95rem;border-radius:var(--r);transition:.15s;letter-spacing:.01em}
+    .btnPrimary{background:var(--lime);color:#0c0c0b}
+    .btnPrimary:hover{background:#d4ff3a}
+    .btnGhost{border:1px solid var(--line);color:var(--muted)}
+    .btnGhost:hover{border-color:var(--text);color:var(--text)}
+
+    /* TICKER */
+    .ticker{border-bottom:1px solid var(--line);overflow:hidden;height:48px;display:flex;align-items:center}
+    .tickerInner{display:flex;gap:0;white-space:nowrap;animation:tick 22s linear infinite}
+    @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .tickerItem{font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding:0 42px;border-right:1px solid var(--line)}
+    .tickerItem span{color:var(--lime);margin-right:10px}
+
+    /* SERVICES */
+    .services{border-bottom:1px solid var(--line)}
+    .sectionHeader{display:flex;align-items:baseline;justify-content:space-between;padding:48px 0 40px;border-bottom:1px solid var(--line);margin-bottom:0}
+    .sectionLabel{font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+    .sectionCount{font-size:.78rem;color:var(--muted);letter-spacing:.1em}
+    .serviceList{display:grid}
+    .serviceRow{display:grid;grid-template-columns:64px 1fr 1fr auto;align-items:start;gap:24px;padding:36px 0;border-bottom:1px solid var(--line);transition:.15s}
+    .serviceRow:hover .serviceTitle{color:var(--lime)}
+    .serviceNum{font-size:.82rem;color:var(--muted);letter-spacing:.1em;font-variant-numeric:tabular-nums;padding-top:4px}
+    .serviceTitle{font-size:1.55rem;font-weight:700;letter-spacing:-.03em;line-height:1.2;transition:.15s}
+    .serviceDesc{color:var(--muted);font-size:.95rem;line-height:1.65;padding-top:4px}
+    .serviceTag{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:6px 12px;border-radius:999px;white-space:nowrap;height:max-content}
+
+    /* WORKFLOW */
+    .workflow{border-bottom:1px solid var(--line)}
+    .workflowGrid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line)}
+    .workflowLeft{padding:56px 48px 56px 0;border-right:1px solid var(--line)}
+    .workflowRight{padding:56px 0 56px 48px}
+    .workflowHeading{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:16px}
+    .workflowSub{color:var(--muted);font-size:.98rem;margin-bottom:40px;line-height:1.7}
+    .stepList{display:grid;gap:0}
+    .step{display:flex;gap:24px;padding:20px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:.15s}
+    .step:first-child{border-top:1px solid var(--line)}
+    .step:hover .stepTitle,.step.active .stepTitle{color:var(--lime)}
+    .stepN{font-size:.78rem;color:var(--muted);letter-spacing:.1em;padding-top:5px;min-width:28px}
+    .stepTitle{font-size:1.05rem;font-weight:700;letter-spacing:-.02em;transition:.15s}
+    .stepSub{font-size:.88rem;color:var(--muted);margin-top:3px}
+    .stepPanel{background:var(--surface);border-radius:8px;padding:36px;display:flex;flex-direction:column;gap:20px}
+    .panelNum{font-size:3.5rem;font-weight:900;letter-spacing:-.07em;color:var(--lime);line-height:1}
+    .panelTitle{font-size:1.4rem;font-weight:700;letter-spacing:-.03em}
+    .panelText{color:var(--muted);font-size:.95rem;line-height:1.7}
+
+    /* EXAMPLES */
+    .examples{border-bottom:1px solid var(--line)}
+    .examplesGrid{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line)}
+    .exampleCell{padding:36px 28px;border-right:1px solid var(--line);transition:.15s}
+    .exampleCell:last-child{border-right:none}
+    .exampleCell:hover{background:var(--surface)}
+    .exampleNum{font-size:.75rem;color:var(--muted);letter-spacing:.15em;margin-bottom:24px;display:block}
+    .exampleCell b{display:block;font-size:1.05rem;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.3}
+    .exampleCell p{color:var(--muted);font-size:.88rem;line-height:1.6}
+
+    /* CUSTOMERS */
+    .customers{border-bottom:1px solid var(--line)}
+    .testimonialsGrid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+    .testimonial{padding:44px 36px;border-right:1px solid var(--line)}
+    .testimonial:last-child{border-right:none}
+    .tQuote{font-size:1.05rem;line-height:1.75;color:var(--text);margin-bottom:32px}
+    .tMeta{display:flex;align-items:center;gap:14px;padding-top:24px;border-top:1px solid var(--line)}
+    .tAvatar{width:40px;height:40px;border-radius:50%;background:var(--lime);display:grid;place-items:center;color:#0c0c0b;font-weight:900;font-size:.82rem;flex-shrink:0}
+    .tName{font-size:.9rem;font-weight:700}
+    .tRole{font-size:.82rem;color:var(--muted)}
+    .statsRow{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+    .statCell{padding:40px 36px;border-right:1px solid var(--line)}
+    .statCell:last-child{border-right:none}
+    .statVal{font-size:3rem;font-weight:900;letter-spacing:-.06em;color:var(--lime);line-height:1;margin-bottom:8px}
+    .statDesc{font-size:.88rem;color:var(--muted);line-height:1.5}
+
+    /* TECH */
+    .tech{border-bottom:1px solid var(--line)}
+    .techInner{display:flex;justify-content:space-between;align-items:center;gap:40px;padding:52px 0;flex-wrap:wrap;border-top:1px solid var(--line)}
+    .techHeading{font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:800;letter-spacing:-.04em;max-width:420px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{border:1px solid var(--line);background:transparent;border-radius:var(--r);padding:8px 16px;color:var(--muted);font-size:.85rem;letter-spacing:.04em;transition:.15s}
+    .chip:hover{border-color:var(--lime);color:var(--lime)}
+
+    /* CONTACT */
+    .contact{border-bottom:1px solid var(--line)}
+    .contactGrid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+    .contactLeft{padding:72px 64px 72px 0;border-right:1px solid var(--line)}
+    .contactRight{padding:72px 0 72px 64px;display:flex;flex-direction:column;gap:0}
+    .contactHeading{font-size:clamp(2rem,4vw,3.8rem);font-weight:900;letter-spacing:-.05em;line-height:1;margin-bottom:20px}
+    .contactSub{color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:40px}
+    .contactItem{display:flex;flex-direction:column;gap:2px;padding:22px 0;border-bottom:1px solid var(--line)}
+    .contactItem:first-child{border-top:1px solid var(--line)}
+    .contactItemLabel{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+    .contactItemValue{font-size:1rem;color:var(--text)}
+
+    /* FOOTER */
+    footer{padding:32px 0}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    .footLeft{font-size:.82rem;color:var(--muted);letter-spacing:.04em}
+    .footerLinks{display:flex;gap:24px;flex-wrap:wrap}
+    .footerLinks a{font-size:.82rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .footerLinks a:hover{color:var(--text)}
+
+    .reveal{opacity:0;transform:translateY(14px);transition:.6s}.reveal.show{opacity:1;transform:none}
+
+    @media(max-width:1020px){
+      .serviceRow{grid-template-columns:48px 1fr 1fr}
+      .serviceTag{display:none}
+      .workflowGrid,.contactGrid{grid-template-columns:1fr}
+      .workflowLeft{border-right:none;padding-right:0;border-bottom:1px solid var(--line);padding-bottom:40px}
+      .workflowRight{padding-left:0;padding-top:40px}
+      .contactLeft{border-right:none;padding-right:0;border-bottom:1px solid var(--line)}
+      .contactRight{padding-left:0}
+      .examplesGrid{grid-template-columns:repeat(2,1fr)}
+      .exampleCell:nth-child(2){border-right:none}
+      .exampleCell:nth-child(3),.exampleCell:nth-child(4){border-top:1px solid var(--line)}
+      .exampleCell:nth-child(4){border-right:none}
+      .exampleCell:nth-child(5){grid-column:1/-1;border-top:1px solid var(--line);border-right:none}
+      .testimonialsGrid,.statsRow{grid-template-columns:1fr}
+      .testimonial,.statCell{border-right:none;border-bottom:1px solid var(--line)}
+      .links{display:none}.menu{display:block}
+      .links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:flex-start;background:var(--bg);padding:20px 28px;border-bottom:1px solid var(--line);gap:18px}
+      .navCta{display:none}
+    }
+    @media(max-width:640px){
+      .wrap{width:min(var(--max),calc(100% - 32px))}
+      h1{font-size:clamp(2.8rem,10vw,4rem)}
+      .hero{padding:80px 0 70px}
+      .heroBottom{flex-direction:column;align-items:flex-start}
+      .heroActions{align-items:flex-start}
+      .serviceRow{grid-template-columns:40px 1fr}
+      .serviceDesc{display:none}
+      .statsRow{grid-template-columns:1fr 1fr}
+      .foot{flex-direction:column;align-items:flex-start}
+      .techInner{flex-direction:column;align-items:flex-start}
+    }
   </style>
 </head>
 <body>
 <header>
   <nav class="wrap">
-    <a class="logo" href="#top"><span>KG</span>KomGIS</a>
-    <div class="links" id="links"><a href="#services">Services</a><a href="#method">Method</a><a href="#examples">Examples</a><a href="#customers">Customers</a><a href="#pricing">Pricing</a><a href="#tech">Technology</a><a href="#contact">Contact</a></div>
+    <a class="logo" href="#top"><span class="logoDot"></span>KomGIS</a>
+    <div class="links" id="links">
+      <a href="#services">Services</a>
+      <a href="#method">Method</a>
+      <a href="#examples">Examples</a>
+      <a href="#customers">Customers</a>
+      <a href="#tech">Technology</a>
+    </div>
+    <a class="navCta" href="#contact">Get in touch</a>
     <button class="menu" id="menu" aria-label="Menu">☰</button>
   </nav>
 </header>
+
 <main id="top">
-  <section class="hero wrap">
-    <div class="grid heroGrid">
-      <div class="reveal">
-        <span class="eyebrow">AI automation for modern business operations</span>
-        <h1>Turn business processes into intelligent workflows.</h1>
-        <p class="lead">KomGIS helps companies automate repetitive business work using process modelling, custom AI agents, human approval, secure integrations and continuous monitoring.</p>
-        <div class="actions"><a class="btn" href="#contact">Request consultation →</a><a class="btn alt" href="#examples">See automation examples</a></div>
-        <div class="grid stats"><div class="stat"><b>BPMN 2.0</b><small>process-first design</small></div><div class="stat"><b>AI Agents</b><small>task-specific automation</small></div><div class="stat"><b>Human Control</b><small>review and approval</small></div></div>
-      </div>
-      <div class="mock reveal">
-        <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> KomGIS Automation Console</div>
-        <div class="screen">
-          <div class="screenTop"><div><small style="color:var(--muted)">Live workflow</small><h3>Invoice approval automation</h3></div><span class="badge">Human review enabled</span></div>
-          <div class="flow"><div class="flowItem"><span class="num">1</span><div><b>Extract invoice data</b><p>Supplier, amount, tax, due date and line items</p></div></div><div class="flowItem"><span class="num">2</span><div><b>Check against records</b><p>Compare with purchase order and business rules</p></div></div><div class="flowItem"><span class="num">3</span><div><b>Route for approval</b><p>Send recommendation to responsible manager</p></div></div></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="heroLabel reveal">AI automation consultancy — Belgrade, Serbia</div>
+      <h1 class="reveal">Turn business<br>processes into<br><span class="accent">intelligent</span><br>workflows.</h1>
+      <div class="heroBottom reveal">
+        <div>
+          <p class="heroCopy">We implement AI automation in a way your team can actually understand — no black boxes, no guesswork, just clear workflows that handle the repetitive work while keeping people in control.</p>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:36px">
+            <a class="btn btnPrimary" href="#contact">Request consultation →</a>
+            <a class="btn btnGhost" href="#examples">See automation examples</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="sectionAlt" id="services"><div class="wrap"><div class="head reveal"><div class="kicker">Services</div><h2>From process analysis to production-ready AI automation.</h2><p class="lead">KomGIS builds reliable automation around your actual business workflows, not generic AI demos.</p></div><div class="grid cards"><article class="card reveal"><div class="icon">01</div><h3>Business Process Modelling</h3><p>Map workflows, roles, systems, decisions and bottlenecks using BPMN 2.0.</p></article><article class="card reveal"><div class="icon">02</div><h3>AI Automation Strategy</h3><p>Identify where AI should assist, automate, validate, summarize or generate.</p></article><article class="card reveal"><div class="icon">03</div><h3>Custom AI Agents</h3><p>Develop controlled agents with scoped tools, prompts, validations and fallbacks.</p></article><article class="card reveal"><div class="icon">04</div><h3>Document Intelligence</h3><p>Extract, classify and summarize emails, invoices, forms, reports and PDFs.</p></article><article class="card reveal"><div class="icon">05</div><h3>Human-in-the-Loop UI</h3><p>Create dashboards for review, approval, correction, feedback and monitoring.</p></article><article class="card reveal"><div class="icon">06</div><h3>Deployment & Optimization</h3><p>Pilot, test, monitor and continuously improve automation performance.</p></article></div></div></section>
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="tickerInner">
+      <span class="tickerItem"><span>→</span>Business process modelling</span>
+      <span class="tickerItem"><span>→</span>Custom AI agents</span>
+      <span class="tickerItem"><span>→</span>Document intelligence</span>
+      <span class="tickerItem"><span>→</span>Human-in-the-loop</span>
+      <span class="tickerItem"><span>→</span>LangGraph &amp; CopilotKit</span>
+      <span class="tickerItem"><span>→</span>BPMN 2.0 workflows</span>
+      <span class="tickerItem"><span>→</span>Deployment &amp; monitoring</span>
+      <span class="tickerItem"><span>→</span>Business process modelling</span>
+      <span class="tickerItem"><span>→</span>Custom AI agents</span>
+      <span class="tickerItem"><span>→</span>Document intelligence</span>
+      <span class="tickerItem"><span>→</span>Human-in-the-loop</span>
+      <span class="tickerItem"><span>→</span>LangGraph &amp; CopilotKit</span>
+      <span class="tickerItem"><span>→</span>BPMN 2.0 workflows</span>
+      <span class="tickerItem"><span>→</span>Deployment &amp; monitoring</span>
+    </div>
+  </div>
 
-  <section id="method"><div class="wrap grid method"><div class="reveal"><div class="kicker">Methodology</div><h2>Process first. AI second.</h2><p class="lead">A structured methodology keeps AI automation practical, reliable and safe for business use.</p><div class="steps"><button class="stepBtn active" data-title="Model the process" data-text="KomGIS maps the existing workflow with BPMN 2.0, including tasks, roles, systems, decisions, inputs, outputs and exceptions."><b>1. Model the process</b><small>Understand how the work is done today.</small></button><button class="stepBtn" data-title="Find AI opportunities" data-text="Each process step is evaluated to decide whether it should remain manual, become AI-assisted or be automated under business rules."><b>2. Find AI opportunities</b><small>Choose the right automation points.</small></button><button class="stepBtn" data-title="Build controlled agents" data-text="AI agents are developed for specific tasks such as extraction, summarization, routing, classification, drafting and recommendations."><b>3. Build controlled agents</b><small>Use AI where it is reliable and measurable.</small></button><button class="stepBtn" data-title="Deploy, monitor and improve" data-text="The automation is deployed gradually with user review, monitoring, feedback, testing and prompt or workflow refinement."><b>4. Deploy and monitor</b><small>Move safely from pilot to production.</small></button></div></div><aside class="panel reveal"><div class="icon">AI</div><h3 id="panelTitle">Model the process</h3><p id="panelText">KomGIS maps the existing workflow with BPMN 2.0, including tasks, roles, systems, decisions, inputs, outputs and exceptions.</p><div class="grid decision"><div><b>Manual</b><br><small>High-risk judgment</small></div><div><b>AI-assisted</b><br><small>Draft, summarize, extract</small></div><div><b>Automated</b><br><small>Bounded repeatable tasks</small></div></div></aside></div></section>
-
-  <section class="sectionAlt" id="examples"><div class="wrap"><div class="head reveal"><div class="kicker">Automation examples</div><h2>Practical use cases clients understand immediately.</h2></div><div class="grid examples"><div class="example reveal"><b>Customer complaints</b><p>Classify issue, summarize history and draft response for human approval.</p></div><div class="example reveal"><b>Invoice processing</b><p>Extract invoice data, detect discrepancies and route approvals.</p></div><div class="example reveal"><b>Document analysis</b><p>Summarize contracts, reports, PDFs and convert data into records.</p></div><div class="example reveal"><b>Sales lead qualification</b><p>Score leads, summarize needs and update CRM automatically.</p></div><div class="example reveal"><b>Employee onboarding</b><p>Create checklists, answer policy questions and notify responsible teams.</p></div></div></div></section>
-
-
-  <section id="customers">
+  <!-- SERVICES -->
+  <section class="services" id="services">
     <div class="wrap">
-      <div class="head reveal">
-        <div class="kicker">Satisfied customers</div>
-        <h2>Trusted automation patterns for busy business teams.</h2>
-        <p class="lead">KomGIS solutions are designed for teams that want faster operations, fewer manual tasks and better control over AI-assisted work.</p>
+      <div class="sectionHeader reveal">
+        <span class="sectionLabel">What we do</span>
+        <span class="sectionCount">One service, five phases</span>
       </div>
-
-      <div class="grid customers">
-        <article class="customerCard reveal">
-          <div class="customerTop">
-            <div class="avatar">FO</div>
-            <div class="customerMeta"><b>Finance Operations Team</b><br><small>Invoice and approval workflow</small></div>
-          </div>
-          <p>“The invoice workflow helped us reduce manual checking and gave managers a clear approval package before payment decisions.”</p>
-        </article>
-
-        <article class="customerCard reveal">
-          <div class="customerTop">
-            <div class="avatar">CS</div>
-            <div class="customerMeta"><b>Customer Support Department</b><br><small>Complaint handling automation</small></div>
-          </div>
-          <p>“AI-generated summaries and response drafts made our support process faster while keeping every customer reply under human control.”</p>
-        </article>
-
-        <article class="customerCard reveal">
-          <div class="customerTop">
-            <div class="avatar">HR</div>
-            <div class="customerMeta"><b>HR and Administration</b><br><small>Onboarding assistant</small></div>
-          </div>
-          <p>“The onboarding assistant reduced repeated questions and helped new employees find policy information and required tasks more easily.”</p>
-        </article>
+      <div class="serviceRow reveal" style="grid-template-columns:64px 1fr;padding-bottom:48px;border-bottom:1px solid var(--line)">
+        <span></span>
+        <div>
+          <div style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-.04em;line-height:1.15;margin-bottom:16px">We build AI automation systems<br>that actually work.</div>
+          <p style="color:var(--muted);font-size:1rem;line-height:1.75;max-width:680px">Most AI projects fail because they start with the technology, not the problem. We do it the other way around — understand the workflow first, then design an AI system that fits it. The result is automation your team trusts and actually uses.</p>
+        </div>
       </div>
-
-      <div class="grid results reveal">
-        <div class="result"><b>3.4×</b><small>faster document handling in pilot workflows</small></div>
-        <div class="result"><b>40%</b><small>less repetitive manual review for selected tasks</small></div>
-        <div class="result"><b>100%</b><small>human review available for sensitive outputs</small></div>
+      <div class="serviceList">
+        <div class="serviceRow reveal">
+          <span class="serviceNum">01</span>
+          <span class="serviceTitle">Business Process Modelling</span>
+          <span class="serviceDesc">Map workflows, roles, systems, decisions and bottlenecks using BPMN 2.0 — in a format your whole team can read and validate.</span>
+          <span class="serviceTag">Phase 1</span>
+        </div>
+        <div class="serviceRow reveal">
+          <span class="serviceNum">02</span>
+          <span class="serviceTitle">AI Automation Design</span>
+          <span class="serviceDesc">Identify exactly where AI should assist, automate, validate, summarize or generate — and where humans must stay in control.</span>
+          <span class="serviceTag">Phase 2</span>
+        </div>
+        <div class="serviceRow reveal">
+          <span class="serviceNum">03</span>
+          <span class="serviceTitle">Custom AI Agents &amp; Human-in-the-Loop UI</span>
+          <span class="serviceDesc">Develop controlled agents alongside the review and approval interface — prompts, validations and fallbacks are built together with the dashboards that keep people in control of every output.</span>
+          <span class="serviceTag">Phase 3</span>
+        </div>
+        <div class="serviceRow reveal">
+          <span class="serviceNum">04</span>
+          <span class="serviceTitle">Data Flow Integration</span>
+          <span class="serviceDesc">Connect your systems via APIs, databases and files so that data moves reliably through every step without manual handling.</span>
+          <span class="serviceTag">Phase 4</span>
+        </div>
+        <div class="serviceRow reveal">
+          <span class="serviceNum">05</span>
+          <span class="serviceTitle">Deployment &amp; Optimization</span>
+          <span class="serviceDesc">Pilot, test, monitor and continuously improve — from first prototype to a system running reliably in production.</span>
+          <span class="serviceTag">Phase 5</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="sectionAlt" id="pricing">
+  <!-- METHODOLOGY -->
+  <section class="workflow" id="method">
     <div class="wrap">
-      <div class="head reveal">
-        <div class="kicker">Pricing</div>
-        <h2>Simple starting packages for AI automation projects.</h2>
-        <p class="lead">Prices are indicative and depend on process complexity, number of integrations, data sensitivity and deployment environment.</p>
+      <div class="sectionHeader reveal">
+        <span class="sectionLabel">Methodology</span>
+        <span class="sectionCount">05 steps</span>
       </div>
-
-      <div class="grid pricing">
-        <article class="priceCard reveal">
-          <h3>Process Discovery</h3>
-          <div class="price">€1,500<span>+</span></div>
-          <p>Best for companies that want to understand where AI automation can create value.</p>
-          <ul class="priceList">
-            <li>Process discovery workshop</li>
-            <li>BPMN 2.0 workflow map</li>
-            <li>AI opportunity assessment</li>
-            <li>Automation roadmap</li>
-          </ul>
-          <a class="btn alt" href="#contact">Request discovery</a>
-        </article>
-
-        <article class="priceCard featured reveal">
-          <span class="priceBadge">Most popular</span>
-          <h3>Automation Pilot</h3>
-          <div class="price">€4,900<span>+</span></div>
-          <p>Best for validating one high-value workflow with a working AI-assisted prototype.</p>
-          <ul class="priceList">
-            <li>One selected business process</li>
-            <li>Custom AI workflow prototype</li>
-            <li>Human-in-the-loop approval screen</li>
-            <li>Testing and pilot support</li>
-          </ul>
-          <a class="btn" href="#contact">Start pilot</a>
-        </article>
-
-        <article class="priceCard reveal">
-          <h3>Production Automation</h3>
-          <div class="price">Custom</div>
-          <p>Best for companies that need full deployment, integrations, monitoring and support.</p>
-          <ul class="priceList">
-            <li>Custom AI agents and workflows</li>
-            <li>CRM, ERP, email or database integration</li>
-            <li>Security, logging and monitoring</li>
-            <li>Deployment and optimization</li>
-          </ul>
-          <a class="btn alt" href="#contact">Request quote</a>
-        </article>
+      <div class="workflowGrid">
+        <div class="workflowLeft reveal">
+          <h2 class="workflowHeading">Process first.<br>AI second.</h2>
+          <p class="workflowSub">A structured methodology keeps AI automation practical, reliable and safe for business use. We don't start with tools — we start with your workflow.</p>
+          <div class="stepList">
+            <div class="step active" data-n="01" data-title="Business Process Modelling" data-text="We map your existing workflows together with your team using our collaboration tool — capturing tasks, roles, decisions, inputs and exceptions in a format everyone can read and validate.">
+              <span class="stepN">01</span><div><div class="stepTitle">Business Process Modelling</div><div class="stepSub">Understand how the work is done today.</div></div>
+            </div>
+            <div class="step" data-n="02" data-title="AI Automation Design" data-text="We identify exactly where AI should assist, automate, validate, summarize or generate — and where humans must stay in control — before a single line of code is written.">
+              <span class="stepN">02</span><div><div class="stepTitle">AI Automation Design</div><div class="stepSub">Decide where AI fits and where it doesn't.</div></div>
+            </div>
+            <div class="step" data-n="03" data-title="Custom AI Agents & Human-in-the-Loop UI" data-text="Agents and the review interface are built together — controlled agents with scoped tools, structured prompts and fallbacks, alongside the dashboards that keep people in control of every sensitive output.">
+              <span class="stepN">03</span><div><div class="stepTitle">Custom AI Agents &amp; Human-in-the-Loop UI</div><div class="stepSub">Build the system and the oversight layer as one.</div></div>
+            </div>
+            <div class="step" data-n="04" data-title="Data Flow Integration" data-text="We connect your systems via APIs, databases and files so that data moves reliably through every step of the workflow — no manual copying, no broken handoffs.">
+              <span class="stepN">04</span><div><div class="stepTitle">Data Flow Integration</div><div class="stepSub">Connect your systems and sources reliably.</div></div>
+            </div>
+            <div class="step" data-n="05" data-title="Deployment & Optimization" data-text="We pilot in a controlled environment, validate with real data, then release to production — with monitoring in place so issues are caught early and the system keeps improving.">
+              <span class="stepN">05</span><div><div class="stepTitle">Deployment &amp; Optimization</div><div class="stepSub">From pilot to production, safely.</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="workflowRight reveal">
+          <div class="stepPanel">
+            <div class="panelNum" id="panelN">01</div>
+            <div class="panelTitle" id="panelTitle">Business Process Modelling</div>
+            <div class="panelText" id="panelText">We map your existing workflows together with your team using our collaboration tool — capturing tasks, roles, decisions, inputs and exceptions in a format everyone can read and validate.</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- EXAMPLES -->
+  <section class="examples" id="examples">
+    <div class="wrap">
+      <div class="sectionHeader reveal">
+        <span class="sectionLabel">Automation examples</span>
+        <span class="sectionCount">Practical use cases</span>
+      </div>
+    </div>
+    <div class="examplesGrid reveal">
+      <div class="exampleCell"><span class="exampleNum">01</span><b>Customer support handling</b><p>Classify incoming requests, summarize case history and draft a response ready for human review and approval.</p></div>
+      <div class="exampleCell"><span class="exampleNum">02</span><b>Invoice processing</b><p>Extract invoice data, detect discrepancies and route approvals.</p></div>
+      <div class="exampleCell"><span class="exampleNum">03</span><b>Document analysis</b><p>Summarize contracts, reports, PDFs and convert data into records.</p></div>
+      <div class="exampleCell"><span class="exampleNum">04</span><b>Sales lead scoring</b><p>Score leads, summarize needs and update CRM automatically.</p></div>
+      <div class="exampleCell"><span class="exampleNum">05</span><b>Employee onboarding</b><p>Create checklists, answer policy questions and notify responsible teams.</p></div>
+    </div>
+  </section>
 
-  <section id="tech"><div class="wrap"><div class="head reveal"><div class="kicker">Technology</div><h2>Built with a modern AI automation stack.</h2><p class="lead">KomGIS can implement solutions using LangChain, LangGraph, OpenAI, Anthropic, Gemini, local LLMs, Django DRF, PostgreSQL, React, Next.js, AWS, DigitalOcean and Vercel.</p><div class="tech"><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">OpenAI</span><span class="chip">Django DRF</span><span class="chip">PostgreSQL</span><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">AWS</span></div></div></div></section>
+  <!-- CUSTOMERS -->
+  <section class="customers" id="customers">
+    <div class="wrap">
+      <div class="sectionHeader reveal">
+        <span class="sectionLabel">Satisfied customers</span>
+        <span class="sectionCount">Trusted automation patterns</span>
+      </div>
+    </div>
+    <div class="testimonialsGrid reveal">
+      <div class="testimonial">
+        <p class="tQuote">"The invoice workflow helped us reduce manual checking and gave managers a clear approval package before payment decisions."</p>
+        <div class="tMeta"><div class="tAvatar">FO</div><div><div class="tName">Finance Operations Team</div><div class="tRole">Invoice and approval workflow</div></div></div>
+      </div>
+      <div class="testimonial">
+        <p class="tQuote">"AI-generated summaries and response drafts made our support process faster while keeping every customer reply under human control."</p>
+        <div class="tMeta"><div class="tAvatar">CS</div><div><div class="tName">Customer Support Department</div><div class="tRole">Complaint handling automation</div></div></div>
+      </div>
+      <div class="testimonial">
+        <p class="tQuote">"The onboarding assistant reduced repeated questions and helped new employees find policy information and required tasks more easily."</p>
+        <div class="tMeta"><div class="tAvatar">HR</div><div><div class="tName">HR and Administration</div><div class="tRole">Onboarding assistant</div></div></div>
+      </div>
+    </div>
+    <div class="statsRow reveal">
+      <div class="statCell"><div class="statVal">3.4×</div><div class="statDesc">faster document handling in pilot workflows</div></div>
+      <div class="statCell"><div class="statVal">40%</div><div class="statDesc">less repetitive manual review for selected tasks</div></div>
+      <div class="statCell"><div class="statVal">100%</div><div class="statDesc">human review available for sensitive outputs</div></div>
+    </div>
+  </section>
 
-  <section id="contact"><div class="wrap ctaBox reveal"><div><div class="kicker">Start with one process</div><h2>Build your first AI automation workflow.</h2><p class="lead">Select one high-value process, model it, automate the right steps, and deploy with human supervision.</p></div><div class="contact"><h3>Request consultation</h3><p>Replace these placeholders with KomGIS contact details before publishing.</p><div class="contactItem">Email: contact@komgis.com</div><div class="contactItem">Phone: +000 000 000 000</div><div class="contactItem">Location: Your city, your country</div><br><a class="btn" style="width:100%" href="mailto:contact@komgis.com">Contact KomGIS →</a></div></div></section>
+  <!-- TECH -->
+  <section class="tech" id="tech">
+    <div class="wrap">
+      <div class="techInner reveal">
+        <h2 class="techHeading">Built with a modern AI automation stack.</h2>
+        <div class="chips">
+          <span class="chip">LangChain</span>
+          <span class="chip">LangGraph</span>
+          <span class="chip">OpenAI</span>
+          <span class="chip">Anthropic</span>
+          <span class="chip">Django DRF</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">React</span>
+          <span class="chip">Next.js</span>
+          <span class="chip">AWS</span>
+          <span class="chip">CopilotKit</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="sectionHeader reveal">
+        <span class="sectionLabel">Start with one process</span>
+      </div>
+      <div class="contactGrid">
+        <div class="contactLeft reveal">
+          <h2 class="contactHeading">Build your first AI automation workflow.</h2>
+          <p class="contactSub">Select one high-value process, model it, automate the right steps, and deploy with human supervision. We'll help you get there.</p>
+          <a class="btn btnPrimary" href="mailto:komgis2026@gmail.com">Contact us →</a>
+        </div>
+        <div class="contactRight reveal">
+          <div class="contactItem">
+            <span class="contactItemLabel">Email</span>
+            <span class="contactItemValue">komgis2026@gmail.com</span>
+          </div>
+          <div class="contactItem">
+            <span class="contactItemLabel">Phone</span>
+            <span class="contactItemValue">+381 64 151 1069</span>
+          </div>
+          <div class="contactItem">
+            <span class="contactItemLabel">Location</span>
+            <span class="contactItemValue">Belgrade, Serbia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
+
 <footer>
   <div class="wrap foot">
-    <span>© 2026 KomGIS. AI business automation systems.</span>
+    <span class="footLeft">© 2026 KomGIS. AI business automation systems.</span>
     <div class="footerLinks">
       <a href="#services">Services</a>
-      <a href="#method">Methodology</a>
+      <a href="#method">Method</a>
       <a href="#examples">Examples</a>
       <a href="#customers">Customers</a>
-      <a href="#pricing">Pricing</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
 </footer>
+
 <script>
-  const menu=document.getElementById('menu'),links=document.getElementById('links');menu.onclick=()=>links.classList.toggle('open');
-  document.querySelectorAll('.stepBtn').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.stepBtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');panelTitle.textContent=btn.dataset.title;panelText.textContent=btn.dataset.text});
-  const io=new IntersectionObserver(items=>items.forEach(i=>{if(i.isIntersecting)i.target.classList.add('show')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const menu=document.getElementById('menu'),links=document.getElementById('links');
+  menu.onclick=()=>links.classList.toggle('open');
+
+  document.querySelectorAll('.step').forEach(s=>s.onclick=()=>{
+    document.querySelectorAll('.step').forEach(x=>x.classList.remove('active'));
+    s.classList.add('active');
+    document.getElementById('panelN').textContent=s.dataset.n;
+    document.getElementById('panelTitle').textContent=s.dataset.title;
+    document.getElementById('panelText').textContent=s.dataset.text;
+  });
+
+  const io=new IntersectionObserver(items=>items.forEach(i=>{if(i.isIntersecting)i.target.classList.add('show')}),{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
