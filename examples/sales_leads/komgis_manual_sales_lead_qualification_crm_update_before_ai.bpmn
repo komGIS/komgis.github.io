@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Simplified_Sales_Lead" targetNamespace="https://komgis.com/bpmn/simplified-sales-lead-qualification">
+  <bpmn:collaboration id="Collaboration_Simplified_Sales_Lead">
+    <bpmn:participant id="Participant_Company" name="Company / Sales Lead Qualification" processRef="Process_Simplified_Sales_Lead" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_Simplified_Sales_Lead" name="Simplified Sales Lead Qualification and CRM Update" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Simplified_Sales_Lead">
+      <bpmn:lane id="Lane_Sales_Intake" name="Sales Intake">
+        <bpmn:flowNodeRef>Start_Lead_Received</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Capture_Lead</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Review_Qualify</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Qualified</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_CRM_Sales" name="CRM / Sales">
+        <bpmn:flowNodeRef>Task_Update_CRM_Nurture</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Nurture</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Update_CRM_Assign</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Contact_Lead</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Qualified</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_Lead_Received" name="Lead received">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_Capture_Lead" name="Capture lead">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:userTask id="Task_Review_Qualify" name="Review and qualify lead">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_Qualified" name="Qualified?">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4_Yes</bpmn:outgoing>
+      <bpmn:outgoing>Flow_4_No</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_Update_CRM_Assign" name="Update CRM and assign sales rep">
+      <bpmn:incoming>Flow_4_Yes</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sendTask id="Task_Contact_Lead" name="Contact qualified lead">
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="End_Qualified" name="Lead in sales pipeline">
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Task_Update_CRM_Nurture" name="Update CRM as nurture / closed">
+      <bpmn:incoming>Flow_4_No</bpmn:incoming>
+      <bpmn:outgoing>Flow_7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="End_Nurture" name="Lead stored in CRM">
+      <bpmn:incoming>Flow_7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Lead_Received" targetRef="Task_Capture_Lead" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Capture_Lead" targetRef="Task_Review_Qualify" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Review_Qualify" targetRef="Gateway_Qualified" />
+    <bpmn:sequenceFlow id="Flow_4_Yes" sourceRef="Gateway_Qualified" targetRef="Task_Update_CRM_Assign" name="Yes" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_Update_CRM_Assign" targetRef="Task_Contact_Lead" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Task_Contact_Lead" targetRef="End_Qualified" />
+    <bpmn:sequenceFlow id="Flow_4_No" sourceRef="Gateway_Qualified" targetRef="Task_Update_CRM_Nurture" name="No" />
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="Task_Update_CRM_Nurture" targetRef="End_Nurture" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Simplified_Sales_Lead">
+    <bpmndi:BPMNPlane id="BPMNPlane_Simplified_Sales_Lead" bpmnElement="Collaboration_Simplified_Sales_Lead">
+      <bpmndi:BPMNShape id="Participant_Company_di" bpmnElement="Participant_Company" isHorizontal="true">
+        <dc:Bounds x="80" y="80" width="1220" height="360" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Sales_Intake_di" bpmnElement="Lane_Sales_Intake" isHorizontal="true">
+        <dc:Bounds x="110" y="80" width="1190" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_CRM_Sales_di" bpmnElement="Lane_CRM_Sales" isHorizontal="true">
+        <dc:Bounds x="110" y="260" width="1190" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Lead_Received_di" bpmnElement="Start_Lead_Received">
+        <dc:Bounds x="180" y="145" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Capture_Lead_di" bpmnElement="Task_Capture_Lead">
+        <dc:Bounds x="270" y="128" width="130" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Review_Qualify_di" bpmnElement="Task_Review_Qualify">
+        <dc:Bounds x="460" y="128" width="150" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Qualified_di" bpmnElement="Gateway_Qualified" isMarkerVisible="true">
+        <dc:Bounds x="680" y="138" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Update_CRM_Assign_di" bpmnElement="Task_Update_CRM_Assign">
+        <dc:Bounds x="800" y="128" width="170" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Contact_Lead_di" bpmnElement="Task_Contact_Lead">
+        <dc:Bounds x="1030" y="128" width="150" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Qualified_di" bpmnElement="End_Qualified">
+        <dc:Bounds x="1230" y="145" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Update_CRM_Nurture_di" bpmnElement="Task_Update_CRM_Nurture">
+        <dc:Bounds x="800" y="315" width="170" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Nurture_di" bpmnElement="End_Nurture">
+        <dc:Bounds x="1040" y="332" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="216" y="163" />
+        <di:waypoint x="270" y="163" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="400" y="163" />
+        <di:waypoint x="460" y="163" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="610" y="163" />
+        <di:waypoint x="680" y="163" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_Yes_di" bpmnElement="Flow_4_Yes">
+        <di:waypoint x="730" y="163" />
+        <di:waypoint x="800" y="163" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="970" y="163" />
+        <di:waypoint x="1030" y="163" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="1180" y="163" />
+        <di:waypoint x="1230" y="163" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_No_di" bpmnElement="Flow_4_No">
+        <di:waypoint x="705" y="188" />
+        <di:waypoint x="705" y="350" />
+        <di:waypoint x="800" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <di:waypoint x="970" y="350" />
+        <di:waypoint x="1040" y="350" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

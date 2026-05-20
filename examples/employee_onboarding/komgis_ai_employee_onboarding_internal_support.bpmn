@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Onboarding_AI_Layer" targetNamespace="https://komgis.com/bpmn/onboarding-ai-automation" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.13.2">
+  <bpmn:collaboration id="Collaboration_Onboarding_AI_Layer">
+    <bpmn:participant id="Participant_Onboarding" name="Employee Onboarding with AI Automation Layer" processRef="Process_Onboarding_AI_Layer" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_Onboarding_AI_Layer" name="Employee Onboarding with AI Automation Layer" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Onboarding_AI_Layer">
+      <bpmn:lane id="Lane_HR" name="HR / Onboarding Team">
+        <bpmn:flowNodeRef>Start_New_Hire</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Prepare_Checklist</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Send_Invitation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Setup_Needed</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Notify_Employee</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Onboarding_Complete</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Employee" name="New Employee">
+        <bpmn:flowNodeRef>Task_Employee_Submits_Info</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_AI" name="AI Automation">
+        <bpmn:flowNodeRef>Task_AI_Check_Data</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_AI_Data_Complete</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Request_Corrections</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Load_Policies</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Answer_Questions</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Save_Notify_HR</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Manager_IT" name="Manager / IT">
+        <bpmn:flowNodeRef>Task_Manager_IT_Setup</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_HRIS" name="HRIS / Internal Systems">
+        <bpmn:flowNodeRef>Task_Update_Systems</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_New_Hire" name="New hire record created" />
+    <bpmn:task id="Task_Prepare_Checklist" name="Prepare onboarding checklist" />
+    <bpmn:task id="Task_Send_Invitation" name="Send onboarding invitation" />
+    <bpmn:task id="Task_Employee_Submits_Info" name="Employee fills and submits onboarding form" />
+    <bpmn:task id="Task_AI_Check_Data" name="AI checks form fields and documents" />
+    <bpmn:exclusiveGateway id="Gateway_AI_Data_Complete" name="Data complete and correct?" />
+    <bpmn:task id="Task_AI_Request_Corrections" name="AI asks employee to correct missing data" />
+    <bpmn:task id="Task_AI_Load_Policies" name="AI loads policies and role documents" />
+    <bpmn:task id="Task_AI_Answer_Questions" name="AI answers onboarding questions" />
+    <bpmn:task id="Task_AI_Save_Notify_HR" name="AI saves data and simulates HR email" />
+    <bpmn:exclusiveGateway id="Gateway_Setup_Needed" name="Manager or IT setup needed?" />
+    <bpmn:task id="Task_Manager_IT_Setup" name="Complete manager / IT setup" />
+    <bpmn:task id="Task_Update_Systems" name="Update HRIS and internal systems" />
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_New_Hire" targetRef="Task_Prepare_Checklist" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Prepare_Checklist" targetRef="Task_Send_Invitation" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Send_Invitation" targetRef="Task_Employee_Submits_Info" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Employee_Submits_Info" targetRef="Task_AI_Check_Data" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_AI_Check_Data" targetRef="Gateway_AI_Data_Complete" />
+    <bpmn:sequenceFlow id="Flow_6_No" name="No" sourceRef="Gateway_AI_Data_Complete" targetRef="Task_AI_Request_Corrections" />
+    <bpmn:sequenceFlow id="Flow_7_Loop" sourceRef="Task_AI_Request_Corrections" targetRef="Task_Employee_Submits_Info" />
+    <bpmn:sequenceFlow id="Flow_8_Yes" name="Yes" sourceRef="Gateway_AI_Data_Complete" targetRef="Task_AI_Load_Policies" />
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Task_AI_Load_Policies" targetRef="Task_AI_Answer_Questions" />
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Task_AI_Answer_Questions" targetRef="Task_AI_Save_Notify_HR" />
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Task_AI_Save_Notify_HR" targetRef="Gateway_Setup_Needed" />
+    <bpmn:sequenceFlow id="Flow_12_Yes" name="Yes" sourceRef="Gateway_Setup_Needed" targetRef="Task_Manager_IT_Setup" />
+    <bpmn:sequenceFlow id="Flow_13_No" name="No" sourceRef="Gateway_Setup_Needed" targetRef="Task_Update_Systems" />
+    <bpmn:sequenceFlow id="Flow_14" sourceRef="Task_Manager_IT_Setup" targetRef="Task_Update_Systems" />
+    <bpmn:sequenceFlow id="Flow_15" sourceRef="Task_Update_Systems" targetRef="Task_Notify_Employee" />
+    <bpmn:sequenceFlow id="Flow_16" sourceRef="Task_Notify_Employee" targetRef="End_Onboarding_Complete" />
+    <bpmn:task id="Task_Notify_Employee" name="Notify employee onboarding is complete" />
+    <bpmn:endEvent id="End_Onboarding_Complete" name="Onboarding completed" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Onboarding_AI_Layer">
+    <bpmndi:BPMNPlane id="BPMNPlane_Onboarding_AI_Layer" bpmnElement="Collaboration_Onboarding_AI_Layer">
+      <bpmndi:BPMNShape id="Participant_Onboarding_di" bpmnElement="Participant_Onboarding" isHorizontal="true">
+        <dc:Bounds x="120" y="100" width="2680" height="750" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_HRIS_di" bpmnElement="Lane_HRIS" isHorizontal="true">
+        <dc:Bounds x="150" y="700" width="2650" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Manager_IT_di" bpmnElement="Lane_Manager_IT" isHorizontal="true">
+        <dc:Bounds x="150" y="550" width="2650" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_AI_di" bpmnElement="Lane_AI" isHorizontal="true">
+        <dc:Bounds x="150" y="400" width="2650" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Employee_di" bpmnElement="Lane_Employee" isHorizontal="true">
+        <dc:Bounds x="150" y="250" width="2650" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_HR_di" bpmnElement="Lane_HR" isHorizontal="true">
+        <dc:Bounds x="150" y="100" width="2650" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_New_Hire_di" bpmnElement="Start_New_Hire">
+        <dc:Bounds x="202" y="157" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Prepare_Checklist_di" bpmnElement="Task_Prepare_Checklist">
+        <dc:Bounds x="270" y="135" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Send_Invitation_di" bpmnElement="Task_Send_Invitation">
+        <dc:Bounds x="480" y="135" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Employee_Submits_Info_di" bpmnElement="Task_Employee_Submits_Info">
+        <dc:Bounds x="690" y="285" width="190" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Check_Data_di" bpmnElement="Task_AI_Check_Data">
+        <dc:Bounds x="920" y="435" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_AI_Data_Complete_di" bpmnElement="Gateway_AI_Data_Complete" isMarkerVisible="true">
+        <dc:Bounds x="1140" y="450" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1130" y="416" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Request_Corrections_di" bpmnElement="Task_AI_Request_Corrections">
+        <dc:Bounds x="1230" y="435" width="190" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Load_Policies_di" bpmnElement="Task_AI_Load_Policies">
+        <dc:Bounds x="1460" y="435" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Answer_Questions_di" bpmnElement="Task_AI_Answer_Questions">
+        <dc:Bounds x="1680" y="435" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Save_Notify_HR_di" bpmnElement="Task_AI_Save_Notify_HR">
+        <dc:Bounds x="1900" y="435" width="190" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Setup_Needed_di" bpmnElement="Gateway_Setup_Needed" isMarkerVisible="true">
+        <dc:Bounds x="2140" y="150" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2129" y="116" width="73" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Manager_IT_Setup_di" bpmnElement="Task_Manager_IT_Setup">
+        <dc:Bounds x="2130" y="585" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Update_Systems_di" bpmnElement="Task_Update_Systems">
+        <dc:Bounds x="2360" y="735" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Notify_Employee_di" bpmnElement="Task_Notify_Employee">
+        <dc:Bounds x="2405" y="130" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Onboarding_Complete_di" bpmnElement="End_Onboarding_Complete">
+        <dc:Bounds x="2712" y="157" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2701" y="126" width="58" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="238" y="175" />
+        <di:waypoint x="270" y="175" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="440" y="175" />
+        <di:waypoint x="480" y="175" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="650" y="175" />
+        <di:waypoint x="670" y="175" />
+        <di:waypoint x="670" y="325" />
+        <di:waypoint x="690" y="325" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="880" y="325" />
+        <di:waypoint x="900" y="325" />
+        <di:waypoint x="900" y="475" />
+        <di:waypoint x="920" y="475" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="1100" y="475" />
+        <di:waypoint x="1140" y="475" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_No_di" bpmnElement="Flow_6_No">
+        <di:waypoint x="1190" y="475" />
+        <di:waypoint x="1230" y="475" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1192" y="483" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_Loop_di" bpmnElement="Flow_7_Loop">
+        <di:waypoint x="1230" y="475" />
+        <di:waypoint x="1210" y="475" />
+        <di:waypoint x="1210" y="385" />
+        <di:waypoint x="785" y="385" />
+        <di:waypoint x="785" y="365" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_Yes_di" bpmnElement="Flow_8_Yes">
+        <di:waypoint x="1165" y="500" />
+        <di:waypoint x="1165" y="535" />
+        <di:waypoint x="1440" y="535" />
+        <di:waypoint x="1440" y="475" />
+        <di:waypoint x="1460" y="475" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1141" y="510" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="1640" y="475" />
+        <di:waypoint x="1680" y="475" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10">
+        <di:waypoint x="1860" y="475" />
+        <di:waypoint x="1900" y="475" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11">
+        <di:waypoint x="2090" y="475" />
+        <di:waypoint x="2115" y="475" />
+        <di:waypoint x="2115" y="175" />
+        <di:waypoint x="2140" y="175" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_Yes_di" bpmnElement="Flow_12_Yes">
+        <di:waypoint x="2165" y="200" />
+        <di:waypoint x="2165" y="585" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2171" y="203" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13_No_di" bpmnElement="Flow_13_No">
+        <di:waypoint x="2190" y="175" />
+        <di:waypoint x="2330" y="175" />
+        <di:waypoint x="2330" y="775" />
+        <di:waypoint x="2360" y="775" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2192" y="153" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14">
+        <di:waypoint x="2310" y="625" />
+        <di:waypoint x="2340" y="625" />
+        <di:waypoint x="2340" y="775" />
+        <di:waypoint x="2360" y="775" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15_di" bpmnElement="Flow_15">
+        <di:waypoint x="2490" y="735" />
+        <di:waypoint x="2490" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16_di" bpmnElement="Flow_16">
+        <di:waypoint x="2575" y="170" />
+        <di:waypoint x="2713" y="170" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

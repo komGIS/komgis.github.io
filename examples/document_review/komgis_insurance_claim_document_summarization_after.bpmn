@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Process_Insurance_Claim_AI" targetNamespace="https://komgis.com/bpmn/insurance-claim-ai" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.13.2">
+  <bpmn:process id="Process_Insurance_Claim_AI_Assisted" name="Insurance Claim Document Summarization with AI Automation" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_Dashboard" name="Claims Dashboard / Back Office">
+        <bpmn:flowNodeRef>Start_Claim_Received</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Register_Claim</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Open_Dashboard</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_AI" name="AI Automation">
+        <bpmn:flowNodeRef>Task_AI_Load_Documents</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Summarize_Extract</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Answer_Questions</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Policy_Suggestion</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Send_Approval</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Send_Rejection</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Agent" name="Insurance Agent">
+        <bpmn:flowNodeRef>Task_Agent_Review</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Decision</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Finance" name="Financial Department">
+        <bpmn:flowNodeRef>End_Approved</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Rejected</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_Claim_Received" name="Insurance claim received" />
+    <bpmn:task id="Task_Register_Claim" name="Register claim and documents" />
+    <bpmn:userTask id="Task_Open_Dashboard" name="Open claim in dashboard" />
+    <bpmn:serviceTask id="Task_AI_Load_Documents" name="AI loads claim documents from database" />
+    <bpmn:serviceTask id="Task_AI_Summarize_Extract" name="AI summarizes documents and extracts key data" />
+    <bpmn:serviceTask id="Task_AI_Answer_Questions" name="AI answers claim questions from documents" />
+    <bpmn:serviceTask id="Task_AI_Policy_Suggestion" name="AI checks company policy and suggests approve or reject" />
+    <bpmn:sendTask id="Task_AI_Send_Approval" name="AI simulates approval email to finance" />
+    <bpmn:sendTask id="Task_AI_Send_Rejection" name="AI simulates rejection email to finance" />
+    <bpmn:userTask id="Task_Agent_Review" name="Agent reviews summary and asks questions" />
+    <bpmn:exclusiveGateway id="Gateway_Decision" name="Approve or reject claim?" />
+    <bpmn:endEvent id="End_Approved" name="Claim approved and sent to finance" />
+    <bpmn:endEvent id="End_Rejected" name="Claim rejected and sent to finance" />
+    <bpmn:sequenceFlow id="F1" sourceRef="Start_Claim_Received" targetRef="Task_Register_Claim" />
+    <bpmn:sequenceFlow id="F2" sourceRef="Task_Register_Claim" targetRef="Task_Open_Dashboard" />
+    <bpmn:sequenceFlow id="F3" sourceRef="Task_Open_Dashboard" targetRef="Task_AI_Load_Documents" />
+    <bpmn:sequenceFlow id="F4" sourceRef="Task_AI_Load_Documents" targetRef="Task_AI_Summarize_Extract" />
+    <bpmn:sequenceFlow id="F5" sourceRef="Task_AI_Summarize_Extract" targetRef="Task_Agent_Review" />
+    <bpmn:sequenceFlow id="F6" sourceRef="Task_Agent_Review" targetRef="Task_AI_Answer_Questions" />
+    <bpmn:sequenceFlow id="F7" sourceRef="Task_AI_Answer_Questions" targetRef="Task_AI_Policy_Suggestion" />
+    <bpmn:sequenceFlow id="F8" sourceRef="Task_AI_Policy_Suggestion" targetRef="Gateway_Decision" />
+    <bpmn:sequenceFlow id="F9A" name="Approve" sourceRef="Gateway_Decision" targetRef="Task_AI_Send_Approval" />
+    <bpmn:sequenceFlow id="F10A" sourceRef="Task_AI_Send_Approval" targetRef="End_Approved" />
+    <bpmn:sequenceFlow id="F9R" name="Reject" sourceRef="Gateway_Decision" targetRef="Task_AI_Send_Rejection" />
+    <bpmn:sequenceFlow id="F10R" sourceRef="Task_AI_Send_Rejection" targetRef="End_Rejected" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_Insurance_Claim_AI_Assisted">
+      <bpmndi:BPMNShape id="Lane_Finance_di" bpmnElement="Lane_Finance" isHorizontal="true">
+        <dc:Bounds x="160" y="560" width="2080" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Agent_di" bpmnElement="Lane_Agent" isHorizontal="true">
+        <dc:Bounds x="160" y="400" width="2080" height="160" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_AI_di" bpmnElement="Lane_AI" isHorizontal="true">
+        <dc:Bounds x="160" y="210" width="2080" height="190" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Dashboard_di" bpmnElement="Lane_Dashboard" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="2080" height="130" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Claim_Received_di" bpmnElement="Start_Claim_Received">
+        <dc:Bounds x="230" y="127" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Register_Claim_di" bpmnElement="Task_Register_Claim">
+        <dc:Bounds x="330" y="110" width="170" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Open_Dashboard_di" bpmnElement="Task_Open_Dashboard">
+        <dc:Bounds x="550" y="110" width="170" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Load_Documents_di" bpmnElement="Task_AI_Load_Documents">
+        <dc:Bounds x="780" y="270" width="190" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Summarize_Extract_di" bpmnElement="Task_AI_Summarize_Extract">
+        <dc:Bounds x="1020" y="270" width="190" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Answer_Questions_di" bpmnElement="Task_AI_Answer_Questions">
+        <dc:Bounds x="1470" y="270" width="190" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Policy_Suggestion_di" bpmnElement="Task_AI_Policy_Suggestion">
+        <dc:Bounds x="1710" y="270" width="210" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Send_Approval_di" bpmnElement="Task_AI_Send_Approval">
+        <dc:Bounds x="1960" y="270" width="190" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Send_Rejection_di" bpmnElement="Task_AI_Send_Rejection">
+        <dc:Bounds x="1960" y="430" width="190" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Agent_Review_di" bpmnElement="Task_Agent_Review">
+        <dc:Bounds x="1250" y="440" width="190" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Decision_di" bpmnElement="Gateway_Decision" isMarkerVisible="true">
+        <dc:Bounds x="1775" y="455" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Approved_di" bpmnElement="End_Approved">
+        <dc:Bounds x="2190" y="287" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2161" y="323" width="78" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Rejected_di" bpmnElement="End_Rejected">
+        <dc:Bounds x="2190" y="447" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2164" y="483" width="71" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F1_di" bpmnElement="F1">
+        <di:waypoint x="266" y="145" />
+        <di:waypoint x="330" y="145" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F2_di" bpmnElement="F2">
+        <di:waypoint x="500" y="145" />
+        <di:waypoint x="550" y="145" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F3_di" bpmnElement="F3">
+        <di:waypoint x="720" y="145" />
+        <di:waypoint x="750" y="145" />
+        <di:waypoint x="750" y="305" />
+        <di:waypoint x="780" y="305" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F4_di" bpmnElement="F4">
+        <di:waypoint x="970" y="305" />
+        <di:waypoint x="1020" y="305" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F5_di" bpmnElement="F5">
+        <di:waypoint x="1210" y="305" />
+        <di:waypoint x="1230" y="305" />
+        <di:waypoint x="1230" y="475" />
+        <di:waypoint x="1250" y="475" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F6_di" bpmnElement="F6">
+        <di:waypoint x="1440" y="475" />
+        <di:waypoint x="1455" y="475" />
+        <di:waypoint x="1455" y="305" />
+        <di:waypoint x="1470" y="305" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F7_di" bpmnElement="F7">
+        <di:waypoint x="1660" y="305" />
+        <di:waypoint x="1710" y="305" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F8_di" bpmnElement="F8">
+        <di:waypoint x="1920" y="305" />
+        <di:waypoint x="1940" y="305" />
+        <di:waypoint x="1940" y="480" />
+        <di:waypoint x="1825" y="480" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F9A_di" bpmnElement="F9A">
+        <di:waypoint x="1800" y="455" />
+        <di:waypoint x="1800" y="370" />
+        <di:waypoint x="1950" y="370" />
+        <di:waypoint x="1950" y="305" />
+        <di:waypoint x="1960" y="305" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1750" y="423" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F10A_di" bpmnElement="F10A">
+        <di:waypoint x="2150" y="305" />
+        <di:waypoint x="2190" y="305" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F9R_di" bpmnElement="F9R">
+        <di:waypoint x="1825" y="480" />
+        <di:waypoint x="1960" y="480" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1843" y="458" width="33" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F10R_di" bpmnElement="F10R">
+        <di:waypoint x="2150" y="465" />
+        <di:waypoint x="2170" y="465" />
+        <di:waypoint x="2170" y="465" />
+        <di:waypoint x="2190" y="465" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Sales_Lead_AI_Layer" targetNamespace="https://komgis.com/bpmn/sales-lead-qualification-ai-layer" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.13.2">
+  <bpmn:collaboration id="Collaboration_Sales_Lead_AI_Layer">
+    <bpmn:participant id="Participant_Company" name="Company / Sales Lead Qualification" processRef="Process_Sales_Lead_AI_Layer" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_Sales_Lead_AI_Layer" name="Sales Lead Qualification with AI Automation Layer" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Sales_Lead_AI_Layer">
+      <bpmn:lane id="Lane_CRM_Sales" name="CRM / Sales">
+        <bpmn:flowNodeRef>Task_Contact_Lead</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Qualified</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Nurture</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_AI_Automation" name="AI Automation">
+        <bpmn:flowNodeRef>Task_AI_Analyze_Lead_Data</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Summarize_Score</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Recommend_Action</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Save_CRM</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Update_Nurture</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Sales_Intake" name="Sales Intake / User">
+        <bpmn:flowNodeRef>Start_Lead_Received</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Capture_Lead</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Review_AI_Results</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Qualified</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Select_Channel_Agent</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_Lead_Received" name="Lead received">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_Capture_Lead" name="Capture lead">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:serviceTask id="Task_AI_Analyze_Lead_Data" name="AI analyzes lead data and conversation history">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_AI_Summarize_Score" name="AI summarizes needs, scores 1-10, categorizes hot/warm/cold">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_Review_AI_Results" name="Review AI score and category">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_Qualified" name="Qualified?">
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:outgoing>Flow_6_Yes</bpmn:outgoing>
+      <bpmn:outgoing>Flow_6_No</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_AI_Recommend_Action" name="AI recommends channel and available sales agents">
+      <bpmn:incoming>Flow_6_Yes</bpmn:incoming>
+      <bpmn:outgoing>Flow_7</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_Select_Channel_Agent" name="Select channel and assign sales agent">
+      <bpmn:incoming>Flow_7</bpmn:incoming>
+      <bpmn:outgoing>Flow_8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_AI_Save_CRM" name="AI saves score, category and assignment to CRM">
+      <bpmn:incoming>Flow_8</bpmn:incoming>
+      <bpmn:outgoing>Flow_9</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="Task_Contact_Lead" name="Contact qualified lead">
+      <bpmn:incoming>Flow_9</bpmn:incoming>
+      <bpmn:outgoing>Flow_10</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="End_Qualified" name="Lead assigned in CRM">
+      <bpmn:incoming>Flow_10</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_AI_Update_Nurture" name="AI updates CRM as cold / nurture">
+      <bpmn:incoming>Flow_6_No</bpmn:incoming>
+      <bpmn:outgoing>Flow_11</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="End_Nurture" name="Lead stored in CRM">
+      <bpmn:incoming>Flow_11</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Lead_Received" targetRef="Task_Capture_Lead" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Capture_Lead" targetRef="Task_AI_Analyze_Lead_Data" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_AI_Analyze_Lead_Data" targetRef="Task_AI_Summarize_Score" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_AI_Summarize_Score" targetRef="Task_Review_AI_Results" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_Review_AI_Results" targetRef="Gateway_Qualified" />
+    <bpmn:sequenceFlow id="Flow_6_Yes" name="Yes" sourceRef="Gateway_Qualified" targetRef="Task_AI_Recommend_Action" />
+    <bpmn:sequenceFlow id="Flow_6_No" name="No" sourceRef="Gateway_Qualified" targetRef="Task_AI_Update_Nurture" />
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="Task_AI_Recommend_Action" targetRef="Task_Select_Channel_Agent" />
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="Task_Select_Channel_Agent" targetRef="Task_AI_Save_CRM" />
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Task_AI_Save_CRM" targetRef="Task_Contact_Lead" />
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Task_Contact_Lead" targetRef="End_Qualified" />
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Task_AI_Update_Nurture" targetRef="End_Nurture" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Sales_Lead_AI_Layer">
+    <bpmndi:BPMNPlane id="BPMNPlane_Sales_Lead_AI_Layer" bpmnElement="Collaboration_Sales_Lead_AI_Layer">
+      <bpmndi:BPMNShape id="Participant_Company_di" bpmnElement="Participant_Company" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1780" height="540" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_CRM_Sales_di" bpmnElement="Lane_CRM_Sales" isHorizontal="true">
+        <dc:Bounds x="190" y="440" width="1750" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_AI_Automation_di" bpmnElement="Lane_AI_Automation" isHorizontal="true">
+        <dc:Bounds x="190" y="260" width="1750" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Sales_Intake_di" bpmnElement="Lane_Sales_Intake" isHorizontal="true">
+        <dc:Bounds x="190" y="80" width="1750" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Lead_Received_di" bpmnElement="Start_Lead_Received">
+        <dc:Bounds x="250" y="145" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="233" y="193" width="70" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Capture_Lead_di" bpmnElement="Task_Capture_Lead">
+        <dc:Bounds x="330" y="128" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Analyze_Lead_Data_di" bpmnElement="Task_AI_Analyze_Lead_Data">
+        <dc:Bounds x="510" y="315" width="150" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Summarize_Score_di" bpmnElement="Task_AI_Summarize_Score">
+        <dc:Bounds x="710" y="315" width="170" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Review_AI_Results_di" bpmnElement="Task_Review_AI_Results">
+        <dc:Bounds x="930" y="128" width="150" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Qualified_di" bpmnElement="Gateway_Qualified" isMarkerVisible="true">
+        <dc:Bounds x="1140" y="138" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1140" y="188" width="50" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Recommend_Action_di" bpmnElement="Task_AI_Recommend_Action">
+        <dc:Bounds x="1260" y="280" width="170" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Select_Channel_Agent_di" bpmnElement="Task_Select_Channel_Agent">
+        <dc:Bounds x="1500" y="128" width="160" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Save_CRM_di" bpmnElement="Task_AI_Save_CRM">
+        <dc:Bounds x="1720" y="315" width="170" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Contact_Lead_di" bpmnElement="Task_Contact_Lead">
+        <dc:Bounds x="1720" y="493" width="150" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Qualified_di" bpmnElement="End_Qualified">
+        <dc:Bounds x="1890" y="510" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1858" y="476" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Update_Nurture_di" bpmnElement="Task_AI_Update_Nurture">
+        <dc:Bounds x="1260" y="360" width="170" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Nurture_di" bpmnElement="End_Nurture">
+        <dc:Bounds x="1500" y="510" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1483" y="556" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="286" y="163" />
+        <di:waypoint x="330" y="163" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="450" y="163" />
+        <di:waypoint x="480" y="163" />
+        <di:waypoint x="480" y="350" />
+        <di:waypoint x="510" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="660" y="350" />
+        <di:waypoint x="710" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="880" y="350" />
+        <di:waypoint x="905" y="350" />
+        <di:waypoint x="905" y="163" />
+        <di:waypoint x="930" y="163" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="1080" y="163" />
+        <di:waypoint x="1140" y="163" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_Yes_di" bpmnElement="Flow_6_Yes">
+        <di:waypoint x="1165" y="188" />
+        <di:waypoint x="1165" y="315" />
+        <di:waypoint x="1260" y="315" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1171" y="242" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <di:waypoint x="1430" y="315" />
+        <di:waypoint x="1465" y="315" />
+        <di:waypoint x="1465" y="163" />
+        <di:waypoint x="1500" y="163" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="1660" y="163" />
+        <di:waypoint x="1700" y="163" />
+        <di:waypoint x="1700" y="350" />
+        <di:waypoint x="1720" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="1805" y="385" />
+        <di:waypoint x="1805" y="493" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10">
+        <di:waypoint x="1870" y="528" />
+        <di:waypoint x="1890" y="528" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_No_di" bpmnElement="Flow_6_No">
+        <di:waypoint x="1190" y="163" />
+        <di:waypoint x="1225" y="163" />
+        <di:waypoint x="1225" y="395" />
+        <di:waypoint x="1260" y="395" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1233" y="269" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11">
+        <di:waypoint x="1430" y="395" />
+        <di:waypoint x="1470" y="395" />
+        <di:waypoint x="1470" y="528" />
+        <di:waypoint x="1500" y="528" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

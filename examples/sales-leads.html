@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales Lead Follow-up — KomGIS Examples</title>
+  <link rel="stylesheet" href="https://unpkg.com/bpmn-js@17/dist/assets/bpmn-font/css/bpmn-embedded.css" />
+  <style>
+    :root{--bg:#0c0c0b;--surface:#131312;--line:#252522;--text:#f2f0eb;--muted:#7a7870;--lime:#c6f135;--max:1200px;--r:4px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(var(--max),calc(100% - 56px));margin:auto}
+    header{position:sticky;top:0;z-index:50;background:rgba(12,12,11,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    nav{height:68px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:1.05rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    .links{display:flex;align-items:center;gap:32px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+    .links a:hover,.links a.active{color:var(--text)}
+    .navCta{padding:9px 20px;background:var(--lime);color:#0c0c0b;border-radius:var(--r);font-size:.85rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .navCta:hover{background:#d4ff3a}
+    .menu{display:none;background:transparent;border:1px solid var(--line);color:var(--text);border-radius:var(--r);padding:8px 12px;font-size:1rem;cursor:pointer}
+    .exHero{padding:56px 0 48px;border-bottom:1px solid var(--line)}
+    .exLabel{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+    .exTitle{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:900;letter-spacing:-.055em;line-height:1.08}
+    .exDesc{color:var(--muted);font-size:1rem;line-height:1.75;max-width:700px;margin-top:16px}
+    .section{padding:52px 0;border-bottom:1px solid var(--line)}
+    .sectionLabel{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
+    .prose p{color:var(--muted);font-size:.95rem;line-height:1.8;max-width:760px;margin-bottom:16px}
+    .prose p:last-child{margin-bottom:0}
+    .bpmnContainer{width:100%;height:520px;background:#f9f8f5;border-radius:6px;border:1px solid var(--line);margin-top:28px}
+    .bpmnHint{font-size:.75rem;color:var(--muted);margin-top:10px;letter-spacing:.04em}
+    .videoBox{aspect-ratio:16/9;background:var(--surface);border:1px solid var(--line);border-radius:8px;max-width:860px;overflow:hidden;margin-top:28px}
+    .videoBox iframe{width:100%;height:100%;border:none;display:block}
+    .backLink{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:48px;transition:.15s}
+    .backLink:hover{color:var(--text)}
+    footer{padding:32px 0;border-top:1px solid var(--line)}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    .footLeft{font-size:.82rem;color:var(--muted);letter-spacing:.04em}
+    .footerLinks{display:flex;gap:24px;flex-wrap:wrap}
+    .footerLinks a{font-size:.82rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .footerLinks a:hover{color:var(--text)}
+    @media(max-width:1020px){
+      .links{display:none}.menu{display:block}
+      .links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:flex-start;background:var(--bg);padding:20px 28px;border-bottom:1px solid var(--line);gap:18px}
+      .navCta{display:none}
+    }
+    @media(max-width:640px){
+      .wrap{width:min(var(--max),calc(100% - 32px))}
+      .foot{flex-direction:column;align-items:flex-start}
+      .bpmnContainer{height:220px}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav class="wrap">
+    <a class="logo" href="../index_no_redundant_lists.html">KomGIS</a>
+    <div class="links" id="links">
+      <a href="../index_no_redundant_lists.html#services">Services</a>
+      <a href="../index_no_redundant_lists.html#method">How it works</a>
+      <a href="index.html" class="active">Examples</a>
+      <a href="../index_no_redundant_lists.html#customers">Results</a>
+      <a href="../index_no_redundant_lists.html#tech">Setup</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+    <a class="navCta" href="../index_no_redundant_lists.html#contact">Get in touch</a>
+    <button class="menu" id="menu" aria-label="Menu">☰</button>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="exHero">
+      <div class="exLabel">Example 04</div>
+      <h1 class="exTitle">Sales Lead Follow-up</h1>
+      <p class="exDesc">AI reviews new leads, scores them for fit and intent, summarizes customer needs, recommends the next action, and drafts a personalized follow-up email. The sales rep reviews the AI output and decides how to proceed.</p>
+    </div>
+
+    <div class="section">
+      <a class="backLink" href="index.html">← All examples</a>
+      <div class="sectionLabel">About this workflow</div>
+      <div class="prose">
+        <p>Every sales team deals with the same bottleneck: leads arrive faster than they can be evaluated. A form submission, a LinkedIn message, an email from a campaign — each one requires someone to read it, look up the company, judge fit and intent, decide on a next step, and log everything in the CRM. When volume is high, corners get cut. Promising leads wait too long. Weak leads consume time that should go elsewhere.</p>
+        <p>This workflow shows how AI changes that dynamic. The AI reads each incoming lead, researches the prospect using available information, scores it against predefined qualification criteria, summarizes what the prospect actually needs, and recommends a next action — all before a human sees it. The sales rep spends their time on judgment, relationships, and conversations, not on research and data entry.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sectionLabel">Before AI automation</div>
+      <div class="prose">
+        <p>In the manual process, every lead enters a queue. A sales administrator captures the lead from the form, email, or campaign tool, checks for duplicates in the CRM, then reads through the available details. From there it's manual research: looking up the company, finding the contact's role, assessing fit against known criteria. The admin scores the lead by hand, writes a summary of what the prospect seems to need, and checks whether enough information exists to act on it.</p>
+        <p>If the lead lacks key information — company size, use case, decision timeline — the admin sends a request for more details and waits. When the information is complete, the lead goes to a qualification gateway: high-quality leads are updated in the CRM and assigned to a sales rep; low-priority leads are filed into a nurture campaign. The rep reviews the lead, contacts the prospect, and logs the activity manually. At each stage, the process depends on a person being available, checking a queue, and doing repetitive research work.</p>
+      </div>
+      <div class="bpmnContainer" id="bpmnBefore"></div>
+      <p class="bpmnHint">Scroll to zoom · Click and drag to pan</p>
+    </div>
+
+    <div class="section">
+      <div class="sectionLabel">After AI automation</div>
+      <div class="prose">
+        <p>With AI in the loop, the lead intake process becomes fully automatic. As soon as a lead arrives — from a form, email, or campaign system — it is captured, normalized, and de-duplicated without human intervention. The AI then analyzes the lead profile and message, scores the lead against qualification criteria, summarizes what the prospect is looking for, and recommends the next sales action.</p>
+        <p>High-scoring leads are automatically updated in the CRM with the score, summary, and recommended action, then routed directly to a sales representative. Low-scoring leads are placed into the appropriate nurture campaign without anyone needing to decide. The sales rep receives only qualified leads, each with a complete AI-generated briefing. Their job is to review the summary, confirm the recommended action, and make contact — everything else has already been done.</p>
+      </div>
+      <div class="bpmnContainer" id="bpmnAfter"></div>
+      <p class="bpmnHint">Scroll to zoom · Click and drag to pan</p>
+    </div>
+
+    <div class="section">
+      <div class="sectionLabel">Final result</div>
+      <div class="prose" style="margin-bottom:40px">
+        <p>The final result is a lead review experience where a sales rep never opens a blank record. When a qualified lead arrives in their queue, it comes with everything already prepared: the prospect's company and role, a plain-language summary of their stated need, a fit score with the reasoning behind it, and a specific recommended next action — call, email, or schedule a demo.</p>
+        <p>In practice, the rep opens a single review screen that shows the AI summary and draft follow-up email side by side. They read it in under a minute, adjust the tone or add a personal note if they choose, and send. The CRM is updated automatically. No copy-pasting, no re-reading the original form, no deciding what to write from scratch.</p>
+        <p>Leads that do not meet the qualification threshold never reach the rep's queue. They are placed directly into a nurture sequence calibrated to their fit level. If their situation changes — they reach out again, they grow their company — the next lead from them goes through the same scoring process and may qualify at that point.</p>
+        <p>The practical effect is that the same sales team can handle significantly more leads without adding headcount, and response time on qualified leads drops from days to hours. The rep's attention is focused on conversations that are likely to close, not on sorting through a backlog of unqualified submissions.</p>
+      </div>
+      <div class="videoBox">
+        <iframe src="https://www.youtube.com/embed/JGwWNGJdvx8" title="Demo video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="footLeft">© 2026 KomGIS. Practical AI automation for business teams.</span>
+    <div class="footerLinks">
+      <a href="index.html">All examples</a>
+      <a href="../index_no_redundant_lists.html#contact">Contact</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/bpmn-js@17/dist/bpmn-navigated-viewer.production.min.js"></script>
+<script>
+  var xmlBefore = `<?xml version='1.0' encoding='utf-8'?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Manual_Sales_Lead_Before_AI" targetNamespace="https://komgis.com/bpmn/manual-sales-lead-qualification-before-ai"><bpmn:message id="Message_Lead" name="Incoming Sales Lead" /><bpmn:message id="Message_Info_Request" name="Request for Additional Information" /><bpmn:message id="Message_Info_Response" name="Additional Lead Information" /><bpmn:message id="Message_Followup" name="Sales Follow-up" /><bpmn:collaboration id="Collaboration_Manual_Sales_Lead"><bpmn:participant id="Participant_Prospect" name="Prospect / Lead Source" processRef="Process_Prospect" /><bpmn:participant id="Participant_Company" name="Company / Manual Sales Process" processRef="Process_Manual_Sales_Lead" /><bpmn:messageFlow id="MessageFlow_Lead" name="Lead submitted" sourceRef="Task_Submit_Lead" targetRef="Start_Lead_Received" /><bpmn:messageFlow id="MessageFlow_Info_Request" name="Request additional information" sourceRef="Task_Request_Missing_Info" targetRef="Event_Info_Request_Received" /><bpmn:messageFlow id="MessageFlow_Info_Response" name="Additional information sent" sourceRef="Task_Send_Additional_Info" targetRef="Event_Info_Response_Received" /><bpmn:messageFlow id="MessageFlow_Followup" name="Sales follow-up sent" sourceRef="Task_Contact_Lead" targetRef="Event_Followup_Received" /></bpmn:collaboration><bpmn:process id="Process_Prospect" name="Prospect Lead Submission" isExecutable="false"><bpmn:startEvent id="Start_Prospect" name="Interested prospect" /><bpmn:task id="Task_Submit_Lead" name="Submit lead by form, email or campaign" /><bpmn:eventBasedGateway id="Gateway_Wait_Reply" name="Wait for company reply" /><bpmn:intermediateCatchEvent id="Event_Info_Request_Received" name="Receive request for more information"><bpmn:messageEventDefinition messageRef="Message_Info_Request" /></bpmn:intermediateCatchEvent><bpmn:task id="Task_Send_Additional_Info" name="Send additional information" /><bpmn:intermediateCatchEvent id="Event_Followup_Received" name="Receive sales follow-up"><bpmn:messageEventDefinition messageRef="Message_Followup" /></bpmn:intermediateCatchEvent><bpmn:endEvent id="End_Prospect" name="Lead interaction completed" /><bpmn:sequenceFlow id="Flow_P1" sourceRef="Start_Prospect" targetRef="Task_Submit_Lead" /><bpmn:sequenceFlow id="Flow_P2" sourceRef="Task_Submit_Lead" targetRef="Gateway_Wait_Reply" /><bpmn:sequenceFlow id="Flow_P3" sourceRef="Gateway_Wait_Reply" targetRef="Event_Info_Request_Received" /><bpmn:sequenceFlow id="Flow_P4" sourceRef="Event_Info_Request_Received" targetRef="Task_Send_Additional_Info" /><bpmn:sequenceFlow id="Flow_P5" sourceRef="Task_Send_Additional_Info" targetRef="Gateway_Wait_Reply" /><bpmn:sequenceFlow id="Flow_P6" sourceRef="Gateway_Wait_Reply" targetRef="Event_Followup_Received" /><bpmn:sequenceFlow id="Flow_P7" sourceRef="Event_Followup_Received" targetRef="End_Prospect" /></bpmn:process><bpmn:process id="Process_Manual_Sales_Lead" name="Manual Sales Lead Qualification and CRM Update Before AI Automation" isExecutable="false"><bpmn:laneSet id="LaneSet_Manual_Sales_Lead"><bpmn:lane id="Lane_Intake" name="Lead Intake"><bpmn:flowNodeRef>Start_Lead_Received</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Capture_Lead</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Check_Duplicate</bpmn:flowNodeRef></bpmn:lane><bpmn:lane id="Lane_Sales_Admin" name="Sales Administrator"><bpmn:flowNodeRef>Task_Read_Lead</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Manual_Research</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Manual_Score</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Summarize_Needs</bpmn:flowNodeRef><bpmn:flowNodeRef>Gateway_Info_Complete</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Request_Missing_Info</bpmn:flowNodeRef><bpmn:flowNodeRef>Event_Info_Response_Received</bpmn:flowNodeRef><bpmn:flowNodeRef>Gateway_Qualified</bpmn:flowNodeRef></bpmn:lane><bpmn:lane id="Lane_CRM_Marketing" name="CRM / Marketing"><bpmn:flowNodeRef>Task_Update_CRM_Qualified</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Update_CRM_Nurture</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Add_Nurture_Campaign</bpmn:flowNodeRef><bpmn:flowNodeRef>End_Nurture</bpmn:flowNodeRef></bpmn:lane><bpmn:lane id="Lane_Sales" name="Sales Representative"><bpmn:flowNodeRef>Task_Assign_Sales_Rep</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Review_Lead</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Contact_Lead</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Log_Activity</bpmn:flowNodeRef><bpmn:flowNodeRef>End_Qualified</bpmn:flowNodeRef></bpmn:lane></bpmn:laneSet><bpmn:startEvent id="Start_Lead_Received" name="Lead received"><bpmn:messageEventDefinition messageRef="Message_Lead" /></bpmn:startEvent><bpmn:task id="Task_Capture_Lead" name="Manually capture lead from form, email or campaign" /><bpmn:userTask id="Task_Check_Duplicate" name="Check for duplicate lead in CRM" /><bpmn:userTask id="Task_Read_Lead" name="Read lead message and available details" /><bpmn:userTask id="Task_Manual_Research" name="Manually research company, contact and fit" /><bpmn:userTask id="Task_Manual_Score" name="Manually score lead using predefined criteria" /><bpmn:userTask id="Task_Summarize_Needs" name="Manually summarize customer needs" /><bpmn:exclusiveGateway id="Gateway_Info_Complete" name="Information complete?" /><bpmn:sendTask id="Task_Request_Missing_Info" name="Request missing lead information" /><bpmn:intermediateCatchEvent id="Event_Info_Response_Received" name="Receive additional lead information"><bpmn:messageEventDefinition messageRef="Message_Info_Response" /></bpmn:intermediateCatchEvent><bpmn:exclusiveGateway id="Gateway_Qualified" name="High-quality lead?" /><bpmn:userTask id="Task_Update_CRM_Qualified" name="Manually update CRM with score, summary and next action" /><bpmn:userTask id="Task_Assign_Sales_Rep" name="Assign qualified lead to sales representative" /><bpmn:userTask id="Task_Review_Lead" name="Sales representative reviews lead details" /><bpmn:sendTask id="Task_Contact_Lead" name="Contact qualified lead" /><bpmn:userTask id="Task_Log_Activity" name="Log call or email activity in CRM" /><bpmn:endEvent id="End_Qualified" name="Qualified lead in sales pipeline" /><bpmn:userTask id="Task_Update_CRM_Nurture" name="Manually update CRM as low-priority or nurture lead" /><bpmn:userTask id="Task_Add_Nurture_Campaign" name="Add lead to marketing nurture campaign" /><bpmn:endEvent id="End_Nurture" name="Lead stored for nurturing" /><bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Lead_Received" targetRef="Task_Capture_Lead" /><bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Capture_Lead" targetRef="Task_Check_Duplicate" /><bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Check_Duplicate" targetRef="Task_Read_Lead" /><bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Read_Lead" targetRef="Task_Manual_Research" /><bpmn:sequenceFlow id="Flow_5" sourceRef="Task_Manual_Research" targetRef="Task_Manual_Score" /><bpmn:sequenceFlow id="Flow_6" sourceRef="Task_Manual_Score" targetRef="Task_Summarize_Needs" /><bpmn:sequenceFlow id="Flow_7" sourceRef="Task_Summarize_Needs" targetRef="Gateway_Info_Complete" /><bpmn:sequenceFlow id="Flow_8_Yes" sourceRef="Gateway_Info_Complete" targetRef="Gateway_Qualified" name="Yes" /><bpmn:sequenceFlow id="Flow_8_No" sourceRef="Gateway_Info_Complete" targetRef="Task_Request_Missing_Info" name="No" /><bpmn:sequenceFlow id="Flow_9" sourceRef="Task_Request_Missing_Info" targetRef="Event_Info_Response_Received" /><bpmn:sequenceFlow id="Flow_10" sourceRef="Event_Info_Response_Received" targetRef="Task_Read_Lead" /><bpmn:sequenceFlow id="Flow_11_Yes" sourceRef="Gateway_Qualified" targetRef="Task_Update_CRM_Qualified" name="Yes" /><bpmn:sequenceFlow id="Flow_11_No" sourceRef="Gateway_Qualified" targetRef="Task_Update_CRM_Nurture" name="No" /><bpmn:sequenceFlow id="Flow_12" sourceRef="Task_Update_CRM_Qualified" targetRef="Task_Assign_Sales_Rep" /><bpmn:sequenceFlow id="Flow_13" sourceRef="Task_Assign_Sales_Rep" targetRef="Task_Review_Lead" /><bpmn:sequenceFlow id="Flow_14" sourceRef="Task_Review_Lead" targetRef="Task_Contact_Lead" /><bpmn:sequenceFlow id="Flow_15" sourceRef="Task_Contact_Lead" targetRef="Task_Log_Activity" /><bpmn:sequenceFlow id="Flow_16" sourceRef="Task_Log_Activity" targetRef="End_Qualified" /><bpmn:sequenceFlow id="Flow_17" sourceRef="Task_Update_CRM_Nurture" targetRef="Task_Add_Nurture_Campaign" /><bpmn:sequenceFlow id="Flow_18" sourceRef="Task_Add_Nurture_Campaign" targetRef="End_Nurture" /></bpmn:process><bpmndi:BPMNDiagram id="BPMNDiagram_Manual_Sales_Lead"><bpmndi:BPMNPlane id="BPMNPlane_Manual_Sales_Lead" bpmnElement="Collaboration_Manual_Sales_Lead"><bpmndi:BPMNShape id="Participant_Prospect_di" bpmnElement="Participant_Prospect" isHorizontal="true"><dc:Bounds x="100" y="60" width="2300" height="160" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Participant_Company_di" bpmnElement="Participant_Company" isHorizontal="true"><dc:Bounds x="100" y="260" width="2300" height="610" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Lane_Intake_di" bpmnElement="Lane_Intake" isHorizontal="true"><dc:Bounds x="130" y="260" width="2270" height="105" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Lane_Sales_Admin_di" bpmnElement="Lane_Sales_Admin" isHorizontal="true"><dc:Bounds x="130" y="365" width="2270" height="255" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Lane_CRM_Marketing_di" bpmnElement="Lane_CRM_Marketing" isHorizontal="true"><dc:Bounds x="130" y="620" width="2270" height="120" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Lane_Sales_di" bpmnElement="Lane_Sales" isHorizontal="true"><dc:Bounds x="130" y="740" width="2270" height="130" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Start_Prospect_di" bpmnElement="Start_Prospect"><dc:Bounds x="190" y="122" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Submit_Lead_di" bpmnElement="Task_Submit_Lead"><dc:Bounds x="280" y="100" width="190" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Gateway_Wait_Reply_di" bpmnElement="Gateway_Wait_Reply" isMarkerVisible="true"><dc:Bounds x="620" y="115" width="50" height="50" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Event_Info_Request_Received_di" bpmnElement="Event_Info_Request_Received"><dc:Bounds x="800" y="122" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Send_Additional_Info_di" bpmnElement="Task_Send_Additional_Info"><dc:Bounds x="890" y="100" width="190" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Event_Followup_Received_di" bpmnElement="Event_Followup_Received"><dc:Bounds x="2160" y="122" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="End_Prospect_di" bpmnElement="End_Prospect"><dc:Bounds x="2270" y="122" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Start_Lead_Received_di" bpmnElement="Start_Lead_Received"><dc:Bounds x="190" y="295" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Capture_Lead_di" bpmnElement="Task_Capture_Lead"><dc:Bounds x="280" y="273" width="185" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Check_Duplicate_di" bpmnElement="Task_Check_Duplicate"><dc:Bounds x="515" y="273" width="180" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Read_Lead_di" bpmnElement="Task_Read_Lead"><dc:Bounds x="745" y="405" width="170" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Manual_Research_di" bpmnElement="Task_Manual_Research"><dc:Bounds x="960" y="405" width="175" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Manual_Score_di" bpmnElement="Task_Manual_Score"><dc:Bounds x="1180" y="405" width="175" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Summarize_Needs_di" bpmnElement="Task_Summarize_Needs"><dc:Bounds x="1400" y="405" width="180" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Gateway_Info_Complete_di" bpmnElement="Gateway_Info_Complete" isMarkerVisible="true"><dc:Bounds x="1630" y="418" width="50" height="50" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Request_Missing_Info_di" bpmnElement="Task_Request_Missing_Info"><dc:Bounds x="1535" y="525" width="190" height="70" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Event_Info_Response_Received_di" bpmnElement="Event_Info_Response_Received"><dc:Bounds x="1290" y="542" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Gateway_Qualified_di" bpmnElement="Gateway_Qualified" isMarkerVisible="true"><dc:Bounds x="1780" y="418" width="50" height="50" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Update_CRM_Qualified_di" bpmnElement="Task_Update_CRM_Qualified"><dc:Bounds x="1745" y="645" width="210" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Update_CRM_Nurture_di" bpmnElement="Task_Update_CRM_Nurture"><dc:Bounds x="1180" y="645" width="205" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Add_Nurture_Campaign_di" bpmnElement="Task_Add_Nurture_Campaign"><dc:Bounds x="910" y="645" width="205" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="End_Nurture_di" bpmnElement="End_Nurture"><dc:Bounds x="790" y="664" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Assign_Sales_Rep_di" bpmnElement="Task_Assign_Sales_Rep"><dc:Bounds x="1480" y="770" width="190" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Review_Lead_di" bpmnElement="Task_Review_Lead"><dc:Bounds x="1720" y="770" width="190" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Contact_Lead_di" bpmnElement="Task_Contact_Lead"><dc:Bounds x="1960" y="770" width="175" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Log_Activity_di" bpmnElement="Task_Log_Activity"><dc:Bounds x="2160" y="770" width="180" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="End_Qualified_di" bpmnElement="End_Qualified"><dc:Bounds x="2360" y="789" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNEdge id="Flow_P1_di" bpmnElement="Flow_P1"><di:waypoint x="226" y="140" /><di:waypoint x="280" y="140" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_P2_di" bpmnElement="Flow_P2"><di:waypoint x="470" y="140" /><di:waypoint x="620" y="140" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_P3_di" bpmnElement="Flow_P3"><di:waypoint x="670" y="140" /><di:waypoint x="800" y="140" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_P4_di" bpmnElement="Flow_P4"><di:waypoint x="836" y="140" /><di:waypoint x="890" y="140" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_P5_di" bpmnElement="Flow_P5"><di:waypoint x="985" y="180" /><di:waypoint x="985" y="205" /><di:waypoint x="645" y="205" /><di:waypoint x="645" y="165" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_P6_di" bpmnElement="Flow_P6"><di:waypoint x="645" y="115" /><di:waypoint x="645" y="85" /><di:waypoint x="2178" y="85" /><di:waypoint x="2178" y="122" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_P7_di" bpmnElement="Flow_P7"><di:waypoint x="2196" y="140" /><di:waypoint x="2270" y="140" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1"><di:waypoint x="226" y="313" /><di:waypoint x="280" y="313" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2"><di:waypoint x="465" y="313" /><di:waypoint x="515" y="313" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3"><di:waypoint x="695" y="313" /><di:waypoint x="720" y="313" /><di:waypoint x="720" y="443" /><di:waypoint x="745" y="442" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4"><di:waypoint x="915" y="442" /><di:waypoint x="960" y="442" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5"><di:waypoint x="1135" y="442" /><di:waypoint x="1180" y="442" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6"><di:waypoint x="1355" y="442" /><di:waypoint x="1400" y="442" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7"><di:waypoint x="1580" y="442" /><di:waypoint x="1630" y="443" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_8_Yes_di" bpmnElement="Flow_8_Yes"><di:waypoint x="1680" y="443" /><di:waypoint x="1780" y="443" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_8_No_di" bpmnElement="Flow_8_No"><di:waypoint x="1655" y="468" /><di:waypoint x="1655" y="525" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9"><di:waypoint x="1535" y="560" /><di:waypoint x="1326" y="560" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10"><di:waypoint x="1308" y="542" /><di:waypoint x="1308" y="385" /><di:waypoint x="830" y="385" /><di:waypoint x="830" y="405" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_11_Yes_di" bpmnElement="Flow_11_Yes"><di:waypoint x="1805" y="468" /><di:waypoint x="1805" y="645" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_11_No_di" bpmnElement="Flow_11_No"><di:waypoint x="1780" y="443" /><di:waypoint x="1282" y="645" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12"><di:waypoint x="1850" y="720" /><di:waypoint x="1850" y="755" /><di:waypoint x="1575" y="770" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13"><di:waypoint x="1670" y="808" /><di:waypoint x="1720" y="808" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14"><di:waypoint x="1910" y="808" /><di:waypoint x="1960" y="808" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_15_di" bpmnElement="Flow_15"><di:waypoint x="2135" y="808" /><di:waypoint x="2160" y="808" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_16_di" bpmnElement="Flow_16"><di:waypoint x="2340" y="808" /><di:waypoint x="2360" y="807" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_17_di" bpmnElement="Flow_17"><di:waypoint x="1180" y="682" /><di:waypoint x="1115" y="682" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_18_di" bpmnElement="Flow_18"><di:waypoint x="910" y="682" /><di:waypoint x="826" y="682" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="MessageFlow_Lead_di" bpmnElement="MessageFlow_Lead"><di:waypoint x="375" y="180" /><di:waypoint x="208" y="295" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="MessageFlow_Info_Request_di" bpmnElement="MessageFlow_Info_Request"><di:waypoint x="1630" y="525" /><di:waypoint x="818" y="158" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="MessageFlow_Info_Response_di" bpmnElement="MessageFlow_Info_Response"><di:waypoint x="985" y="180" /><di:waypoint x="1308" y="542" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="MessageFlow_Followup_di" bpmnElement="MessageFlow_Followup"><di:waypoint x="2048" y="770" /><di:waypoint x="2178" y="158" /></bpmndi:BPMNEdge></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></bpmn:definitions>`;
+
+  var xmlAfter = `<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+  id="Definitions_AI_Sales_Lead_Qualification"
+  targetNamespace="https://komgis.com/bpmn/ai-sales-lead-qualification-crm-update">
+
+  <bpmn:message id="Message_Lead" name="Incoming Sales Lead"/>
+  <bpmn:message id="Message_Followup" name="Sales Follow-up"/>
+
+  <bpmn:collaboration id="Collaboration_AI_Sales_Lead">
+    <bpmn:participant id="Participant_Lead_Source" name="Prospect / Lead Source" processRef="Process_Lead_Source"/>
+    <bpmn:participant id="Participant_Company" name="Company / Sales Team + AI Automation" processRef="Process_AI_Sales_Lead"/>
+    <bpmn:messageFlow id="MessageFlow_Lead" name="Lead submitted" sourceRef="Task_Submit_Lead" targetRef="Start_Lead_Received"/>
+    <bpmn:messageFlow id="MessageFlow_Followup" name="Sales follow-up sent" sourceRef="Task_Contact_Lead" targetRef="Event_Followup_Received"/>
+  </bpmn:collaboration>
+
+  <bpmn:process id="Process_Lead_Source" name="Prospect Lead Submission" isExecutable="false">
+    <bpmn:startEvent id="Start_Prospect" name="Interested prospect"/>
+    <bpmn:sequenceFlow id="Flow_P1" sourceRef="Start_Prospect" targetRef="Task_Submit_Lead"/>
+    <bpmn:task id="Task_Submit_Lead" name="Submit lead by form, email or campaign"/>
+    <bpmn:sequenceFlow id="Flow_P2" sourceRef="Task_Submit_Lead" targetRef="Event_Followup_Received"/>
+    <bpmn:intermediateCatchEvent id="Event_Followup_Received" name="Receive sales follow-up">
+      <bpmn:messageEventDefinition messageRef="Message_Followup"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_P3" sourceRef="Event_Followup_Received" targetRef="End_Prospect"/>
+    <bpmn:endEvent id="End_Prospect" name="Follow-up received"/>
+  </bpmn:process>
+
+  <bpmn:process id="Process_AI_Sales_Lead" name="AI Sales Lead Qualification and CRM Update Automation" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_AI_Sales_Lead">
+      <bpmn:lane id="Lane_Intake" name="Lead Intake System">
+        <bpmn:flowNodeRef>Start_Lead_Received</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Capture_Lead</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Normalize_Lead</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_AI" name="AI Automation">
+        <bpmn:flowNodeRef>Task_Analyze_Lead</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Score_Lead</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Summarize_Needs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Recommend_Action</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Qualified</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_CRM" name="CRM / Marketing System">
+        <bpmn:flowNodeRef>Task_Update_CRM_Qualified</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Update_CRM_Nurture</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Add_Nurture_Campaign</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Nurture</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Sales" name="Sales Team">
+        <bpmn:flowNodeRef>Task_Route_To_Sales</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Review_Lead</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Contact_Lead</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Qualified</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+
+    <bpmn:startEvent id="Start_Lead_Received" name="Lead received">
+      <bpmn:messageEventDefinition messageRef="Message_Lead"/>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Lead_Received" targetRef="Task_Capture_Lead"/>
+    <bpmn:task id="Task_Capture_Lead" name="Capture lead from form, email or campaign"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Capture_Lead" targetRef="Task_Normalize_Lead"/>
+    <bpmn:serviceTask id="Task_Normalize_Lead" name="Normalize and de-duplicate lead data"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Normalize_Lead" targetRef="Task_Analyze_Lead"/>
+    <bpmn:serviceTask id="Task_Analyze_Lead" name="AI analyzes lead profile and message"/>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Analyze_Lead" targetRef="Task_Score_Lead"/>
+    <bpmn:serviceTask id="Task_Score_Lead" name="AI scores lead using predefined criteria"/>
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_Score_Lead" targetRef="Task_Summarize_Needs"/>
+    <bpmn:serviceTask id="Task_Summarize_Needs" name="AI summarizes customer needs"/>
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Task_Summarize_Needs" targetRef="Task_Recommend_Action"/>
+    <bpmn:serviceTask id="Task_Recommend_Action" name="AI recommends next sales action"/>
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="Task_Recommend_Action" targetRef="Gateway_Qualified"/>
+    <bpmn:exclusiveGateway id="Gateway_Qualified" name="High-quality lead?"/>
+    <bpmn:sequenceFlow id="Flow_8_Yes" name="Yes" sourceRef="Gateway_Qualified" targetRef="Task_Update_CRM_Qualified"/>
+    <bpmn:sequenceFlow id="Flow_8_No" name="No" sourceRef="Gateway_Qualified" targetRef="Task_Update_CRM_Nurture"/>
+    <bpmn:serviceTask id="Task_Update_CRM_Qualified" name="Update CRM with lead score, summary and recommendation"/>
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Task_Update_CRM_Qualified" targetRef="Task_Route_To_Sales"/>
+    <bpmn:task id="Task_Route_To_Sales" name="Route qualified lead to sales representative"/>
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Task_Route_To_Sales" targetRef="Task_Review_Lead"/>
+    <bpmn:userTask id="Task_Review_Lead" name="Sales representative reviews AI summary and next action"/>
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Task_Review_Lead" targetRef="Task_Contact_Lead"/>
+    <bpmn:sendTask id="Task_Contact_Lead" name="Contact qualified lead"/>
+    <bpmn:sequenceFlow id="Flow_12" sourceRef="Task_Contact_Lead" targetRef="End_Qualified"/>
+    <bpmn:endEvent id="End_Qualified" name="Qualified lead in sales pipeline"/>
+    <bpmn:serviceTask id="Task_Update_CRM_Nurture" name="Update CRM as low-priority or nurture lead"/>
+    <bpmn:sequenceFlow id="Flow_13" sourceRef="Task_Update_CRM_Nurture" targetRef="Task_Add_Nurture_Campaign"/>
+    <bpmn:serviceTask id="Task_Add_Nurture_Campaign" name="Add lead to marketing nurture campaign"/>
+    <bpmn:sequenceFlow id="Flow_14" sourceRef="Task_Add_Nurture_Campaign" targetRef="End_Nurture"/>
+    <bpmn:endEvent id="End_Nurture" name="Lead stored for nurturing"/>
+  </bpmn:process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_AI_Sales_Lead">
+    <bpmndi:BPMNPlane id="BPMNPlane_AI_Sales_Lead" bpmnElement="Collaboration_AI_Sales_Lead">
+      <bpmndi:BPMNShape id="Participant_Lead_Source_di" bpmnElement="Participant_Lead_Source" isHorizontal="true">
+        <dc:Bounds x="100" y="70" width="1680" height="145"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_Company_di" bpmnElement="Participant_Company" isHorizontal="true">
+        <dc:Bounds x="100" y="250" width="1680" height="560"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Intake_di" bpmnElement="Lane_Intake" isHorizontal="true">
+        <dc:Bounds x="130" y="250" width="1650" height="105"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_AI_di" bpmnElement="Lane_AI" isHorizontal="true">
+        <dc:Bounds x="130" y="355" width="1650" height="190"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_CRM_di" bpmnElement="Lane_CRM" isHorizontal="true">
+        <dc:Bounds x="130" y="545" width="1650" height="140"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Sales_di" bpmnElement="Lane_Sales" isHorizontal="true">
+        <dc:Bounds x="130" y="685" width="1650" height="125"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Prospect_di" bpmnElement="Start_Prospect">
+        <dc:Bounds x="200" y="124" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Submit_Lead_di" bpmnElement="Task_Submit_Lead">
+        <dc:Bounds x="290" y="102" width="185" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_Followup_Received_di" bpmnElement="Event_Followup_Received">
+        <dc:Bounds x="1500" y="124" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Prospect_di" bpmnElement="End_Prospect">
+        <dc:Bounds x="1605" y="124" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Lead_Received_di" bpmnElement="Start_Lead_Received">
+        <dc:Bounds x="200" y="286" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Capture_Lead_di" bpmnElement="Task_Capture_Lead">
+        <dc:Bounds x="290" y="264" width="170" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Normalize_Lead_di" bpmnElement="Task_Normalize_Lead">
+        <dc:Bounds x="510" y="264" width="170" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Analyze_Lead_di" bpmnElement="Task_Analyze_Lead">
+        <dc:Bounds x="730" y="392" width="165" height="75"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Score_Lead_di" bpmnElement="Task_Score_Lead">
+        <dc:Bounds x="940" y="392" width="165" height="75"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Summarize_Needs_di" bpmnElement="Task_Summarize_Needs">
+        <dc:Bounds x="1150" y="392" width="165" height="75"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Recommend_Action_di" bpmnElement="Task_Recommend_Action">
+        <dc:Bounds x="1360" y="392" width="165" height="75"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Qualified_di" bpmnElement="Gateway_Qualified" isMarkerVisible="true">
+        <dc:Bounds x="1580" y="404" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Update_CRM_Qualified_di" bpmnElement="Task_Update_CRM_Qualified">
+        <dc:Bounds x="1360" y="565" width="185" height="75"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Update_CRM_Nurture_di" bpmnElement="Task_Update_CRM_Nurture">
+        <dc:Bounds x="1050" y="565" width="185" height="75"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Add_Nurture_Campaign_di" bpmnElement="Task_Add_Nurture_Campaign">
+        <dc:Bounds x="780" y="565" width="185" height="75"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Nurture_di" bpmnElement="End_Nurture">
+        <dc:Bounds x="700" y="584" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Route_To_Sales_di" bpmnElement="Task_Route_To_Sales">
+        <dc:Bounds x="920" y="710" width="175" height="75"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Review_Lead_di" bpmnElement="Task_Review_Lead">
+        <dc:Bounds x="1140" y="710" width="190" height="75"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Contact_Lead_di" bpmnElement="Task_Contact_Lead">
+        <dc:Bounds x="1380" y="710" width="170" height="75"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Qualified_di" bpmnElement="End_Qualified">
+        <dc:Bounds x="1605" y="729" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_P1_di" bpmnElement="Flow_P1">
+        <di:waypoint x="236" y="142"/>
+        <di:waypoint x="290" y="142"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P2_di" bpmnElement="Flow_P2">
+        <di:waypoint x="475" y="142"/>
+        <di:waypoint x="1500" y="142"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_di" bpmnElement="Flow_P3">
+        <di:waypoint x="1536" y="142"/>
+        <di:waypoint x="1605" y="142"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="236" y="304"/>
+        <di:waypoint x="290" y="304"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="460" y="304"/>
+        <di:waypoint x="510" y="304"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="680" y="304"/>
+        <di:waypoint x="705" y="304"/>
+        <di:waypoint x="705" y="430"/>
+        <di:waypoint x="730" y="430"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="895" y="430"/>
+        <di:waypoint x="940" y="430"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="1105" y="430"/>
+        <di:waypoint x="1150" y="430"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="1315" y="430"/>
+        <di:waypoint x="1360" y="430"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <di:waypoint x="1525" y="430"/>
+        <di:waypoint x="1580" y="429"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_Yes_di" bpmnElement="Flow_8_Yes">
+        <di:waypoint x="1605" y="454"/>
+        <di:waypoint x="1605" y="603"/>
+        <di:waypoint x="1545" y="603"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_No_di" bpmnElement="Flow_8_No">
+        <di:waypoint x="1580" y="429"/>
+        <di:waypoint x="1143" y="565"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="1453" y="640"/>
+        <di:waypoint x="1453" y="748"/>
+        <di:waypoint x="1095" y="748"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10">
+        <di:waypoint x="1095" y="748"/>
+        <di:waypoint x="1140" y="748"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11">
+        <di:waypoint x="1330" y="748"/>
+        <di:waypoint x="1380" y="748"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12">
+        <di:waypoint x="1550" y="748"/>
+        <di:waypoint x="1605" y="747"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13">
+        <di:waypoint x="1050" y="603"/>
+        <di:waypoint x="965" y="603"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14">
+        <di:waypoint x="780" y="603"/>
+        <di:waypoint x="736" y="602"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_Lead_di" bpmnElement="MessageFlow_Lead">
+        <di:waypoint x="382" y="182"/>
+        <di:waypoint x="218" y="286"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_Followup_di" bpmnElement="MessageFlow_Followup">
+        <di:waypoint x="1465" y="710"/>
+        <di:waypoint x="1518" y="160"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>`;
+
+  var viewerBefore = new BpmnJS({ container: '#bpmnBefore' });
+  viewerBefore.importXML(xmlBefore)
+    .then(function() { viewerBefore.get('canvas').zoom('fit-viewport'); })
+    .catch(function(err) { console.error('bpmn before:', err); });
+
+  var viewerAfter = new BpmnJS({ container: '#bpmnAfter' });
+  viewerAfter.importXML(xmlAfter)
+    .then(function() { viewerAfter.get('canvas').zoom('fit-viewport'); })
+    .catch(function(err) { console.error('bpmn after:', err); });
+
+  var menu = document.getElementById('menu'), links = document.getElementById('links');
+  menu.onclick = function() { links.classList.toggle('open'); };
+</script>
+</body>
+</html>

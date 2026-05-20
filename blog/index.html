@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — KomGIS</title>
+  <meta name="description" content="Practical articles on AI automation for business teams." />
+  <style>
+    :root{--bg:#0c0c0b;--surface:#131312;--line:#252522;--text:#f2f0eb;--muted:#7a7870;--lime:#c6f135;--max:1200px;--r:4px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(var(--max),calc(100% - 56px));margin:auto}
+
+    header{position:sticky;top:0;z-index:50;background:rgba(12,12,11,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    nav{height:68px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:1.05rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    .links{display:flex;align-items:center;gap:32px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+    .links a:hover{color:var(--text)}
+    .links a.active{color:var(--text)}
+    .navCta{padding:9px 20px;background:var(--lime);color:#0c0c0b;border-radius:var(--r);font-size:.85rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .navCta:hover{background:#d4ff3a}
+    .menu{display:none;background:transparent;border:1px solid var(--line);color:var(--text);border-radius:var(--r);padding:8px 12px;font-size:1rem;cursor:pointer}
+
+    .pageHero{padding:64px 0 56px;border-bottom:1px solid var(--line)}
+    .pageTitle{font-size:clamp(2.8rem,6vw,5rem);font-weight:900;letter-spacing:-.055em;line-height:1.05}
+
+    .postGrid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+    .postCard{padding:40px 32px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:12px;transition:.15s}
+    .postCard:hover{background:var(--surface)}
+    .postDate{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+    .postTitle{font-size:1.2rem;font-weight:700;letter-spacing:-.03em;line-height:1.25;color:var(--text)}
+    .postExcerpt{color:var(--muted);font-size:.9rem;line-height:1.65;flex:1}
+    .postLink{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);margin-top:4px}
+
+    footer{padding:32px 0;border-top:1px solid var(--line);margin-top:80px}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    .footLeft{font-size:.82rem;color:var(--muted);letter-spacing:.04em}
+    .footerLinks{display:flex;gap:24px;flex-wrap:wrap}
+    .footerLinks a{font-size:.82rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .footerLinks a:hover{color:var(--text)}
+
+    @media(max-width:1020px){
+      .postGrid{grid-template-columns:1fr 1fr}
+      .links{display:none}.menu{display:block}
+      .links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:flex-start;background:var(--bg);padding:20px 28px;border-bottom:1px solid var(--line);gap:18px}
+      .navCta{display:none}
+    }
+    @media(max-width:640px){
+      .wrap{width:min(var(--max),calc(100% - 32px))}
+      .postGrid{grid-template-columns:1fr}
+      .foot{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav class="wrap">
+    <a class="logo" href="../index_no_redundant_lists.html">KomGIS</a>
+    <div class="links" id="links">
+      <a href="../index_no_redundant_lists.html#services">Services</a>
+      <a href="../index_no_redundant_lists.html#method">How it works</a>
+      <a href="../index_no_redundant_lists.html#examples">Examples</a>
+      <a href="../index_no_redundant_lists.html#customers">Results</a>
+      <a href="../index_no_redundant_lists.html#tech">Setup</a>
+      <a href="index.html" class="active">Blog</a>
+    </div>
+    <a class="navCta" href="../index_no_redundant_lists.html#contact">Get in touch</a>
+    <button class="menu" id="menu" aria-label="Menu">☰</button>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="pageHero">
+      <h1 class="pageTitle">Blog</h1>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="postGrid">
+      <a class="postCard" href="how-to-start.html">
+        <span class="postDate">May 19, 2026</span>
+        <div class="postTitle">How to Start with AI Automation: Pick One Process</div>
+        <p class="postExcerpt">Most businesses want to automate but don't know where to begin. The answer is simpler than it looks — start with one real process, map how it works today, and add AI only where it clearly helps.</p>
+        <span class="postLink">Read →</span>
+      </a>
+      <a class="postCard" href="human-review.html">
+        <span class="postDate">May 12, 2026</span>
+        <div class="postTitle">Why Human Review Makes AI Automation Actually Work</div>
+        <p class="postExcerpt">AI makes mistakes. For business tasks involving approvals, communications, or financial decisions, those mistakes have real costs. The answer is not to avoid AI — it is to build review steps into the workflow.</p>
+        <span class="postLink">Read →</span>
+      </a>
+      <a class="postCard" href="connecting-tools.html">
+        <span class="postDate">May 5, 2026</span>
+        <div class="postTitle">Connecting Your Business Tools: The Hidden Step in Automation</div>
+        <p class="postExcerpt">Most businesses use many separate tools. The gap between them is where time gets lost. AI automation is most valuable when information flows through a process without manual handoffs.</p>
+        <span class="postLink">Read →</span>
+      </a>
+      <a class="postCard" href="measuring-results.html">
+        <span class="postDate">April 28, 2026</span>
+        <div class="postTitle">How to Measure Whether Your AI Automation Is Working</div>
+        <p class="postExcerpt">You built the automation — now how do you know if it is actually working? Deciding what to measure before launch and reviewing results regularly makes the difference between a system that improves and one that quietly drifts.</p>
+        <span class="postLink">Read →</span>
+      </a>
+      <a class="postCard" href="common-mistakes.html">
+        <span class="postDate">April 21, 2026</span>
+        <div class="postTitle">The Most Common Mistakes When Starting AI Automation</div>
+        <p class="postExcerpt">Most first automation projects fail for the same reasons: the wrong process, skipped planning, unrealistic expectations, and no human review. Here is what to watch out for before you start building.</p>
+        <span class="postLink">Read →</span>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="footLeft">© 2026 KomGIS. Practical AI automation for business teams.</span>
+    <div class="footerLinks">
+      <a href="../index_no_redundant_lists.html#services">Services</a>
+      <a href="../index_no_redundant_lists.html#examples">Examples</a>
+      <a href="../index_no_redundant_lists.html#contact">Contact</a>
+      <a href="index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menu=document.getElementById('menu'),links=document.getElementById('links');
+  menu.onclick=()=>links.classList.toggle('open');
+</script>
+</body>
+</html>

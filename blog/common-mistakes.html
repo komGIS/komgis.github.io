@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Most Common Mistakes When Starting AI Automation — KomGIS Blog</title>
+  <meta name="description" content="Most first automation projects fail for the same reasons. Here are the mistakes that come up most often and how to avoid them." />
+  <style>
+    :root{--bg:#0c0c0b;--surface:#131312;--line:#252522;--text:#f2f0eb;--muted:#7a7870;--lime:#c6f135;--max:1200px;--r:4px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(var(--max),calc(100% - 56px));margin:auto}
+
+    header{position:sticky;top:0;z-index:50;background:rgba(12,12,11,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    nav{height:68px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:1.05rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    .links{display:flex;align-items:center;gap:32px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+    .links a:hover{color:var(--text)}
+    .links a.active{color:var(--text)}
+    .navCta{padding:9px 20px;background:var(--lime);color:#0c0c0b;border-radius:var(--r);font-size:.85rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .navCta:hover{background:#d4ff3a}
+    .menu{display:none;background:transparent;border:1px solid var(--line);color:var(--text);border-radius:var(--r);padding:8px 12px;font-size:1rem;cursor:pointer}
+
+    .articleHero{padding:56px 0 48px;border-bottom:1px solid var(--line)}
+    .articleMeta{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+    .articleTitle{font-size:clamp(2rem,4.5vw,3.8rem);font-weight:900;letter-spacing:-.055em;line-height:1.08;max-width:900px}
+
+    .articleWrap{max-width:720px;padding:56px 0 96px}
+    .backLink{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:48px;transition:.15s}
+    .backLink:hover{color:var(--text)}
+    .articleWrap h2{font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:var(--text);margin:44px 0 12px}
+    .articleWrap p{color:var(--muted);font-size:1rem;line-height:1.85;margin-bottom:20px}
+    .articleWrap ul{color:var(--muted);font-size:1rem;line-height:1.85;padding-left:20px;margin-bottom:20px;display:flex;flex-direction:column;gap:6px}
+    .articleWrap li::marker{color:var(--lime)}
+
+    footer{padding:32px 0;border-top:1px solid var(--line)}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    .footLeft{font-size:.82rem;color:var(--muted);letter-spacing:.04em}
+    .footerLinks{display:flex;gap:24px;flex-wrap:wrap}
+    .footerLinks a{font-size:.82rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .footerLinks a:hover{color:var(--text)}
+
+    @media(max-width:1020px){
+      .links{display:none}.menu{display:block}
+      .links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:flex-start;background:var(--bg);padding:20px 28px;border-bottom:1px solid var(--line);gap:18px}
+      .navCta{display:none}
+    }
+    @media(max-width:640px){
+      .wrap{width:min(var(--max),calc(100% - 32px))}
+      .foot{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav class="wrap">
+    <a class="logo" href="../index_no_redundant_lists.html">KomGIS</a>
+    <div class="links" id="links">
+      <a href="../index_no_redundant_lists.html#services">Services</a>
+      <a href="../index_no_redundant_lists.html#method">How it works</a>
+      <a href="../index_no_redundant_lists.html#examples">Examples</a>
+      <a href="../index_no_redundant_lists.html#customers">Results</a>
+      <a href="../index_no_redundant_lists.html#tech">Setup</a>
+      <a href="index.html" class="active">Blog</a>
+    </div>
+    <a class="navCta" href="../index_no_redundant_lists.html#contact">Get in touch</a>
+    <button class="menu" id="menu" aria-label="Menu">☰</button>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="articleHero">
+      <div class="articleMeta">April 21, 2026 &nbsp;·&nbsp; 4 min read</div>
+      <h1 class="articleTitle">The Most Common Mistakes When Starting AI Automation</h1>
+    </div>
+
+    <div class="articleWrap">
+      <a class="backLink" href="index.html">← Back to Blog</a>
+
+      <p>Most first automation projects do not fail because the technology does not work. They fail because of decisions made before any code is written — choosing the wrong process, skipping the planning steps, or setting expectations that no system could meet.</p>
+
+      <p>These mistakes come up repeatedly. They are easy to avoid once you know what to look for.</p>
+
+      <h2>Choosing a process that is too complex or too inconsistent</h2>
+
+      <p>The best first process for automation is one that is repetitive, well-defined, and handled the same way every time. A process that has many exceptions, requires judgment that is hard to describe, or is handled differently by different people is a difficult starting point.</p>
+
+      <p>The question to ask before starting: if you had to write down the rules for this process so that a new employee could follow them without asking questions, how long would that document be? If the answer is more than a page or two, the process probably needs to be simplified before it can be automated.</p>
+
+      <h2>Skipping the process mapping step</h2>
+
+      <p>It is tempting to move straight from "we want to automate this" to building the system. The mapping step feels slow and unnecessary when everyone already knows how the process works.</p>
+
+      <p>In practice, the mapping step almost always reveals something important: a step that was forgotten, a decision that has no clear rule behind it, a piece of information that is harder to get than assumed, or a handoff that breaks in ways nobody has thought to mention. Discovering these things during mapping takes an hour. Discovering them after building takes much longer.</p>
+
+      <h2>Expecting AI to be correct from the start</h2>
+
+      <p>AI models need calibration. The first version of an AI-powered workflow will make mistakes. Some will be obvious; some will be subtle. This is not a failure — it is a normal part of building anything that involves AI.</p>
+
+      <p>The mistake is expecting it to work well immediately and then losing confidence when it does not. Build with the assumption that the first version will need adjustment. Test with real historical examples before launch. Track where mistakes happen after launch. Improve from there.</p>
+
+      <h2>Building without a human review step</h2>
+
+      <p>Removing human review to save time in the short term tends to create much larger problems later. An AI that approves invoices, sends customer communications, or makes decisions without anyone checking will eventually do something wrong that takes significant effort to fix.</p>
+
+      <p>Human review is not a temporary workaround for imperfect AI. It is a permanent feature of well-designed automation. The review step can be made fast and efficient, but it should not be removed for any process where a mistake would matter.</p>
+
+      <h2>Trying to connect too many tools at once</h2>
+
+      <p>Every tool connection is a point of potential failure. A workflow that reads from email, writes to a CRM, pulls data from a spreadsheet, and sends a Slack notification has four places where something can break. When it does break, finding the cause takes time.</p>
+
+      <p>Start with the fewest connections that make the automation useful. Add more only after the first version is stable and the team is comfortable with it. Each new connection should solve a specific, identified problem — not be added because it seems like it might help.</p>
+
+      <h2>Not testing with real data before launch</h2>
+
+      <p>Testing with invented examples misses the edge cases that real data contains. Real invoices have unusual formats. Real support requests are written unclearly. Real documents have missing sections. The automation needs to be tested against real historical examples — a sample of actual cases from the past few months — before anyone relies on it.</p>
+
+      <p>If the process handles sensitive data and real examples cannot be used for testing, create anonymized versions that preserve the structure and complexity of real cases. Simplified test data produces misleading results.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="footLeft">© 2026 KomGIS. Practical AI automation for business teams.</span>
+    <div class="footerLinks">
+      <a href="../index_no_redundant_lists.html#services">Services</a>
+      <a href="../index_no_redundant_lists.html#examples">Examples</a>
+      <a href="../index_no_redundant_lists.html#contact">Contact</a>
+      <a href="index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menu=document.getElementById('menu'),links=document.getElementById('links');
+  menu.onclick=()=>links.classList.toggle('open');
+</script>
+</body>
+</html>

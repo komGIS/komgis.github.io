@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Manual_Customer_Complaint_Before_AI" targetNamespace="https://komgis.com/bpmn/manual-customer-complaint-before-ai" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.13.2">
+  <bpmn:process id="Process_Manual_Customer_Complaint_Before_AI" name="Manual Customer Complaint Handling Process Before AI Automation" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Manual_Complaint">
+      <bpmn:lane id="Lane_Outbound" name="Outbound Communication">
+        <bpmn:flowNodeRef>Task_Send_Response</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Complaint_Handled</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Manager" name="Support Manager">
+        <bpmn:flowNodeRef>Task_Review_Response</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Rework_Response</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Approved</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Support" name="Support Employee">
+        <bpmn:flowNodeRef>Task_Read_Complaint</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Categorize_Issue</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Search_History</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Request_Info</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Draft_Response</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Info_Complete</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_Additional_Info_Received</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Intake" name="Support Intake">
+        <bpmn:flowNodeRef>Task_Register_Complaint</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Assign_Ticket</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Start_Complaint_Received</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_Complaint_Received" name="Complaint received" />
+    <bpmn:task id="Task_Register_Complaint" name="Manually register complaint in ticketing system" />
+    <bpmn:task id="Task_Assign_Ticket" name="Assign complaint to support employee" />
+    <bpmn:userTask id="Task_Read_Complaint" name="Read full complaint manually" />
+    <bpmn:userTask id="Task_Categorize_Issue" name="Manually categorize issue and urgency" />
+    <bpmn:userTask id="Task_Search_History" name="Search previous customer communication manually" />
+    <bpmn:exclusiveGateway id="Gateway_Info_Complete" name="Information complete?" />
+    <bpmn:sendTask id="Task_Request_Info" name="Request missing information from customer" />
+    <bpmn:intermediateCatchEvent id="Event_Additional_Info_Received" name="Receive additional information" />
+    <bpmn:userTask id="Task_Draft_Response" name="Manually draft customer response" />
+    <bpmn:userTask id="Task_Review_Response" name="Manager reviews response" />
+    <bpmn:exclusiveGateway id="Gateway_Approved" name="Response approved?" />
+    <bpmn:userTask id="Task_Rework_Response" name="Rework response based on manager feedback" />
+    <bpmn:sendTask id="Task_Send_Response" name="Send approved response to customer" />
+    <bpmn:endEvent id="End_Complaint_Handled" name="Complaint response completed" />
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Complaint_Received" targetRef="Task_Register_Complaint" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Register_Complaint" targetRef="Task_Assign_Ticket" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Assign_Ticket" targetRef="Task_Read_Complaint" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Read_Complaint" targetRef="Task_Categorize_Issue" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_Categorize_Issue" targetRef="Task_Search_History" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Task_Search_History" targetRef="Gateway_Info_Complete" />
+    <bpmn:sequenceFlow id="Flow_7_Yes" name="Yes" sourceRef="Gateway_Info_Complete" targetRef="Task_Draft_Response" />
+    <bpmn:sequenceFlow id="Flow_7_No" name="No" sourceRef="Gateway_Info_Complete" targetRef="Task_Request_Info" />
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="Task_Request_Info" targetRef="Event_Additional_Info_Received" />
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Event_Additional_Info_Received" targetRef="Task_Search_History" />
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Task_Draft_Response" targetRef="Task_Review_Response" />
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Task_Review_Response" targetRef="Gateway_Approved" />
+    <bpmn:sequenceFlow id="Flow_12_Yes" name="Yes" sourceRef="Gateway_Approved" targetRef="Task_Send_Response" />
+    <bpmn:sequenceFlow id="Flow_12_No" name="No" sourceRef="Gateway_Approved" targetRef="Task_Rework_Response" />
+    <bpmn:sequenceFlow id="Flow_13" sourceRef="Task_Rework_Response" targetRef="Task_Review_Response" />
+    <bpmn:sequenceFlow id="Flow_14" sourceRef="Task_Send_Response" targetRef="End_Complaint_Handled" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Manual_Complaint">
+    <bpmndi:BPMNPlane id="BPMNPlane_Manual_Complaint" bpmnElement="Process_Manual_Customer_Complaint_Before_AI">
+      <bpmndi:BPMNShape id="Lane_Outbound_di" bpmnElement="Lane_Outbound" isHorizontal="true">
+        <dc:Bounds x="160" y="550" width="1780" height="110" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Manager_di" bpmnElement="Lane_Manager" isHorizontal="true">
+        <dc:Bounds x="160" y="430" width="1780" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Support_di" bpmnElement="Lane_Support" isHorizontal="true">
+        <dc:Bounds x="160" y="200" width="1780" height="230" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Intake_di" bpmnElement="Lane_Intake" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1780" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Complaint_Received_di" bpmnElement="Start_Complaint_Received">
+        <dc:Bounds x="220" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="212" y="166" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Register_Complaint_di" bpmnElement="Task_Register_Complaint">
+        <dc:Bounds x="300" y="100" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Assign_Ticket_di" bpmnElement="Task_Assign_Ticket">
+        <dc:Bounds x="520" y="100" width="165" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Read_Complaint_di" bpmnElement="Task_Read_Complaint">
+        <dc:Bounds x="735" y="260" width="160" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Categorize_Issue_di" bpmnElement="Task_Categorize_Issue">
+        <dc:Bounds x="940" y="260" width="170" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Search_History_di" bpmnElement="Task_Search_History">
+        <dc:Bounds x="1155" y="260" width="180" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Info_Complete_di" bpmnElement="Gateway_Info_Complete" isMarkerVisible="true">
+        <dc:Bounds x="1380" y="272" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1377" y="236" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Request_Info_di" bpmnElement="Task_Request_Info">
+        <dc:Bounds x="1305" y="345" width="180" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_Additional_Info_Received_di" bpmnElement="Event_Additional_Info_Received">
+        <dc:Bounds x="1145" y="362" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1082" y="360" width="55" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Draft_Response_di" bpmnElement="Task_Draft_Response">
+        <dc:Bounds x="1495" y="260" width="175" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Review_Response_di" bpmnElement="Task_Review_Response">
+        <dc:Bounds x="1495" y="455" width="175" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Approved_di" bpmnElement="Gateway_Approved" isMarkerVisible="true">
+        <dc:Bounds x="1710" y="465" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1709" y="435.5" width="52" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Rework_Response_di" bpmnElement="Task_Rework_Response">
+        <dc:Bounds x="1280" y="455" width="180" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Send_Response_di" bpmnElement="Task_Send_Response">
+        <dc:Bounds x="1595" y="575" width="180" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Complaint_Handled_di" bpmnElement="End_Complaint_Handled">
+        <dc:Bounds x="1855" y="592" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1847" y="550" width="51" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="256" y="140" />
+        <di:waypoint x="300" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="470" y="140" />
+        <di:waypoint x="520" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="685" y="140" />
+        <di:waypoint x="710" y="140" />
+        <di:waypoint x="710" y="298" />
+        <di:waypoint x="735" y="298" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="895" y="298" />
+        <di:waypoint x="940" y="298" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="1110" y="298" />
+        <di:waypoint x="1155" y="298" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="1335" y="298" />
+        <di:waypoint x="1380" y="297" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_Yes_di" bpmnElement="Flow_7_Yes">
+        <di:waypoint x="1430" y="297" />
+        <di:waypoint x="1495" y="298" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1454" y="273" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_No_di" bpmnElement="Flow_7_No">
+        <di:waypoint x="1405" y="322" />
+        <di:waypoint x="1405" y="345" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1413" y="324" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="1305" y="380" />
+        <di:waypoint x="1181" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="1163" y="362" />
+        <di:waypoint x="1163" y="335" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10">
+        <di:waypoint x="1582" y="335" />
+        <di:waypoint x="1582" y="455" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11">
+        <di:waypoint x="1670" y="490" />
+        <di:waypoint x="1710" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_Yes_di" bpmnElement="Flow_12_Yes">
+        <di:waypoint x="1735" y="515" />
+        <di:waypoint x="1735" y="575" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1741" y="535" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_No_di" bpmnElement="Flow_12_No">
+        <di:waypoint x="1720" y="500" />
+        <di:waypoint x="1670" y="540" />
+        <di:waypoint x="1370" y="540" />
+        <di:waypoint x="1370" y="525" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1702" y="516" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13">
+        <di:waypoint x="1460" y="490" />
+        <di:waypoint x="1495" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14">
+        <di:waypoint x="1775" y="610" />
+        <di:waypoint x="1855" y="610" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

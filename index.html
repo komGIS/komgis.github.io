@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KomGIS | AI Automation for Business</title>
-  <meta name="description" content="We provide AI automation services for business process modelling, custom AI agents, document processing, customer support, finance workflows and internal operations." />
+  <title>KomGIS | Simple AI Automation for Business</title>
+  <meta name="description" content="We help businesses map one process, reduce repetitive work with AI, connect existing tools, and keep people in control of important decisions." />
   <style>
     :root{
       --bg:#0c0c0b;--surface:#131312;--line:#252522;
@@ -29,18 +29,23 @@
     .menu{display:none;background:transparent;border:1px solid var(--line);color:var(--text);border-radius:var(--r);padding:8px 12px;font-size:1rem;cursor:pointer}
 
     /* HERO */
-    .hero{padding:120px 0 100px;border-bottom:1px solid var(--line)}
+    .hero{padding:16px 0 100px;border-bottom:1px solid var(--line)}
     .heroLabel{font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:40px;display:flex;align-items:center;gap:14px}
     .heroLabel::before{content:'';display:block;width:32px;height:1px;background:var(--muted)}
     h1{font-size:clamp(3.2rem,7.5vw,7.8rem);line-height:1.06;letter-spacing:-.055em;font-weight:900;max-width:1100px}
     h1 .accent{color:var(--lime)}
     .heroBottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:64px;gap:40px;flex-wrap:wrap}
     .heroCopy{max-width:520px;color:var(--muted);font-size:1.05rem;line-height:1.7}
-        .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;font-weight:700;font-size:.95rem;border-radius:var(--r);transition:.15s;letter-spacing:.01em}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;font-weight:700;font-size:.95rem;border-radius:var(--r);transition:.15s;letter-spacing:.01em}
     .btnPrimary{background:var(--lime);color:#0c0c0b}
     .btnPrimary:hover{background:#d4ff3a}
     .btnGhost{border:1px solid var(--line);color:var(--muted)}
     .btnGhost:hover{border-color:var(--text);color:var(--text)}
+
+    /* PROMO VIDEO */
+    .promoSection{border-bottom:1px solid var(--line);padding:72px 0}
+    .promoVideo{width:100%;max-width:900px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:#000;display:block}
+    .promoVideo video{width:100%;height:100%;display:block}
 
     /* TICKER */
     .ticker{border-bottom:1px solid var(--line);overflow:hidden;height:48px;display:flex;align-items:center}
@@ -73,7 +78,7 @@
     .step{display:flex;gap:24px;padding:20px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:.15s}
     .step:first-child{border-top:1px solid var(--line)}
     .step:hover .stepTitle,.step.active .stepTitle{color:var(--lime)}
-    .stepN{font-size:.78rem;color:var(--muted);letter-spacing:.1em;padding-top:5px;min-width:28px}
+    .stepN{font-size:1.2rem;color:var(--muted);letter-spacing:.1em;padding-top:5px;min-width:28px}
     .stepTitle{font-size:1.05rem;font-weight:700;letter-spacing:-.02em;transition:.15s}
     .stepSub{font-size:.88rem;color:var(--muted);margin-top:3px}
     .stepPanel{background:var(--surface);border-radius:8px;padding:36px;display:flex;flex-direction:column;gap:20px}
@@ -87,7 +92,7 @@
     .exampleCell{padding:36px 28px;border-right:1px solid var(--line);transition:.15s}
     .exampleCell:last-child{border-right:none}
     .exampleCell:hover{background:var(--surface)}
-    .exampleNum{font-size:.75rem;color:var(--muted);letter-spacing:.15em;margin-bottom:24px;display:block}
+    .exampleNum{font-size:1.2rem;color:var(--muted);letter-spacing:.15em;margin-bottom:24px;display:block}
     .exampleCell b{display:block;font-size:1.05rem;font-weight:700;letter-spacing:-.02em;margin-bottom:10px;line-height:1.3}
     .exampleCell p{color:var(--muted);font-size:.88rem;line-height:1.6}
 
@@ -159,7 +164,7 @@
     @media(max-width:640px){
       .wrap{width:min(var(--max),calc(100% - 32px))}
       h1{font-size:clamp(2.8rem,10vw,4rem)}
-      .hero{padding:80px 0 70px}
+      .hero{padding:32px 0 60px}
       .heroBottom{flex-direction:column;align-items:flex-start}
       .heroActions{align-items:flex-start}
       .serviceRow{grid-template-columns:40px 1fr}
@@ -173,13 +178,14 @@
 <body>
 <header>
   <nav class="wrap">
-    <a class="logo" href="#top"><span class="logoDot"></span>KomGIS</a>
+    <a class="logo" href="#top">KomGIS</a>
     <div class="links" id="links">
       <a href="#services">Services</a>
-      <a href="#method">Method</a>
+      <a href="#method">How it works</a>
       <a href="#examples">Examples</a>
-      <a href="#customers">Customers</a>
-      <a href="#tech">Technology</a>
+      <a href="#customers">Results</a>
+      <a href="#tech">Setup</a>
+      <a href="blog/index.html">Blog</a>
     </div>
     <a class="navCta" href="#contact">Get in touch</a>
     <button class="menu" id="menu" aria-label="Menu">☰</button>
@@ -191,84 +197,42 @@
   <!-- HERO -->
   <section class="hero">
     <div class="wrap">
-      <div class="heroLabel reveal">AI automation consultancy — Belgrade, Serbia</div>
-      <h1 class="reveal">Turn business<br>processes into<br><span class="accent">intelligent</span><br>workflows.</h1>
+      <h1 class="reveal">Turn everyday<br>work into<br><span class="accent">smarter</span><br>workflows</h1>
       <div class="heroBottom reveal">
         <div>
-          <p class="heroCopy">We implement AI automation in a way your team can actually understand — no black boxes, no guesswork, just clear workflows that handle the repetitive work while keeping people in control.</p>
+          <p class="heroCopy">We help your team reduce repetitive work by mapping real business process, adding AI only where it helps, connecting your existing tools and data, and keeping people in charge of important decisions.</p>
           <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:36px">
-            <a class="btn btnPrimary" href="#contact">Request consultation →</a>
-            <a class="btn btnGhost" href="#examples">See automation examples</a>
+            <a class="btn btnPrimary" href="#contact">Book a consultation →</a>
+            <a class="btn btnGhost" href="#examples">See practical examples</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TICKER -->
-  <div class="ticker">
-    <div class="tickerInner">
-      <span class="tickerItem"><span>→</span>Business process modelling</span>
-      <span class="tickerItem"><span>→</span>Custom AI agents</span>
-      <span class="tickerItem"><span>→</span>Document intelligence</span>
-      <span class="tickerItem"><span>→</span>Human-in-the-loop</span>
-      <span class="tickerItem"><span>→</span>LangGraph &amp; CopilotKit</span>
-      <span class="tickerItem"><span>→</span>BPMN 2.0 workflows</span>
-      <span class="tickerItem"><span>→</span>Deployment &amp; monitoring</span>
-      <span class="tickerItem"><span>→</span>Business process modelling</span>
-      <span class="tickerItem"><span>→</span>Custom AI agents</span>
-      <span class="tickerItem"><span>→</span>Document intelligence</span>
-      <span class="tickerItem"><span>→</span>Human-in-the-loop</span>
-      <span class="tickerItem"><span>→</span>LangGraph &amp; CopilotKit</span>
-      <span class="tickerItem"><span>→</span>BPMN 2.0 workflows</span>
-      <span class="tickerItem"><span>→</span>Deployment &amp; monitoring</span>
+  <!-- PROMO VIDEO -->
+  <section class="promoSection">
+    <div class="wrap">
+      <div class="promoVideo reveal">
+        <video controls playsinline preload="metadata">
+          <source src="promo_video/KomGIS-promo.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- SERVICES -->
   <section class="services" id="services">
     <div class="wrap">
       <div class="sectionHeader reveal">
-        <span class="sectionLabel">What we do</span>
-        <span class="sectionCount">One service, five phases</span>
+        <span class="sectionLabel">What we help with</span>
+        <span class="sectionCount">Simple, practical AI automation</span>
       </div>
-      <div class="serviceRow reveal" style="grid-template-columns:64px 1fr;padding-bottom:48px;border-bottom:1px solid var(--line)">
-        <span></span>
+      <div class="serviceRow reveal" style="grid-template-columns:1fr;padding-bottom:56px;border-bottom:1px solid var(--line)">
         <div>
-          <div style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-.04em;line-height:1.15;margin-bottom:16px">We build AI automation systems<br>that actually work.</div>
-          <p style="color:var(--muted);font-size:1rem;line-height:1.75;max-width:680px">Most AI projects fail because they start with the technology, not the problem. We do it the other way around — understand the workflow first, then design an AI system that fits it. The result is automation your team trusts and actually uses.</p>
-        </div>
-      </div>
-      <div class="serviceList">
-        <div class="serviceRow reveal">
-          <span class="serviceNum">01</span>
-          <span class="serviceTitle">Business Process Modelling</span>
-          <span class="serviceDesc">Map workflows, roles, systems, decisions and bottlenecks using BPMN 2.0 — in a format your whole team can read and validate.</span>
-          <span class="serviceTag">Phase 1</span>
-        </div>
-        <div class="serviceRow reveal">
-          <span class="serviceNum">02</span>
-          <span class="serviceTitle">AI Automation Design</span>
-          <span class="serviceDesc">Identify exactly where AI should assist, automate, validate, summarize or generate — and where humans must stay in control.</span>
-          <span class="serviceTag">Phase 2</span>
-        </div>
-        <div class="serviceRow reveal">
-          <span class="serviceNum">03</span>
-          <span class="serviceTitle">Custom AI Agents &amp; Human-in-the-Loop UI</span>
-          <span class="serviceDesc">Develop controlled agents alongside the review and approval interface — prompts, validations and fallbacks are built together with the dashboards that keep people in control of every output.</span>
-          <span class="serviceTag">Phase 3</span>
-        </div>
-        <div class="serviceRow reveal">
-          <span class="serviceNum">04</span>
-          <span class="serviceTitle">Data Flow Integration</span>
-          <span class="serviceDesc">Connect your systems via APIs, databases and files so that data moves reliably through every step without manual handling.</span>
-          <span class="serviceTag">Phase 4</span>
-        </div>
-        <div class="serviceRow reveal">
-          <span class="serviceNum">05</span>
-          <span class="serviceTitle">Deployment &amp; Optimization</span>
-          <span class="serviceDesc">Pilot, test, monitor and continuously improve — from first prototype to a system running reliably in production.</span>
-          <span class="serviceTag">Phase 5</span>
+          <div style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-.04em;line-height:1.15;margin-bottom:16px">We help your team save time<br>without making work harder to understand</div>
+          <p style="color:var(--muted);font-size:1rem;line-height:1.75;max-width:760px;margin-bottom:18px">We start with one real business process, such as support requests, invoice review, document handling, sales follow-up, or onboarding. We look at how the work happens today, find the repetitive parts, and add AI only where it can clearly help.</p>
+          <p style="color:var(--muted);font-size:1rem;line-height:1.75;max-width:760px">The goal is not to replace your team. The goal is to reduce copy-paste work, prepare useful drafts and summaries, move information between tools, and keep people in control of important decisions.</p>
         </div>
       </div>
     </div>
@@ -278,36 +242,36 @@
   <section class="workflow" id="method">
     <div class="wrap">
       <div class="sectionHeader reveal">
-        <span class="sectionLabel">Methodology</span>
-        <span class="sectionCount">05 steps</span>
+        <span class="sectionLabel">How it works</span>
+        <span class="sectionCount">5 clear steps</span>
       </div>
       <div class="workflowGrid">
         <div class="workflowLeft reveal">
-          <h2 class="workflowHeading">Process first.<br>AI second.</h2>
-          <p class="workflowSub">A structured methodology keeps AI automation practical, reliable and safe for business use. We don't start with tools — we start with your workflow.</p>
+          <h2 class="workflowHeading">Start with the work, then add AI</h2>
+          <p class="workflowSub">AI works best when it is part of a clear process. We use simple steps, clear rules, and human review so the automation is useful and safe for everyday work.</p>
           <div class="stepList">
-            <div class="step active" data-n="01" data-title="Business Process Modelling" data-text="We map your existing workflows together with your team using our collaboration tool — capturing tasks, roles, decisions, inputs and exceptions in a format everyone can read and validate.">
-              <span class="stepN">01</span><div><div class="stepTitle">Business Process Modelling</div><div class="stepSub">Understand how the work is done today.</div></div>
+            <div class="step active" data-n="01" data-title="Map the current work" data-text="We map the process with your team: what starts it, who is involved, what information is needed, where decisions happen, and where delays or mistakes appear.">
+              <span class="stepN">01</span><div><div class="stepTitle">Map the current work</div><div class="stepSub">Understand how the work happens today.</div></div>
             </div>
-            <div class="step" data-n="02" data-title="AI Automation Design" data-text="We identify exactly where AI should assist, automate, validate, summarize or generate — and where humans must stay in control — before a single line of code is written.">
-              <span class="stepN">02</span><div><div class="stepTitle">AI Automation Design</div><div class="stepSub">Decide where AI fits and where it doesn't.</div></div>
+            <div class="step" data-n="02" data-title="Decide where AI can help" data-text="We decide where AI should help, where simple business rules are better, and where a person must stay in control before anything important happens.">
+              <span class="stepN">02</span><div><div class="stepTitle">Decide where AI can help</div><div class="stepSub">Decide where AI is useful and where normal rules are better.</div></div>
             </div>
-            <div class="step" data-n="03" data-title="Custom AI Agents & Human-in-the-Loop UI" data-text="Agents and the review interface are built together — controlled agents with scoped tools, structured prompts and fallbacks, alongside the dashboards that keep people in control of every sensitive output.">
-              <span class="stepN">03</span><div><div class="stepTitle">Custom AI Agents &amp; Human-in-the-Loop UI</div><div class="stepSub">Build the system and the oversight layer as one.</div></div>
+            <div class="step" data-n="03" data-title="Build AI controls and agents" data-text="We build AI helpers that follow clear rules, plus screens where your team can review, edit, approve, or reject the result before anything important happens.">
+              <span class="stepN">03</span><div><div class="stepTitle">Build AI controls and agents</div><div class="stepSub">Build the automation and the approval screen together.</div></div>
             </div>
-            <div class="step" data-n="04" data-title="Data Flow Integration" data-text="We connect your systems via APIs, databases and files so that data moves reliably through every step of the workflow — no manual copying, no broken handoffs.">
-              <span class="stepN">04</span><div><div class="stepTitle">Data Flow Integration</div><div class="stepSub">Connect your systems and sources reliably.</div></div>
+            <div class="step" data-n="04" data-title="Connect your business tools and data" data-text="We connect email, forms, files, databases, CRM, and other systems so information moves through the process without copy-paste or broken handoffs.">
+              <span class="stepN">04</span><div><div class="stepTitle">Connect your business tools and data</div><div class="stepSub">Make information move between your tools.</div></div>
             </div>
-            <div class="step" data-n="05" data-title="Deployment & Optimization" data-text="We pilot in a controlled environment, validate with real data, then release to production — with monitoring in place so issues are caught early and the system keeps improving.">
-              <span class="stepN">05</span><div><div class="stepTitle">Deployment &amp; Optimization</div><div class="stepSub">From pilot to production, safely.</div></div>
+            <div class="step" data-n="05" data-title="Test, launch, and improve" data-text="We test the workflow with real examples, fix weak points, then launch carefully so the system can improve over time.">
+              <span class="stepN">05</span><div><div class="stepTitle">Test, launch, and improve</div><div class="stepSub">Test first, then launch safely.</div></div>
             </div>
           </div>
         </div>
         <div class="workflowRight reveal">
           <div class="stepPanel">
             <div class="panelNum" id="panelN">01</div>
-            <div class="panelTitle" id="panelTitle">Business Process Modelling</div>
-            <div class="panelText" id="panelText">We map your existing workflows together with your team using our collaboration tool — capturing tasks, roles, decisions, inputs and exceptions in a format everyone can read and validate.</div>
+            <div class="panelTitle" id="panelTitle">Map the current work</div>
+            <div class="panelText" id="panelText">We map the process with your team: what starts it, who is involved, what information is needed, where decisions happen, and where delays or mistakes appear.</div>
           </div>
         </div>
       </div>
@@ -318,16 +282,16 @@
   <section class="examples" id="examples">
     <div class="wrap">
       <div class="sectionHeader reveal">
-        <span class="sectionLabel">Automation examples</span>
-        <span class="sectionCount">Practical use cases</span>
+        <span class="sectionLabel">Practical automation examples</span>
+        <span class="sectionCount">Common business tasks</span>
       </div>
     </div>
     <div class="examplesGrid reveal">
-      <div class="exampleCell"><span class="exampleNum">01</span><b>Customer support handling</b><p>Classify incoming requests, summarize case history and draft a response ready for human review and approval.</p></div>
-      <div class="exampleCell"><span class="exampleNum">02</span><b>Invoice processing</b><p>Extract invoice data, detect discrepancies and route approvals.</p></div>
-      <div class="exampleCell"><span class="exampleNum">03</span><b>Document analysis</b><p>Summarize contracts, reports, PDFs and convert data into records.</p></div>
-      <div class="exampleCell"><span class="exampleNum">04</span><b>Sales lead scoring</b><p>Score leads, summarize needs and update CRM automatically.</p></div>
-      <div class="exampleCell"><span class="exampleNum">05</span><b>Employee onboarding</b><p>Create checklists, answer policy questions and notify responsible teams.</p></div>
+      <a class="exampleCell" href="examples/customer-support.html"><span class="exampleNum">01</span><b>Customer support requests</b><p>Read new messages, understand the issue, suggest priority, and prepare a reply for a team member to approve.</p></a>
+      <a class="exampleCell" href="examples/invoice-review.html"><span class="exampleNum">02</span><b>Invoice review and approval</b><p>Read invoice details, spot missing or unusual information, and send the invoice to the right person for approval.</p></a>
+      <a class="exampleCell" href="examples/document-review.html"><span class="exampleNum">03</span><b>Document review</b><p>Turn long documents into summaries, action items, risks, and key details your team can check.</p></a>
+      <a class="exampleCell" href="examples/sales-leads.html"><span class="exampleNum">04</span><b>Sales lead follow-up</b><p>Review new leads, estimate priority, suggest the next action, and prepare a follow-up email.</p></a>
+      <a class="exampleCell" href="examples/employee-onboarding.html"><span class="exampleNum">05</span><b>Employee onboarding</b><p>Create onboarding checklists, answer common policy questions, and remind the right teams about required tasks.</p></a>
     </div>
   </section>
 
@@ -335,28 +299,23 @@
   <section class="customers" id="customers">
     <div class="wrap">
       <div class="sectionHeader reveal">
-        <span class="sectionLabel">Satisfied customers</span>
-        <span class="sectionCount">Trusted automation patterns</span>
+        <span class="sectionLabel">Results</span>
+        <span class="sectionCount">What this can improve</span>
       </div>
     </div>
     <div class="testimonialsGrid reveal">
       <div class="testimonial">
-        <p class="tQuote">"The invoice workflow helped us reduce manual checking and gave managers a clear approval package before payment decisions."</p>
-        <div class="tMeta"><div class="tAvatar">FO</div><div><div class="tName">Finance Operations Team</div><div class="tRole">Invoice and approval workflow</div></div></div>
+        <p class="tQuote">"The invoice workflow reduced manual checking and gave managers the key details they needed before approving payment."</p>
+        <div class="tMeta"><div class="tAvatar">FO</div><div><div class="tName">Finance team</div><div class="tRole">Invoice approval process</div></div></div>
       </div>
       <div class="testimonial">
-        <p class="tQuote">"AI-generated summaries and response drafts made our support process faster while keeping every customer reply under human control."</p>
-        <div class="tMeta"><div class="tAvatar">CS</div><div><div class="tName">Customer Support Department</div><div class="tRole">Complaint handling automation</div></div></div>
+        <p class="tQuote">"Suggested summaries and reply drafts helped our support team respond faster while still reviewing every customer message."</p>
+        <div class="tMeta"><div class="tAvatar">CS</div><div><div class="tName">Customer support team</div><div class="tRole">Support request process</div></div></div>
       </div>
       <div class="testimonial">
-        <p class="tQuote">"The onboarding assistant reduced repeated questions and helped new employees find policy information and required tasks more easily."</p>
-        <div class="tMeta"><div class="tAvatar">HR</div><div><div class="tName">HR and Administration</div><div class="tRole">Onboarding assistant</div></div></div>
+        <p class="tQuote">"The onboarding workflow helped new employees find answers, follow their checklist, and know what to do next."</p>
+        <div class="tMeta"><div class="tAvatar">HR</div><div><div class="tName">HR team</div><div class="tRole">Onboarding process</div></div></div>
       </div>
-    </div>
-    <div class="statsRow reveal">
-      <div class="statCell"><div class="statVal">3.4×</div><div class="statDesc">faster document handling in pilot workflows</div></div>
-      <div class="statCell"><div class="statVal">40%</div><div class="statDesc">less repetitive manual review for selected tasks</div></div>
-      <div class="statCell"><div class="statVal">100%</div><div class="statDesc">human review available for sensitive outputs</div></div>
     </div>
   </section>
 
@@ -364,19 +323,8 @@
   <section class="tech" id="tech">
     <div class="wrap">
       <div class="techInner reveal">
-        <h2 class="techHeading">Built with a modern AI automation stack.</h2>
-        <div class="chips">
-          <span class="chip">LangChain</span>
-          <span class="chip">LangGraph</span>
-          <span class="chip">OpenAI</span>
-          <span class="chip">Anthropic</span>
-          <span class="chip">Django DRF</span>
-          <span class="chip">PostgreSQL</span>
-          <span class="chip">React</span>
-          <span class="chip">Next.js</span>
-          <span class="chip">AWS</span>
-          <span class="chip">CopilotKit</span>
-        </div>
+        <h2 class="techHeading">The technical setup stays behind the scenes</h2>
+        <p style="color:var(--muted);font-size:1rem;line-height:1.75;max-width:620px">Your team sees a clear workflow, useful screens, approval steps, and results they can check. We handle the AI models, workflow logic, integrations, data storage, and monitoring in the background.</p>
       </div>
     </div>
   </section>
@@ -384,13 +332,10 @@
   <!-- CONTACT -->
   <section class="contact" id="contact">
     <div class="wrap">
-      <div class="sectionHeader reveal">
-        <span class="sectionLabel">Start with one process</span>
-      </div>
       <div class="contactGrid">
         <div class="contactLeft reveal">
-          <h2 class="contactHeading">Build your first AI automation workflow.</h2>
-          <p class="contactSub">Select one high-value process, model it, automate the right steps, and deploy with human supervision. We'll help you get there.</p>
+          <h2 class="contactHeading">Start by one, follow with others</h2>
+          <p class="contactSub">Choose a process that happens often, takes time, or causes mistakes. We will map it, improve it, add AI only where it helps, and keep people in control.</p>
           <a class="btn btnPrimary" href="mailto:komgis2026@gmail.com">Contact us →</a>
         </div>
         <div class="contactRight reveal">
@@ -415,13 +360,14 @@
 
 <footer>
   <div class="wrap foot">
-    <span class="footLeft">© 2026 KomGIS. AI business automation systems.</span>
+    <span class="footLeft">© 2026 KomGIS. Practical AI automation for business teams.</span>
     <div class="footerLinks">
       <a href="#services">Services</a>
-      <a href="#method">Method</a>
+      <a href="#method">How it works</a>
       <a href="#examples">Examples</a>
-      <a href="#customers">Customers</a>
+      <a href="#customers">Results</a>
       <a href="#contact">Contact</a>
+      <a href="blog/index.html">Blog</a>
     </div>
   </div>
 </footer>

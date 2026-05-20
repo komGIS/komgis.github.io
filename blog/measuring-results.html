@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Measure Whether Your AI Automation Is Working — KomGIS Blog</title>
+  <meta name="description" content="You built the automation. Now how do you know if it is actually working? Measuring the right things before and after launch makes the difference." />
+  <style>
+    :root{--bg:#0c0c0b;--surface:#131312;--line:#252522;--text:#f2f0eb;--muted:#7a7870;--lime:#c6f135;--max:1200px;--r:4px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(var(--max),calc(100% - 56px));margin:auto}
+
+    header{position:sticky;top:0;z-index:50;background:rgba(12,12,11,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    nav{height:68px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:1.05rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    .links{display:flex;align-items:center;gap:32px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+    .links a:hover{color:var(--text)}
+    .links a.active{color:var(--text)}
+    .navCta{padding:9px 20px;background:var(--lime);color:#0c0c0b;border-radius:var(--r);font-size:.85rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .navCta:hover{background:#d4ff3a}
+    .menu{display:none;background:transparent;border:1px solid var(--line);color:var(--text);border-radius:var(--r);padding:8px 12px;font-size:1rem;cursor:pointer}
+
+    .articleHero{padding:56px 0 48px;border-bottom:1px solid var(--line)}
+    .articleMeta{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+    .articleTitle{font-size:clamp(2rem,4.5vw,3.8rem);font-weight:900;letter-spacing:-.055em;line-height:1.08;max-width:900px}
+
+    .articleWrap{max-width:720px;padding:56px 0 96px}
+    .backLink{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:48px;transition:.15s}
+    .backLink:hover{color:var(--text)}
+    .articleWrap h2{font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:var(--text);margin:44px 0 12px}
+    .articleWrap p{color:var(--muted);font-size:1rem;line-height:1.85;margin-bottom:20px}
+    .articleWrap ul{color:var(--muted);font-size:1rem;line-height:1.85;padding-left:20px;margin-bottom:20px;display:flex;flex-direction:column;gap:6px}
+    .articleWrap li::marker{color:var(--lime)}
+
+    footer{padding:32px 0;border-top:1px solid var(--line)}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    .footLeft{font-size:.82rem;color:var(--muted);letter-spacing:.04em}
+    .footerLinks{display:flex;gap:24px;flex-wrap:wrap}
+    .footerLinks a{font-size:.82rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .footerLinks a:hover{color:var(--text)}
+
+    @media(max-width:1020px){
+      .links{display:none}.menu{display:block}
+      .links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:flex-start;background:var(--bg);padding:20px 28px;border-bottom:1px solid var(--line);gap:18px}
+      .navCta{display:none}
+    }
+    @media(max-width:640px){
+      .wrap{width:min(var(--max),calc(100% - 32px))}
+      .foot{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav class="wrap">
+    <a class="logo" href="../index_no_redundant_lists.html">KomGIS</a>
+    <div class="links" id="links">
+      <a href="../index_no_redundant_lists.html#services">Services</a>
+      <a href="../index_no_redundant_lists.html#method">How it works</a>
+      <a href="../index_no_redundant_lists.html#examples">Examples</a>
+      <a href="../index_no_redundant_lists.html#customers">Results</a>
+      <a href="../index_no_redundant_lists.html#tech">Setup</a>
+      <a href="index.html" class="active">Blog</a>
+    </div>
+    <a class="navCta" href="../index_no_redundant_lists.html#contact">Get in touch</a>
+    <button class="menu" id="menu" aria-label="Menu">☰</button>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="articleHero">
+      <div class="articleMeta">April 28, 2026 &nbsp;·&nbsp; 4 min read</div>
+      <h1 class="articleTitle">How to Measure Whether Your AI Automation Is Working</h1>
+    </div>
+
+    <div class="articleWrap">
+      <a class="backLink" href="index.html">← Back to Blog</a>
+
+      <p>You spent time mapping the process, building the automation, testing it with real examples, and launching it carefully. Now the question is: is it actually working? And how would you know if it stopped working?</p>
+
+      <p>Many teams answer this question by feel. Things seem faster. People seem less frustrated. That is a reasonable start, but it is not enough to make good decisions about what to improve next, what to expand, or whether the investment was worthwhile.</p>
+
+      <p>Measuring automation results does not require complex analytics. It requires deciding in advance what you are going to measure and recording a baseline before the automation goes live.</p>
+
+      <h2>Establish a baseline before you launch</h2>
+
+      <p>The most common measurement mistake is forgetting to record what things looked like before the automation. Once the new process is running, it becomes difficult to remember how long the old one actually took or how many errors it produced.</p>
+
+      <p>Before launch, record simple numbers for the process you are automating:</p>
+      <ul>
+        <li>How long does one instance of this task take, from start to finish?</li>
+        <li>How many instances happen per day or per week?</li>
+        <li>How often do errors or corrections happen, and what do they look like?</li>
+        <li>How many people are involved and how much of their time does it consume?</li>
+      </ul>
+
+      <p>These do not need to be precise. A reasonable estimate recorded on a spreadsheet is far more useful than no baseline at all.</p>
+
+      <h2>What to measure after launch</h2>
+
+      <p>After the automation has been running for two to four weeks, measure the same things. Look for changes in:</p>
+      <ul>
+        <li>Time per task — is the review step faster than the old manual process?</li>
+        <li>Error rate — are mistakes happening less often, more often, or in different places?</li>
+        <li>Volume handled — is the team able to process more without adding people?</li>
+        <li>Where time is now spent — has the repetitive work shifted, or just moved to a different step?</li>
+      </ul>
+
+      <p>Also pay attention to things that are harder to count. Are team members actually using the review screen, or finding ways to bypass it? Are they satisfied with the quality of the AI's output, or correcting it heavily every time? Are there new types of errors that did not exist before?</p>
+
+      <h2>When the numbers look good but something feels wrong</h2>
+
+      <p>Measurement can tell you the automation is faster. It cannot always tell you why team members are uncomfortable with it, or why a particular category of item keeps getting flagged for correction.</p>
+
+      <p>Pay attention to the qualitative signals alongside the numbers. Talk to the people using the system regularly. Ask what is working and what is not. The most useful improvements often come from those conversations, not from the metrics.</p>
+
+      <h2>Review on a regular schedule</h2>
+
+      <p>AI model behavior can drift over time as the types of inputs change. A workflow that handles support requests well in one season may start struggling when a new product launches and request patterns shift. Reviewing metrics monthly — even briefly — catches these changes before they become serious problems.</p>
+
+      <p>The goal is not to optimize constantly. It is to know what is working so you can expand it, and to catch what is breaking before it causes real damage.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="footLeft">© 2026 KomGIS. Practical AI automation for business teams.</span>
+    <div class="footerLinks">
+      <a href="../index_no_redundant_lists.html#services">Services</a>
+      <a href="../index_no_redundant_lists.html#examples">Examples</a>
+      <a href="../index_no_redundant_lists.html#contact">Contact</a>
+      <a href="index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menu=document.getElementById('menu'),links=document.getElementById('links');
+  menu.onclick=()=>links.classList.toggle('open');
+</script>
+</body>
+</html>
