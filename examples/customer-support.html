@@ -69,16 +69,16 @@
 
 <header>
   <nav class="wrap">
-    <a class="logo" href="../index_no_redundant_lists.html">KomGIS</a>
+    <a class="logo" href="../index.html">KomGIS</a>
     <div class="links" id="links">
-      <a href="../index_no_redundant_lists.html#services">Services</a>
-      <a href="../index_no_redundant_lists.html#method">How it works</a>
+      <a href="../index.html#services">Services</a>
+      <a href="../index.html#method">How it works</a>
       <a href="index.html" class="active">Examples</a>
-      <a href="../index_no_redundant_lists.html#customers">Results</a>
-      <a href="../index_no_redundant_lists.html#tech">Setup</a>
+      <a href="../index.html#customers">Results</a>
+      <a href="../index.html#tech">Setup</a>
       <a href="../blog/index.html">Blog</a>
     </div>
-    <a class="navCta" href="../index_no_redundant_lists.html#contact">Get in touch</a>
+    <a class="navCta" href="../index.html#contact">Get in touch</a>
     <button class="menu" id="menu" aria-label="Menu">☰</button>
   </nav>
 </header>
@@ -154,7 +154,7 @@
     <span class="footLeft">© 2026 KomGIS. Practical AI automation for business teams.</span>
     <div class="footerLinks">
       <a href="index.html">All examples</a>
-      <a href="../index_no_redundant_lists.html#contact">Contact</a>
+      <a href="../index.html#contact">Contact</a>
       <a href="../blog/index.html">Blog</a>
     </div>
   </div>
@@ -162,131 +162,409 @@
 
 <script src="https://unpkg.com/bpmn-js@17/dist/bpmn-navigated-viewer.production.min.js"></script>
 <script>
-var xmlBefore = `<?xml version='1.0' encoding='utf-8'?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Manual_Customer_Complaint_Before_AI" targetNamespace="https://komgis.com/bpmn/manual-customer-complaint-before-ai"><bpmn:process id="Process_Manual_Customer_Complaint_Before_AI" name="Manual Customer Complaint Handling Process Before AI Automation" isExecutable="false"><bpmn:laneSet id="LaneSet_Manual_Complaint"><bpmn:lane id="Lane_Intake" name="Support Intake"><bpmn:flowNodeRef>Start_Complaint_Received</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Register_Complaint</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Assign_Ticket</bpmn:flowNodeRef></bpmn:lane><bpmn:lane id="Lane_Support" name="Support Employee"><bpmn:flowNodeRef>Task_Read_Complaint</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Categorize_Issue</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Search_History</bpmn:flowNodeRef><bpmn:flowNodeRef>Gateway_Info_Complete</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Request_Info</bpmn:flowNodeRef><bpmn:flowNodeRef>Event_Additional_Info_Received</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Draft_Response</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Rework_Response</bpmn:flowNodeRef></bpmn:lane><bpmn:lane id="Lane_Manager" name="Support Manager"><bpmn:flowNodeRef>Task_Review_Response</bpmn:flowNodeRef><bpmn:flowNodeRef>Gateway_Approved</bpmn:flowNodeRef></bpmn:lane><bpmn:lane id="Lane_Outbound" name="Outbound Communication"><bpmn:flowNodeRef>Task_Send_Response</bpmn:flowNodeRef><bpmn:flowNodeRef>End_Complaint_Handled</bpmn:flowNodeRef></bpmn:lane></bpmn:laneSet><bpmn:startEvent id="Start_Complaint_Received" name="Complaint received" /><bpmn:task id="Task_Register_Complaint" name="Manually register complaint in ticketing system" /><bpmn:task id="Task_Assign_Ticket" name="Assign complaint to support employee" /><bpmn:userTask id="Task_Read_Complaint" name="Read full complaint manually" /><bpmn:userTask id="Task_Categorize_Issue" name="Manually categorize issue and urgency" /><bpmn:userTask id="Task_Search_History" name="Search previous customer communication manually" /><bpmn:exclusiveGateway id="Gateway_Info_Complete" name="Information complete?" /><bpmn:sendTask id="Task_Request_Info" name="Request missing information from customer" /><bpmn:intermediateCatchEvent id="Event_Additional_Info_Received" name="Receive additional information" /><bpmn:userTask id="Task_Draft_Response" name="Manually draft customer response" /><bpmn:userTask id="Task_Review_Response" name="Manager reviews response" /><bpmn:exclusiveGateway id="Gateway_Approved" name="Response approved?" /><bpmn:userTask id="Task_Rework_Response" name="Rework response based on manager feedback" /><bpmn:sendTask id="Task_Send_Response" name="Send approved response to customer" /><bpmn:endEvent id="End_Complaint_Handled" name="Complaint response completed" /><bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Complaint_Received" targetRef="Task_Register_Complaint" /><bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Register_Complaint" targetRef="Task_Assign_Ticket" /><bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Assign_Ticket" targetRef="Task_Read_Complaint" /><bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Read_Complaint" targetRef="Task_Categorize_Issue" /><bpmn:sequenceFlow id="Flow_5" sourceRef="Task_Categorize_Issue" targetRef="Task_Search_History" /><bpmn:sequenceFlow id="Flow_6" sourceRef="Task_Search_History" targetRef="Gateway_Info_Complete" /><bpmn:sequenceFlow id="Flow_7_Yes" sourceRef="Gateway_Info_Complete" targetRef="Task_Draft_Response" name="Yes" /><bpmn:sequenceFlow id="Flow_7_No" sourceRef="Gateway_Info_Complete" targetRef="Task_Request_Info" name="No" /><bpmn:sequenceFlow id="Flow_8" sourceRef="Task_Request_Info" targetRef="Event_Additional_Info_Received" /><bpmn:sequenceFlow id="Flow_9" sourceRef="Event_Additional_Info_Received" targetRef="Task_Search_History" /><bpmn:sequenceFlow id="Flow_10" sourceRef="Task_Draft_Response" targetRef="Task_Review_Response" /><bpmn:sequenceFlow id="Flow_11" sourceRef="Task_Review_Response" targetRef="Gateway_Approved" /><bpmn:sequenceFlow id="Flow_12_Yes" sourceRef="Gateway_Approved" targetRef="Task_Send_Response" name="Yes" /><bpmn:sequenceFlow id="Flow_12_No" sourceRef="Gateway_Approved" targetRef="Task_Rework_Response" name="No" /><bpmn:sequenceFlow id="Flow_13" sourceRef="Task_Rework_Response" targetRef="Task_Review_Response" /><bpmn:sequenceFlow id="Flow_14" sourceRef="Task_Send_Response" targetRef="End_Complaint_Handled" /></bpmn:process><bpmndi:BPMNDiagram id="BPMNDiagram_Manual_Complaint"><bpmndi:BPMNPlane id="BPMNPlane_Manual_Complaint" bpmnElement="Process_Manual_Customer_Complaint_Before_AI"><bpmndi:BPMNShape id="Lane_Intake_di" bpmnElement="Lane_Intake" isHorizontal="true"><dc:Bounds x="100" y="80" width="1780" height="120" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Lane_Support_di" bpmnElement="Lane_Support" isHorizontal="true"><dc:Bounds x="100" y="200" width="1780" height="230" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Lane_Manager_di" bpmnElement="Lane_Manager" isHorizontal="true"><dc:Bounds x="100" y="430" width="1780" height="120" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Lane_Outbound_di" bpmnElement="Lane_Outbound" isHorizontal="true"><dc:Bounds x="100" y="550" width="1780" height="110" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Start_Complaint_Received_di" bpmnElement="Start_Complaint_Received"><dc:Bounds x="160" y="122" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Register_Complaint_di" bpmnElement="Task_Register_Complaint"><dc:Bounds x="240" y="100" width="170" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Assign_Ticket_di" bpmnElement="Task_Assign_Ticket"><dc:Bounds x="460" y="100" width="165" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Read_Complaint_di" bpmnElement="Task_Read_Complaint"><dc:Bounds x="675" y="260" width="160" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Categorize_Issue_di" bpmnElement="Task_Categorize_Issue"><dc:Bounds x="880" y="260" width="170" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Search_History_di" bpmnElement="Task_Search_History"><dc:Bounds x="1095" y="260" width="180" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Gateway_Info_Complete_di" bpmnElement="Gateway_Info_Complete" isMarkerVisible="true"><dc:Bounds x="1320" y="272" width="50" height="50" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Request_Info_di" bpmnElement="Task_Request_Info"><dc:Bounds x="1245" y="345" width="180" height="70" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Event_Additional_Info_Received_di" bpmnElement="Event_Additional_Info_Received"><dc:Bounds x="1085" y="362" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Draft_Response_di" bpmnElement="Task_Draft_Response"><dc:Bounds x="1435" y="260" width="175" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Review_Response_di" bpmnElement="Task_Review_Response"><dc:Bounds x="1435" y="455" width="175" height="70" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Gateway_Approved_di" bpmnElement="Gateway_Approved" isMarkerVisible="true"><dc:Bounds x="1650" y="465" width="50" height="50" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Rework_Response_di" bpmnElement="Task_Rework_Response"><dc:Bounds x="1220" y="455" width="180" height="70" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Send_Response_di" bpmnElement="Task_Send_Response"><dc:Bounds x="1535" y="575" width="180" height="70" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="End_Complaint_Handled_di" bpmnElement="End_Complaint_Handled"><dc:Bounds x="1795" y="592" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1"><di:waypoint x="196" y="140" /><di:waypoint x="240" y="140" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2"><di:waypoint x="410" y="140" /><di:waypoint x="460" y="140" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3"><di:waypoint x="625" y="140" /><di:waypoint x="650" y="140" /><di:waypoint x="650" y="298" /><di:waypoint x="675" y="298" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4"><di:waypoint x="835" y="298" /><di:waypoint x="880" y="298" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5"><di:waypoint x="1050" y="298" /><di:waypoint x="1095" y="298" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6"><di:waypoint x="1275" y="298" /><di:waypoint x="1320" y="297" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_7_Yes_di" bpmnElement="Flow_7_Yes"><di:waypoint x="1370" y="297" /><di:waypoint x="1435" y="298" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_7_No_di" bpmnElement="Flow_7_No"><di:waypoint x="1345" y="322" /><di:waypoint x="1345" y="345" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8"><di:waypoint x="1245" y="380" /><di:waypoint x="1121" y="380" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9"><di:waypoint x="1103" y="362" /><di:waypoint x="1103" y="335" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10"><di:waypoint x="1522" y="335" /><di:waypoint x="1522" y="455" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11"><di:waypoint x="1610" y="490" /><di:waypoint x="1650" y="490" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_12_Yes_di" bpmnElement="Flow_12_Yes"><di:waypoint x="1675" y="515" /><di:waypoint x="1675" y="575" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_12_No_di" bpmnElement="Flow_12_No"><di:waypoint x="1650" y="490" /><di:waypoint x="1310" y="525" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13"><di:waypoint x="1400" y="490" /><di:waypoint x="1435" y="490" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14"><di:waypoint x="1715" y="610" /><di:waypoint x="1795" y="610" /></bpmndi:BPMNEdge></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></bpmn:definitions>`;
-
-var xmlAfter = `<?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
-  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
-  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
-  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
-  id="Definitions_AI_Customer_Complaint"
-  targetNamespace="https://komgis.com/bpmn/customer-complaint-ai-automation">
-  <bpmn:message id="Message_Complaint" name="Customer Complaint"/>
-  <bpmn:message id="Message_Response" name="Approved Response"/>
-  <bpmn:collaboration id="Collaboration_Customer_Complaint">
-    <bpmn:participant id="Participant_Customer" name="Customer" processRef="Process_Customer"/>
-    <bpmn:participant id="Participant_Company" name="Company / Support Team + AI Automation" processRef="Process_AI_Complaint"/>
-    <bpmn:messageFlow id="MessageFlow_Complaint" name="Complaint submitted" sourceRef="Task_Submit_Complaint" targetRef="Start_Complaint_Received"/>
-    <bpmn:messageFlow id="MessageFlow_Response" name="Response sent to customer" sourceRef="Task_Send_Response" targetRef="Event_Response_Received"/>
-  </bpmn:collaboration>
-  <bpmn:process id="Process_Customer" name="Customer Interaction" isExecutable="false">
-    <bpmn:startEvent id="Start_Customer" name="Need support"/>
-    <bpmn:sequenceFlow id="Flow_C1" sourceRef="Start_Customer" targetRef="Task_Submit_Complaint"/>
-    <bpmn:task id="Task_Submit_Complaint" name="Submit complaint by email, web form or ticket"/>
-    <bpmn:sequenceFlow id="Flow_C2" sourceRef="Task_Submit_Complaint" targetRef="Event_Response_Received"/>
-    <bpmn:intermediateCatchEvent id="Event_Response_Received" name="Receive company response">
-      <bpmn:messageEventDefinition messageRef="Message_Response"/>
-    </bpmn:intermediateCatchEvent>
-    <bpmn:sequenceFlow id="Flow_C3" sourceRef="Event_Response_Received" targetRef="End_Customer"/>
-    <bpmn:endEvent id="End_Customer" name="Complaint addressed"/>
-  </bpmn:process>
-  <bpmn:process id="Process_AI_Complaint" name="AI Customer Complaint Handling Automation" isExecutable="false">
-    <bpmn:laneSet id="LaneSet_AI_Complaint">
-      <bpmn:lane id="Lane_Intake" name="Intake System">
-        <bpmn:flowNodeRef>Start_Complaint_Received</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_Capture_Complaint</bpmn:flowNodeRef>
-      </bpmn:lane>
-      <bpmn:lane id="Lane_AI" name="AI Automation">
-        <bpmn:flowNodeRef>Task_Classify_Issue</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_Summarize_Complaint</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_Check_History</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Gateway_History_Found</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_Mark_Missing_Context</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_Draft_Response</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_Revise_Response</bpmn:flowNodeRef>
-      </bpmn:lane>
-      <bpmn:lane id="Lane_Human" name="Human Support Employee">
-        <bpmn:flowNodeRef>Task_Review_Approve</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Gateway_Response_Approved</bpmn:flowNodeRef>
+var xmlBefore = `<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Manual_Customer_Complaint_Before_AI" targetNamespace="https://komgis.com/bpmn/manual-customer-complaint-before-ai" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.13.2">
+  <bpmn:process id="Process_Manual_Customer_Complaint_Before_AI" name="Manual Customer Complaint Handling Process Before AI Automation" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Manual_Complaint">
+      <bpmn:lane id="Lane_Outbound" name="Outbound Communication">
         <bpmn:flowNodeRef>Task_Send_Response</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>End_Complaint_Handled</bpmn:flowNodeRef>
       </bpmn:lane>
+      <bpmn:lane id="Lane_Manager" name="Support Manager">
+        <bpmn:flowNodeRef>Task_Review_Response</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Rework_Response</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Approved</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Support" name="Support Employee">
+        <bpmn:flowNodeRef>Task_Read_Complaint</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Categorize_Issue</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Search_History</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Request_Info</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Draft_Response</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Info_Complete</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_Additional_Info_Received</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Intake" name="Support Intake">
+        <bpmn:flowNodeRef>Task_Register_Complaint</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Assign_Ticket</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Start_Complaint_Received</bpmn:flowNodeRef>
+      </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:startEvent id="Start_Complaint_Received" name="Complaint received">
-      <bpmn:messageEventDefinition messageRef="Message_Complaint"/>
-    </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Complaint_Received" targetRef="Task_Capture_Complaint"/>
-    <bpmn:task id="Task_Capture_Complaint" name="Capture complaint from email, web form or ticket"/>
-    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Capture_Complaint" targetRef="Task_Classify_Issue"/>
-    <bpmn:serviceTask id="Task_Classify_Issue" name="AI classifies issue type and urgency"/>
-    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Classify_Issue" targetRef="Task_Summarize_Complaint"/>
-    <bpmn:serviceTask id="Task_Summarize_Complaint" name="AI summarizes customer problem"/>
-    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Summarize_Complaint" targetRef="Task_Check_History"/>
-    <bpmn:serviceTask id="Task_Check_History" name="Check previous communication history"/>
-    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_Check_History" targetRef="Gateway_History_Found"/>
-    <bpmn:exclusiveGateway id="Gateway_History_Found" name="Relevant history found?"/>
-    <bpmn:sequenceFlow id="Flow_6_Yes" name="Yes" sourceRef="Gateway_History_Found" targetRef="Task_Draft_Response"/>
-    <bpmn:sequenceFlow id="Flow_6_No" name="No" sourceRef="Gateway_History_Found" targetRef="Task_Mark_Missing_Context"/>
-    <bpmn:task id="Task_Mark_Missing_Context" name="Flag missing context for human review"/>
-    <bpmn:sequenceFlow id="Flow_7" sourceRef="Task_Mark_Missing_Context" targetRef="Task_Draft_Response"/>
-    <bpmn:serviceTask id="Task_Draft_Response" name="AI drafts professional response"/>
-    <bpmn:sequenceFlow id="Flow_8" sourceRef="Task_Draft_Response" targetRef="Task_Review_Approve"/>
-    <bpmn:userTask id="Task_Review_Approve" name="Human reviews and approves response"/>
-    <bpmn:sequenceFlow id="Flow_9" sourceRef="Task_Review_Approve" targetRef="Gateway_Response_Approved"/>
-    <bpmn:exclusiveGateway id="Gateway_Response_Approved" name="Response approved?"/>
-    <bpmn:sequenceFlow id="Flow_10_Yes" name="Yes" sourceRef="Gateway_Response_Approved" targetRef="Task_Send_Response"/>
-    <bpmn:sequenceFlow id="Flow_10_No" name="No" sourceRef="Gateway_Response_Approved" targetRef="Task_Revise_Response"/>
-    <bpmn:serviceTask id="Task_Revise_Response" name="AI revises response using human feedback"/>
-    <bpmn:sequenceFlow id="Flow_11" sourceRef="Task_Revise_Response" targetRef="Task_Review_Approve"/>
-    <bpmn:sendTask id="Task_Send_Response" name="Send approved response to customer"/>
-    <bpmn:sequenceFlow id="Flow_12" sourceRef="Task_Send_Response" targetRef="End_Complaint_Handled"/>
-    <bpmn:endEvent id="End_Complaint_Handled" name="Complaint response completed"/>
+    <bpmn:startEvent id="Start_Complaint_Received" name="Complaint received" />
+    <bpmn:task id="Task_Register_Complaint" name="Manually register complaint in ticketing system" />
+    <bpmn:task id="Task_Assign_Ticket" name="Assign complaint to support employee" />
+    <bpmn:userTask id="Task_Read_Complaint" name="Read full complaint manually" />
+    <bpmn:userTask id="Task_Categorize_Issue" name="Manually categorize issue and urgency" />
+    <bpmn:userTask id="Task_Search_History" name="Search previous customer communication manually" />
+    <bpmn:exclusiveGateway id="Gateway_Info_Complete" name="Information complete?" />
+    <bpmn:sendTask id="Task_Request_Info" name="Request missing information from customer" />
+    <bpmn:intermediateCatchEvent id="Event_Additional_Info_Received" name="Receive additional information" />
+    <bpmn:userTask id="Task_Draft_Response" name="Manually draft customer response" />
+    <bpmn:userTask id="Task_Review_Response" name="Manager reviews response" />
+    <bpmn:exclusiveGateway id="Gateway_Approved" name="Response approved?" />
+    <bpmn:userTask id="Task_Rework_Response" name="Rework response based on manager feedback" />
+    <bpmn:sendTask id="Task_Send_Response" name="Send approved response to customer" />
+    <bpmn:endEvent id="End_Complaint_Handled" name="Complaint response completed" />
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Complaint_Received" targetRef="Task_Register_Complaint" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Register_Complaint" targetRef="Task_Assign_Ticket" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Assign_Ticket" targetRef="Task_Read_Complaint" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Read_Complaint" targetRef="Task_Categorize_Issue" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_Categorize_Issue" targetRef="Task_Search_History" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Task_Search_History" targetRef="Gateway_Info_Complete" />
+    <bpmn:sequenceFlow id="Flow_7_Yes" name="Yes" sourceRef="Gateway_Info_Complete" targetRef="Task_Draft_Response" />
+    <bpmn:sequenceFlow id="Flow_7_No" name="No" sourceRef="Gateway_Info_Complete" targetRef="Task_Request_Info" />
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="Task_Request_Info" targetRef="Event_Additional_Info_Received" />
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Event_Additional_Info_Received" targetRef="Task_Search_History" />
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Task_Draft_Response" targetRef="Task_Review_Response" />
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Task_Review_Response" targetRef="Gateway_Approved" />
+    <bpmn:sequenceFlow id="Flow_12_Yes" name="Yes" sourceRef="Gateway_Approved" targetRef="Task_Send_Response" />
+    <bpmn:sequenceFlow id="Flow_12_No" name="No" sourceRef="Gateway_Approved" targetRef="Task_Rework_Response" />
+    <bpmn:sequenceFlow id="Flow_13" sourceRef="Task_Rework_Response" targetRef="Task_Review_Response" />
+    <bpmn:sequenceFlow id="Flow_14" sourceRef="Task_Send_Response" targetRef="End_Complaint_Handled" />
   </bpmn:process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_AI_Customer_Complaint">
-    <bpmndi:BPMNPlane id="BPMNPlane_AI_Customer_Complaint" bpmnElement="Collaboration_Customer_Complaint">
-      <bpmndi:BPMNShape id="Participant_Customer_di" bpmnElement="Participant_Customer" isHorizontal="true"><dc:Bounds x="120" y="70" width="1360" height="140"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Participant_Company_di" bpmnElement="Participant_Company" isHorizontal="true"><dc:Bounds x="120" y="250" width="1360" height="420"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_Intake_di" bpmnElement="Lane_Intake" isHorizontal="true"><dc:Bounds x="150" y="250" width="1330" height="110"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_AI_di" bpmnElement="Lane_AI" isHorizontal="true"><dc:Bounds x="150" y="360" width="1330" height="190"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_Human_di" bpmnElement="Lane_Human" isHorizontal="true"><dc:Bounds x="150" y="550" width="1330" height="120"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Start_Customer_di" bpmnElement="Start_Customer"><dc:Bounds x="210" y="122" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Submit_Complaint_di" bpmnElement="Task_Submit_Complaint"><dc:Bounds x="300" y="100" width="170" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_Response_Received_di" bpmnElement="Event_Response_Received"><dc:Bounds x="1260" y="122" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="End_Customer_di" bpmnElement="End_Customer"><dc:Bounds x="1360" y="122" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Start_Complaint_Received_di" bpmnElement="Start_Complaint_Received"><dc:Bounds x="210" y="287" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Capture_Complaint_di" bpmnElement="Task_Capture_Complaint"><dc:Bounds x="300" y="265" width="170" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Classify_Issue_di" bpmnElement="Task_Classify_Issue"><dc:Bounds x="520" y="385" width="155" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Summarize_Complaint_di" bpmnElement="Task_Summarize_Complaint"><dc:Bounds x="720" y="385" width="155" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Check_History_di" bpmnElement="Task_Check_History"><dc:Bounds x="920" y="385" width="155" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_History_Found_di" bpmnElement="Gateway_History_Found" isMarkerVisible="true"><dc:Bounds x="1120" y="400" width="50" height="50"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Mark_Missing_Context_di" bpmnElement="Task_Mark_Missing_Context"><dc:Bounds x="1205" y="455" width="155" height="70"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Draft_Response_di" bpmnElement="Task_Draft_Response"><dc:Bounds x="1205" y="365" width="155" height="70"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Revise_Response_di" bpmnElement="Task_Revise_Response"><dc:Bounds x="720" y="455" width="180" height="70"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Review_Approve_di" bpmnElement="Task_Review_Approve"><dc:Bounds x="960" y="570" width="170" height="75"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_Response_Approved_di" bpmnElement="Gateway_Response_Approved" isMarkerVisible="true"><dc:Bounds x="1170" y="582" width="50" height="50"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Send_Response_di" bpmnElement="Task_Send_Response"><dc:Bounds x="1265" y="570" width="160" height="75"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="End_Complaint_Handled_di" bpmnElement="End_Complaint_Handled"><dc:Bounds x="1440" y="589" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_C1_di" bpmnElement="Flow_C1"><di:waypoint x="246" y="140"/><di:waypoint x="300" y="140"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_C2_di" bpmnElement="Flow_C2"><di:waypoint x="470" y="140"/><di:waypoint x="1260" y="140"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_C3_di" bpmnElement="Flow_C3"><di:waypoint x="1296" y="140"/><di:waypoint x="1360" y="140"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1"><di:waypoint x="246" y="305"/><di:waypoint x="300" y="305"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2"><di:waypoint x="470" y="305"/><di:waypoint x="495" y="305"/><di:waypoint x="495" y="425"/><di:waypoint x="520" y="425"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3"><di:waypoint x="675" y="425"/><di:waypoint x="720" y="425"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4"><di:waypoint x="875" y="425"/><di:waypoint x="920" y="425"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5"><di:waypoint x="1075" y="425"/><di:waypoint x="1120" y="425"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_6_Yes_di" bpmnElement="Flow_6_Yes"><di:waypoint x="1170" y="425"/><di:waypoint x="1205" y="400"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_6_No_di" bpmnElement="Flow_6_No"><di:waypoint x="1145" y="450"/><di:waypoint x="1145" y="490"/><di:waypoint x="1205" y="490"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7"><di:waypoint x="1283" y="455"/><di:waypoint x="1283" y="435"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8"><di:waypoint x="1283" y="435"/><di:waypoint x="1283" y="535"/><di:waypoint x="1045" y="535"/><di:waypoint x="1045" y="570"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9"><di:waypoint x="1130" y="608"/><di:waypoint x="1170" y="607"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_10_Yes_di" bpmnElement="Flow_10_Yes"><di:waypoint x="1220" y="607"/><di:waypoint x="1265" y="608"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_10_No_di" bpmnElement="Flow_10_No"><di:waypoint x="1195" y="582"/><di:waypoint x="1195" y="490"/><di:waypoint x="900" y="490"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11"><di:waypoint x="810" y="525"/><di:waypoint x="810" y="608"/><di:waypoint x="960" y="608"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12"><di:waypoint x="1425" y="608"/><di:waypoint x="1440" y="607"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MessageFlow_Complaint_di" bpmnElement="MessageFlow_Complaint"><di:waypoint x="385" y="180"/><di:waypoint x="228" y="287"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MessageFlow_Response_di" bpmnElement="MessageFlow_Response"><di:waypoint x="1345" y="570"/><di:waypoint x="1278" y="158"/></bpmndi:BPMNEdge>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Manual_Complaint">
+    <bpmndi:BPMNPlane id="BPMNPlane_Manual_Complaint" bpmnElement="Process_Manual_Customer_Complaint_Before_AI">
+      <bpmndi:BPMNShape id="Lane_Outbound_di" bpmnElement="Lane_Outbound" isHorizontal="true">
+        <dc:Bounds x="160" y="550" width="1780" height="110" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Manager_di" bpmnElement="Lane_Manager" isHorizontal="true">
+        <dc:Bounds x="160" y="430" width="1780" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Support_di" bpmnElement="Lane_Support" isHorizontal="true">
+        <dc:Bounds x="160" y="200" width="1780" height="230" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Intake_di" bpmnElement="Lane_Intake" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1780" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Complaint_Received_di" bpmnElement="Start_Complaint_Received">
+        <dc:Bounds x="220" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="212" y="166" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Register_Complaint_di" bpmnElement="Task_Register_Complaint">
+        <dc:Bounds x="300" y="100" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Assign_Ticket_di" bpmnElement="Task_Assign_Ticket">
+        <dc:Bounds x="520" y="100" width="165" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Read_Complaint_di" bpmnElement="Task_Read_Complaint">
+        <dc:Bounds x="735" y="260" width="160" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Categorize_Issue_di" bpmnElement="Task_Categorize_Issue">
+        <dc:Bounds x="940" y="260" width="170" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Search_History_di" bpmnElement="Task_Search_History">
+        <dc:Bounds x="1155" y="260" width="180" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Info_Complete_di" bpmnElement="Gateway_Info_Complete" isMarkerVisible="true">
+        <dc:Bounds x="1380" y="272" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1377" y="236" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Request_Info_di" bpmnElement="Task_Request_Info">
+        <dc:Bounds x="1305" y="345" width="180" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_Additional_Info_Received_di" bpmnElement="Event_Additional_Info_Received">
+        <dc:Bounds x="1145" y="362" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1082" y="360" width="55" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Draft_Response_di" bpmnElement="Task_Draft_Response">
+        <dc:Bounds x="1495" y="260" width="175" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Review_Response_di" bpmnElement="Task_Review_Response">
+        <dc:Bounds x="1495" y="455" width="175" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Approved_di" bpmnElement="Gateway_Approved" isMarkerVisible="true">
+        <dc:Bounds x="1710" y="465" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1709" y="435.5" width="52" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Rework_Response_di" bpmnElement="Task_Rework_Response">
+        <dc:Bounds x="1280" y="455" width="180" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Send_Response_di" bpmnElement="Task_Send_Response">
+        <dc:Bounds x="1595" y="575" width="180" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Complaint_Handled_di" bpmnElement="End_Complaint_Handled">
+        <dc:Bounds x="1855" y="592" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1847" y="550" width="51" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="256" y="140" />
+        <di:waypoint x="300" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="470" y="140" />
+        <di:waypoint x="520" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="685" y="140" />
+        <di:waypoint x="710" y="140" />
+        <di:waypoint x="710" y="298" />
+        <di:waypoint x="735" y="298" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="895" y="298" />
+        <di:waypoint x="940" y="298" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="1110" y="298" />
+        <di:waypoint x="1155" y="298" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="1335" y="298" />
+        <di:waypoint x="1380" y="297" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_Yes_di" bpmnElement="Flow_7_Yes">
+        <di:waypoint x="1430" y="297" />
+        <di:waypoint x="1495" y="298" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1454" y="273" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_No_di" bpmnElement="Flow_7_No">
+        <di:waypoint x="1405" y="322" />
+        <di:waypoint x="1405" y="345" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1413" y="324" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="1305" y="380" />
+        <di:waypoint x="1181" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="1163" y="362" />
+        <di:waypoint x="1163" y="335" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10">
+        <di:waypoint x="1582" y="335" />
+        <di:waypoint x="1582" y="455" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11">
+        <di:waypoint x="1670" y="490" />
+        <di:waypoint x="1710" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_Yes_di" bpmnElement="Flow_12_Yes">
+        <di:waypoint x="1735" y="515" />
+        <di:waypoint x="1735" y="575" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1741" y="535" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_No_di" bpmnElement="Flow_12_No">
+        <di:waypoint x="1720" y="500" />
+        <di:waypoint x="1670" y="540" />
+        <di:waypoint x="1370" y="540" />
+        <di:waypoint x="1370" y="525" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1702" y="516" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13">
+        <di:waypoint x="1460" y="490" />
+        <di:waypoint x="1495" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14">
+        <di:waypoint x="1775" y="610" />
+        <di:waypoint x="1855" y="610" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>`;
+
+var xmlAfter = `<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Customer_Complaint_With_AI_Layer" targetNamespace="https://komgis.com/bpmn/customer-complaint-ai-layer-simple" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.13.2">
+  <bpmn:process id="Process_Customer_Complaint_With_AI_Layer" name="Customer Complaint Handling with AI Automation Layer" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Complaint_AI_Layer">
+      <bpmn:lane id="Lane_Outbound" name="Outbound Communication">
+        <bpmn:flowNodeRef>Task_Send_Response</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Complaint_Handled</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Manager" name="Support Manager">
+        <bpmn:flowNodeRef>Task_Review_Response</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Approved</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Rework_Response</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_AI_Automation" name="AI Automation">
+        <bpmn:flowNodeRef>Task_AI_Classify_Complaint</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Load_History</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Summarize_Context</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Draft_Response</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Support" name="Support Employee">
+        <bpmn:flowNodeRef>Task_Read_Complaint</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Intake" name="Support Intake">
+        <bpmn:flowNodeRef>Start_Complaint_Received</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Register_Complaint</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Assign_Ticket</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_Complaint_Received" name="Complaint received" />
+    <bpmn:task id="Task_Register_Complaint" name="Register complaint in system" />
+    <bpmn:task id="Task_Assign_Ticket" name="Assign complaint to support employee" />
+    <bpmn:userTask id="Task_Read_Complaint" name="Open complaint and start AI assistant" />
+    <bpmn:serviceTask id="Task_AI_Classify_Complaint" name="AI classifies complaint" />
+    <bpmn:serviceTask id="Task_AI_Load_History" name="AI loads customer communication history" />
+    <bpmn:serviceTask id="Task_AI_Summarize_Context" name="AI summarizes complaint and history" />
+    <bpmn:serviceTask id="Task_AI_Draft_Response" name="AI drafts customer response" />
+    <bpmn:userTask id="Task_Review_Response" name="Human reviews AI draft" />
+    <bpmn:exclusiveGateway id="Gateway_Approved" name="Response approved?" />
+    <bpmn:userTask id="Task_Rework_Response" name="Revise response with human feedback" />
+    <bpmn:sendTask id="Task_Send_Response" name="Send approved response to customer" />
+    <bpmn:endEvent id="End_Complaint_Handled" name="Complaint response completed" />
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Complaint_Received" targetRef="Task_Register_Complaint" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Register_Complaint" targetRef="Task_Assign_Ticket" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Assign_Ticket" targetRef="Task_Read_Complaint" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Read_Complaint" targetRef="Task_AI_Classify_Complaint" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_AI_Classify_Complaint" targetRef="Task_AI_Load_History" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Task_AI_Load_History" targetRef="Task_AI_Summarize_Context" />
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="Task_AI_Summarize_Context" targetRef="Task_AI_Draft_Response" />
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="Task_AI_Draft_Response" targetRef="Task_Review_Response" />
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Task_Review_Response" targetRef="Gateway_Approved" />
+    <bpmn:sequenceFlow id="Flow_10_Yes" name="Yes" sourceRef="Gateway_Approved" targetRef="Task_Send_Response" />
+    <bpmn:sequenceFlow id="Flow_10_No" name="No" sourceRef="Gateway_Approved" targetRef="Task_Rework_Response" />
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Task_Rework_Response" targetRef="Task_Review_Response" />
+    <bpmn:sequenceFlow id="Flow_12" sourceRef="Task_Send_Response" targetRef="End_Complaint_Handled" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Complaint_AI_Layer">
+    <bpmndi:BPMNPlane id="BPMNPlane_Complaint_AI_Layer" bpmnElement="Process_Customer_Complaint_With_AI_Layer">
+      <bpmndi:BPMNShape id="Lane_Intake_di" bpmnElement="Lane_Intake" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1780" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Support_di" bpmnElement="Lane_Support" isHorizontal="true">
+        <dc:Bounds x="160" y="200" width="1780" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_AI_Automation_di" bpmnElement="Lane_AI_Automation" isHorizontal="true">
+        <dc:Bounds x="160" y="320" width="1780" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Manager_di" bpmnElement="Lane_Manager" isHorizontal="true">
+        <dc:Bounds x="160" y="460" width="1780" height="110" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Outbound_di" bpmnElement="Lane_Outbound" isHorizontal="true">
+        <dc:Bounds x="160" y="570" width="1780" height="110" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Complaint_Received_di" bpmnElement="Start_Complaint_Received">
+        <dc:Bounds x="220" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="211" y="166" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Register_Complaint_di" bpmnElement="Task_Register_Complaint">
+        <dc:Bounds x="300" y="100" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Assign_Ticket_di" bpmnElement="Task_Assign_Ticket">
+        <dc:Bounds x="520" y="100" width="165" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Read_Complaint_di" bpmnElement="Task_Read_Complaint">
+        <dc:Bounds x="735" y="225" width="170" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Classify_Complaint_di" bpmnElement="Task_AI_Classify_Complaint">
+        <dc:Bounds x="940" y="350" width="170" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Load_History_di" bpmnElement="Task_AI_Load_History">
+        <dc:Bounds x="1155" y="350" width="180" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Summarize_Context_di" bpmnElement="Task_AI_Summarize_Context">
+        <dc:Bounds x="1380" y="350" width="180" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Draft_Response_di" bpmnElement="Task_AI_Draft_Response">
+        <dc:Bounds x="1605" y="350" width="175" height="75" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Review_Response_di" bpmnElement="Task_Review_Response">
+        <dc:Bounds x="1605" y="485" width="175" height="65" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Approved_di" bpmnElement="Gateway_Approved" isMarkerVisible="true">
+        <dc:Bounds x="1820" y="492" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1818" y="460" width="55" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Rework_Response_di" bpmnElement="Task_Rework_Response">
+        <dc:Bounds x="1380" y="485" width="180" height="65" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Send_Response_di" bpmnElement="Task_Send_Response">
+        <dc:Bounds x="1605" y="595" width="180" height="65" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Complaint_Handled_di" bpmnElement="End_Complaint_Handled">
+        <dc:Bounds x="1872" y="610" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1864" y="570" width="51" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="256" y="140" />
+        <di:waypoint x="300" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="470" y="140" />
+        <di:waypoint x="520" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="685" y="140" />
+        <di:waypoint x="710" y="140" />
+        <di:waypoint x="710" y="260" />
+        <di:waypoint x="735" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="905" y="260" />
+        <di:waypoint x="920" y="260" />
+        <di:waypoint x="920" y="388" />
+        <di:waypoint x="940" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="1110" y="388" />
+        <di:waypoint x="1155" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="1335" y="388" />
+        <di:waypoint x="1380" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <di:waypoint x="1560" y="388" />
+        <di:waypoint x="1605" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="1692" y="425" />
+        <di:waypoint x="1692" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="1780" y="518" />
+        <di:waypoint x="1820" y="517" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_Yes_di" bpmnElement="Flow_10_Yes">
+        <di:waypoint x="1845" y="542" />
+        <di:waypoint x="1845" y="628" />
+        <di:waypoint x="1785" y="628" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1852" y="543" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_No_di" bpmnElement="Flow_10_No">
+        <di:waypoint x="1845" y="542" />
+        <di:waypoint x="1845" y="559" />
+        <di:waypoint x="1470" y="560" />
+        <di:waypoint x="1470" y="550" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1661" y="535" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11">
+        <di:waypoint x="1560" y="518" />
+        <di:waypoint x="1605" y="518" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12">
+        <di:waypoint x="1785" y="628" />
+        <di:waypoint x="1872" y="628" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>`;

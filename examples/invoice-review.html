@@ -56,16 +56,16 @@
 <body>
 <header>
   <nav class="wrap">
-    <a class="logo" href="../index_no_redundant_lists.html">KomGIS</a>
+    <a class="logo" href="../index.html">KomGIS</a>
     <div class="links" id="links">
-      <a href="../index_no_redundant_lists.html#services">Services</a>
-      <a href="../index_no_redundant_lists.html#method">How it works</a>
+      <a href="../index.html#services">Services</a>
+      <a href="../index.html#method">How it works</a>
       <a href="index.html" class="active">Examples</a>
-      <a href="../index_no_redundant_lists.html#customers">Results</a>
-      <a href="../index_no_redundant_lists.html#tech">Setup</a>
+      <a href="../index.html#customers">Results</a>
+      <a href="../index.html#tech">Setup</a>
       <a href="../blog/index.html">Blog</a>
     </div>
-    <a class="navCta" href="../index_no_redundant_lists.html#contact">Get in touch</a>
+    <a class="navCta" href="../index.html#contact">Get in touch</a>
     <button class="menu" id="menu" aria-label="Menu">☰</button>
   </nav>
 </header>
@@ -135,7 +135,7 @@
     <span class="footLeft">© 2026 KomGIS. Practical AI automation for business teams.</span>
     <div class="footerLinks">
       <a href="index.html">All examples</a>
-      <a href="../index_no_redundant_lists.html#contact">Contact</a>
+      <a href="../index.html#contact">Contact</a>
       <a href="../blog/index.html">Blog</a>
     </div>
   </div>
@@ -143,114 +143,375 @@
 
 <script src="https://unpkg.com/bpmn-js@17/dist/bpmn-navigated-viewer.production.min.js"></script>
 <script>
-var xmlBefore = `<?xml version='1.0' encoding='utf-8'?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Manual_Invoice_Processing_Before_AI" targetNamespace="https://komgis.com/bpmn/manual-invoice-processing-before-ai"><bpmn:message id="Message_Invoice" name="Supplier Invoice" /><bpmn:message id="Message_Correction_Request" name="Correction Request" /><bpmn:message id="Message_Correction_Response" name="Corrected Invoice or Missing Information" /><bpmn:collaboration id="Collaboration_Manual_Invoice_Processing"><bpmn:participant id="Participant_Supplier" name="Supplier" processRef="Process_Supplier" /><bpmn:participant id="Participant_Company" name="Company / Manual Finance Process" processRef="Process_Manual_Invoice" /><bpmn:messageFlow id="MessageFlow_Invoice" name="Invoice submitted" sourceRef="Task_Submit_Invoice" targetRef="Start_Invoice_Received" /><bpmn:messageFlow id="MessageFlow_Correction_Request" name="Correction requested" sourceRef="Task_Request_Correction" targetRef="Event_Correction_Requested" /><bpmn:messageFlow id="MessageFlow_Correction_Response" name="Corrected information sent" sourceRef="Task_Provide_Correction" targetRef="Event_Correction_Response_Received" /></bpmn:collaboration><bpmn:process id="Process_Supplier" name="Supplier Invoice Submission" isExecutable="false"><bpmn:startEvent id="Start_Supplier" name="Invoice ready" /><bpmn:task id="Task_Submit_Invoice" name="Submit invoice by email, portal or upload" /><bpmn:intermediateCatchEvent id="Event_Correction_Requested" name="Receive correction request"><bpmn:messageEventDefinition messageRef="Message_Correction_Request" /></bpmn:intermediateCatchEvent><bpmn:task id="Task_Provide_Correction" name="Provide corrected invoice or missing information" /><bpmn:endEvent id="End_Supplier" name="Correction sent" /><bpmn:sequenceFlow id="Flow_S1" sourceRef="Start_Supplier" targetRef="Task_Submit_Invoice" /><bpmn:sequenceFlow id="Flow_S2" sourceRef="Task_Submit_Invoice" targetRef="Event_Correction_Requested" /><bpmn:sequenceFlow id="Flow_S3" sourceRef="Event_Correction_Requested" targetRef="Task_Provide_Correction" /><bpmn:sequenceFlow id="Flow_S4" sourceRef="Task_Provide_Correction" targetRef="End_Supplier" /></bpmn:process><bpmn:process id="Process_Manual_Invoice" name="Manual Invoice Processing and Payment Approval Before AI Automation" isExecutable="false"><bpmn:laneSet id="LaneSet_Manual_Invoice"><bpmn:lane id="Lane_Intake" name="Invoice Intake"><bpmn:flowNodeRef>Start_Invoice_Received</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Register_Invoice</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Assign_Finance_Clerk</bpmn:flowNodeRef></bpmn:lane><bpmn:lane id="Lane_Finance" name="Finance Clerk"><bpmn:flowNodeRef>Task_Read_Invoice</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Enter_Data</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Check_PO</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Check_GR</bpmn:flowNodeRef><bpmn:flowNodeRef>Gateway_Discrepancy</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Prepare_Approval_Package</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Request_Correction</bpmn:flowNodeRef><bpmn:flowNodeRef>Event_Correction_Response_Received</bpmn:flowNodeRef></bpmn:lane><bpmn:lane id="Lane_Department" name="Purchasing / Receiving Department"><bpmn:flowNodeRef>Task_Investigate_Discrepancy</bpmn:flowNodeRef><bpmn:flowNodeRef>Gateway_Resolved</bpmn:flowNodeRef></bpmn:lane><bpmn:lane id="Lane_Approver" name="Finance Manager / Approver"><bpmn:flowNodeRef>Task_Route_Approval</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Review_Approve</bpmn:flowNodeRef><bpmn:flowNodeRef>Gateway_Approved</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Mark_Approved</bpmn:flowNodeRef><bpmn:flowNodeRef>End_Approved</bpmn:flowNodeRef><bpmn:flowNodeRef>End_Correction_Requested</bpmn:flowNodeRef></bpmn:lane></bpmn:laneSet><bpmn:startEvent id="Start_Invoice_Received" name="Invoice received"><bpmn:messageEventDefinition messageRef="Message_Invoice" /></bpmn:startEvent><bpmn:task id="Task_Register_Invoice" name="Manually register invoice in accounting system" /><bpmn:task id="Task_Assign_Finance_Clerk" name="Assign invoice to finance clerk" /><bpmn:userTask id="Task_Read_Invoice" name="Read invoice manually" /><bpmn:userTask id="Task_Enter_Data" name="Manually enter invoice data" /><bpmn:userTask id="Task_Check_PO" name="Manually check invoice against purchase order" /><bpmn:userTask id="Task_Check_GR" name="Manually check against goods receipt" /><bpmn:exclusiveGateway id="Gateway_Discrepancy" name="Missing or inconsistent information?" /><bpmn:userTask id="Task_Investigate_Discrepancy" name="Investigate discrepancy with responsible department" /><bpmn:exclusiveGateway id="Gateway_Resolved" name="Can discrepancy be resolved internally?" /><bpmn:task id="Task_Request_Correction" name="Request correction or missing information from supplier" /><bpmn:intermediateCatchEvent id="Event_Correction_Response_Received" name="Receive corrected invoice or missing information"><bpmn:messageEventDefinition messageRef="Message_Correction_Response" /></bpmn:intermediateCatchEvent><bpmn:userTask id="Task_Prepare_Approval_Package" name="Prepare invoice approval package manually" /><bpmn:task id="Task_Route_Approval" name="Route invoice to correct approver" /><bpmn:userTask id="Task_Review_Approve" name="Human reviews and approves invoice for payment" /><bpmn:exclusiveGateway id="Gateway_Approved" name="Payment approved?" /><bpmn:task id="Task_Mark_Approved" name="Mark invoice approved and ready for payment" /><bpmn:endEvent id="End_Approved" name="Invoice approved for payment" /><bpmn:endEvent id="End_Correction_Requested" name="Correction requested" /><bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Invoice_Received" targetRef="Task_Register_Invoice" /><bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Register_Invoice" targetRef="Task_Assign_Finance_Clerk" /><bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Assign_Finance_Clerk" targetRef="Task_Read_Invoice" /><bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Read_Invoice" targetRef="Task_Enter_Data" /><bpmn:sequenceFlow id="Flow_5" sourceRef="Task_Enter_Data" targetRef="Task_Check_PO" /><bpmn:sequenceFlow id="Flow_6" sourceRef="Task_Check_PO" targetRef="Task_Check_GR" /><bpmn:sequenceFlow id="Flow_7" sourceRef="Task_Check_GR" targetRef="Gateway_Discrepancy" /><bpmn:sequenceFlow id="Flow_8_No" sourceRef="Gateway_Discrepancy" targetRef="Task_Prepare_Approval_Package" name="No" /><bpmn:sequenceFlow id="Flow_8_Yes" sourceRef="Gateway_Discrepancy" targetRef="Task_Investigate_Discrepancy" name="Yes" /><bpmn:sequenceFlow id="Flow_9" sourceRef="Task_Investigate_Discrepancy" targetRef="Gateway_Resolved" /><bpmn:sequenceFlow id="Flow_10_Yes" sourceRef="Gateway_Resolved" targetRef="Task_Prepare_Approval_Package" name="Yes" /><bpmn:sequenceFlow id="Flow_10_No" sourceRef="Gateway_Resolved" targetRef="Task_Request_Correction" name="No" /><bpmn:sequenceFlow id="Flow_11" sourceRef="Task_Request_Correction" targetRef="Event_Correction_Response_Received" /><bpmn:sequenceFlow id="Flow_12" sourceRef="Event_Correction_Response_Received" targetRef="Task_Read_Invoice" /><bpmn:sequenceFlow id="Flow_13" sourceRef="Task_Prepare_Approval_Package" targetRef="Task_Route_Approval" /><bpmn:sequenceFlow id="Flow_14" sourceRef="Task_Route_Approval" targetRef="Task_Review_Approve" /><bpmn:sequenceFlow id="Flow_15" sourceRef="Task_Review_Approve" targetRef="Gateway_Approved" /><bpmn:sequenceFlow id="Flow_16_Yes" sourceRef="Gateway_Approved" targetRef="Task_Mark_Approved" name="Yes" /><bpmn:sequenceFlow id="Flow_16_No" sourceRef="Gateway_Approved" targetRef="Task_Request_Correction" name="No" /><bpmn:sequenceFlow id="Flow_17" sourceRef="Task_Mark_Approved" targetRef="End_Approved" /><bpmn:sequenceFlow id="Flow_18" sourceRef="Task_Request_Correction" targetRef="End_Correction_Requested" /></bpmn:process><bpmndi:BPMNDiagram id="BPMNDiagram_Manual_Invoice"><bpmndi:BPMNPlane id="BPMNPlane_Manual_Invoice" bpmnElement="Collaboration_Manual_Invoice_Processing"><bpmndi:BPMNShape id="Participant_Supplier_di" bpmnElement="Participant_Supplier" isHorizontal="true"><dc:Bounds x="100" y="60" width="1780" height="150" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Participant_Company_di" bpmnElement="Participant_Company" isHorizontal="true"><dc:Bounds x="100" y="250" width="1780" height="600" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Lane_Intake_di" bpmnElement="Lane_Intake" isHorizontal="true"><dc:Bounds x="130" y="250" width="1750" height="105" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Lane_Finance_di" bpmnElement="Lane_Finance" isHorizontal="true"><dc:Bounds x="130" y="355" width="1750" height="240" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Lane_Department_di" bpmnElement="Lane_Department" isHorizontal="true"><dc:Bounds x="130" y="595" width="1750" height="120" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Lane_Approver_di" bpmnElement="Lane_Approver" isHorizontal="true"><dc:Bounds x="130" y="715" width="1750" height="135" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Start_Supplier_di" bpmnElement="Start_Supplier"><dc:Bounds x="200" y="117" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Submit_Invoice_di" bpmnElement="Task_Submit_Invoice"><dc:Bounds x="290" y="95" width="180" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Event_Correction_Requested_di" bpmnElement="Event_Correction_Requested"><dc:Bounds x="1325" y="117" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Provide_Correction_di" bpmnElement="Task_Provide_Correction"><dc:Bounds x="1415" y="95" width="190" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="End_Supplier_di" bpmnElement="End_Supplier"><dc:Bounds x="1660" y="117" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Start_Invoice_Received_di" bpmnElement="Start_Invoice_Received"><dc:Bounds x="200" y="287" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Register_Invoice_di" bpmnElement="Task_Register_Invoice"><dc:Bounds x="290" y="265" width="190" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Assign_Finance_Clerk_di" bpmnElement="Task_Assign_Finance_Clerk"><dc:Bounds x="530" y="265" width="180" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Read_Invoice_di" bpmnElement="Task_Read_Invoice"><dc:Bounds x="760" y="395" width="160" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Enter_Data_di" bpmnElement="Task_Enter_Data"><dc:Bounds x="965" y="395" width="160" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Check_PO_di" bpmnElement="Task_Check_PO"><dc:Bounds x="1170" y="395" width="175" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Check_GR_di" bpmnElement="Task_Check_GR"><dc:Bounds x="1390" y="395" width="175" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Gateway_Discrepancy_di" bpmnElement="Gateway_Discrepancy" isMarkerVisible="true"><dc:Bounds x="1610" y="408" width="50" height="50" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Request_Correction_di" bpmnElement="Task_Request_Correction"><dc:Bounds x="1425" y="505" width="190" height="70" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Event_Correction_Response_Received_di" bpmnElement="Event_Correction_Response_Received"><dc:Bounds x="1225" y="522" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Prepare_Approval_Package_di" bpmnElement="Task_Prepare_Approval_Package"><dc:Bounds x="1675" y="390" width="180" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Investigate_Discrepancy_di" bpmnElement="Task_Investigate_Discrepancy"><dc:Bounds x="1250" y="620" width="210" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Gateway_Resolved_di" bpmnElement="Gateway_Resolved" isMarkerVisible="true"><dc:Bounds x="1515" y="632" width="50" height="50" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Route_Approval_di" bpmnElement="Task_Route_Approval"><dc:Bounds x="1000" y="750" width="175" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Review_Approve_di" bpmnElement="Task_Review_Approve"><dc:Bounds x="1225" y="750" width="185" height="75" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Gateway_Approved_di" bpmnElement="Gateway_Approved" isMarkerVisible="true"><dc:Bounds x="1460" y="762" width="50" height="50" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="Task_Mark_Approved_di" bpmnElement="Task_Mark_Approved"><dc:Bounds x="1565" y="725" width="160" height="70" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="End_Approved_di" bpmnElement="End_Approved"><dc:Bounds x="1810" y="742" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="End_Correction_Requested_di" bpmnElement="End_Correction_Requested"><dc:Bounds x="1810" y="812" width="36" height="36" /></bpmndi:BPMNShape><bpmndi:BPMNEdge id="Flow_S1_di" bpmnElement="Flow_S1"><di:waypoint x="236" y="135" /><di:waypoint x="290" y="135" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_S2_di" bpmnElement="Flow_S2"><di:waypoint x="470" y="135" /><di:waypoint x="1325" y="135" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_S3_di" bpmnElement="Flow_S3"><di:waypoint x="1361" y="135" /><di:waypoint x="1415" y="135" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_S4_di" bpmnElement="Flow_S4"><di:waypoint x="1605" y="135" /><di:waypoint x="1660" y="135" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1"><di:waypoint x="236" y="305" /><di:waypoint x="290" y="305" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2"><di:waypoint x="480" y="305" /><di:waypoint x="530" y="305" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3"><di:waypoint x="710" y="305" /><di:waypoint x="735" y="305" /><di:waypoint x="735" y="433" /><di:waypoint x="760" y="432" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4"><di:waypoint x="920" y="432" /><di:waypoint x="965" y="432" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5"><di:waypoint x="1125" y="432" /><di:waypoint x="1170" y="432" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6"><di:waypoint x="1345" y="432" /><di:waypoint x="1390" y="432" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7"><di:waypoint x="1565" y="432" /><di:waypoint x="1610" y="433" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_8_No_di" bpmnElement="Flow_8_No"><di:waypoint x="1660" y="433" /><di:waypoint x="1675" y="428" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_8_Yes_di" bpmnElement="Flow_8_Yes"><di:waypoint x="1635" y="458" /><di:waypoint x="1635" y="658" /><di:waypoint x="1460" y="658" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9"><di:waypoint x="1460" y="658" /><di:waypoint x="1515" y="657" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_10_Yes_di" bpmnElement="Flow_10_Yes"><di:waypoint x="1540" y="632" /><di:waypoint x="1540" y="470" /><di:waypoint x="1675" y="428" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_10_No_di" bpmnElement="Flow_10_No"><di:waypoint x="1565" y="657" /><di:waypoint x="1690" y="657" /><di:waypoint x="1690" y="540" /><di:waypoint x="1615" y="540" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11"><di:waypoint x="1425" y="540" /><di:waypoint x="1261" y="540" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12"><di:waypoint x="1243" y="522" /><di:waypoint x="1243" y="370" /><di:waypoint x="840" y="370" /><di:waypoint x="840" y="395" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13"><di:waypoint x="1765" y="465" /><di:waypoint x="1765" y="710" /><di:waypoint x="1088" y="710" /><di:waypoint x="1088" y="750" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14"><di:waypoint x="1175" y="788" /><di:waypoint x="1225" y="788" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_15_di" bpmnElement="Flow_15"><di:waypoint x="1410" y="788" /><di:waypoint x="1460" y="787" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_16_Yes_di" bpmnElement="Flow_16_Yes"><di:waypoint x="1510" y="787" /><di:waypoint x="1565" y="760" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_16_No_di" bpmnElement="Flow_16_No"><di:waypoint x="1485" y="812" /><di:waypoint x="1485" y="845" /><di:waypoint x="1520" y="845" /><di:waypoint x="1520" y="575" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_17_di" bpmnElement="Flow_17"><di:waypoint x="1725" y="760" /><di:waypoint x="1810" y="760" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="Flow_18_di" bpmnElement="Flow_18"><di:waypoint x="1615" y="540" /><di:waypoint x="1810" y="540" /><di:waypoint x="1810" y="830" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="MessageFlow_Invoice_di" bpmnElement="MessageFlow_Invoice"><di:waypoint x="380" y="175" /><di:waypoint x="218" y="287" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="MessageFlow_Correction_Request_di" bpmnElement="MessageFlow_Correction_Request"><di:waypoint x="1520" y="505" /><di:waypoint x="1343" y="153" /></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="MessageFlow_Correction_Response_di" bpmnElement="MessageFlow_Correction_Response"><di:waypoint x="1510" y="175" /><di:waypoint x="1243" y="522" /></bpmndi:BPMNEdge></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></bpmn:definitions>`;
+var xmlBefore = `<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Simplified_Invoice_Checking" targetNamespace="https://komgis.com/bpmn/simplified-invoice-checking" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.13.2">
+  <bpmn:collaboration id="Collaboration_Simplified_Invoice_Checking">
+    <bpmn:participant id="Participant_Company" name="Company / Simplified Invoice Checking Process" processRef="Process_Simplified_Invoice_Checking" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_Simplified_Invoice_Checking" name="Simplified Invoice Checking and Payment Approval" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Simplified_Invoice">
+      <bpmn:lane id="Lane_Approver" name="Payment Approval">
+        <bpmn:flowNodeRef>Task_Approve_Payment</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Mark_Approved</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Invoice_Approved</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_Corrected_Invoice_Received</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Finance" name="Finance Check">
+        <bpmn:flowNodeRef>Task_Check_Invoice</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Invoice_OK</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Request_Correction</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Intake" name="Invoice Intake">
+        <bpmn:flowNodeRef>Start_Invoice_Received</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Register_Invoice</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_Invoice_Received" name="Invoice received">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_Register_Invoice" name="Register invoice">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:userTask id="Task_Check_Invoice" name="Check invoice details and match PO / receipt">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_Approve_Payment" name="Approve invoice for payment">
+      <bpmn:incoming>Flow_4_Yes</bpmn:incoming>
+      <bpmn:outgoing>Flow_7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:task id="Task_Mark_Approved" name="Mark approved and ready for payment">
+      <bpmn:incoming>Flow_7</bpmn:incoming>
+      <bpmn:outgoing>Flow_8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="End_Invoice_Approved" name="Invoice approved">
+      <bpmn:incoming>Flow_8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateCatchEvent id="Event_Corrected_Invoice_Received" name="Receive corrected invoice">
+      <bpmn:incoming>Flow_0jqdlbn</bpmn:incoming>
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="Gateway_Invoice_OK" name="Invoice correct?">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:outgoing>Flow_4_Yes</bpmn:outgoing>
+      <bpmn:outgoing>Flow_4_No</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0jqdlbn</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_Request_Correction" name="Request correction from supplier">
+      <bpmn:incoming>Flow_4_No</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Invoice_Received" targetRef="Task_Register_Invoice" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Register_Invoice" targetRef="Task_Check_Invoice" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Event_Corrected_Invoice_Received" targetRef="Task_Check_Invoice" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Check_Invoice" targetRef="Gateway_Invoice_OK" />
+    <bpmn:sequenceFlow id="Flow_4_Yes" name="Yes" sourceRef="Gateway_Invoice_OK" targetRef="Task_Approve_Payment" />
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="Task_Approve_Payment" targetRef="Task_Mark_Approved" />
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="Task_Mark_Approved" targetRef="End_Invoice_Approved" />
+    <bpmn:sequenceFlow id="Flow_0jqdlbn" sourceRef="Gateway_Invoice_OK" targetRef="Event_Corrected_Invoice_Received" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_Request_Correction" targetRef="Gateway_Invoice_OK" />
+    <bpmn:sequenceFlow id="Flow_4_No" name="No" sourceRef="Gateway_Invoice_OK" targetRef="Task_Request_Correction" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Simplified_Invoice_Checking">
+    <bpmndi:BPMNPlane id="BPMNPlane_Simplified_Invoice_Checking" bpmnElement="Collaboration_Simplified_Invoice_Checking">
+      <bpmndi:BPMNShape id="Participant_Company_di" bpmnElement="Participant_Company" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1320" height="430" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Approver_di" bpmnElement="Lane_Approver" isHorizontal="true">
+        <dc:Bounds x="190" y="390" width="1290" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Finance_di" bpmnElement="Lane_Finance" isHorizontal="true">
+        <dc:Bounds x="190" y="200" width="1290" height="190" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Intake_di" bpmnElement="Lane_Intake" isHorizontal="true">
+        <dc:Bounds x="190" y="80" width="1290" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Invoice_Received_di" bpmnElement="Start_Invoice_Received">
+        <dc:Bounds x="250" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="228" y="163" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Register_Invoice_di" bpmnElement="Task_Register_Invoice">
+        <dc:Bounds x="330" y="100" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Check_Invoice_di" bpmnElement="Task_Check_Invoice">
+        <dc:Bounds x="540" y="255" width="210" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Approve_Payment_di" bpmnElement="Task_Approve_Payment">
+        <dc:Bounds x="930" y="410" width="180" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Mark_Approved_di" bpmnElement="Task_Mark_Approved">
+        <dc:Bounds x="1170" y="410" width="190" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Invoice_Approved_di" bpmnElement="End_Invoice_Approved">
+        <dc:Bounds x="1420" y="432" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1388" y="413" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_Corrected_Invoice_Received_di" bpmnElement="Event_Corrected_Invoice_Received">
+        <dc:Bounds x="627" y="422" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="601" y="458" width="89" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Invoice_OK_di" bpmnElement="Gateway_Invoice_OK" isMarkerVisible="true">
+        <dc:Bounds x="805" y="270" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="791" y="320" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Request_Correction_di" bpmnElement="Task_Request_Correction">
+        <dc:Bounds x="985" y="260" width="190" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="286" y="140" />
+        <di:waypoint x="330" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="480" y="140" />
+        <di:waypoint x="510" y="140" />
+        <di:waypoint x="510" y="295" />
+        <di:waypoint x="540" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="750" y="295" />
+        <di:waypoint x="805" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_Yes_di" bpmnElement="Flow_4_Yes">
+        <di:waypoint x="855" y="295" />
+        <di:waypoint x="895" y="295" />
+        <di:waypoint x="895" y="450" />
+        <di:waypoint x="930" y="450" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="901" y="413" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_No_di" bpmnElement="Flow_4_No">
+        <di:waypoint x="855" y="295" />
+        <di:waypoint x="985" y="295" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="872" y="272" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="985" y="295" />
+        <di:waypoint x="855" y="295" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="645" y="422" />
+        <di:waypoint x="645" y="335" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <di:waypoint x="1110" y="450" />
+        <di:waypoint x="1170" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="1360" y="450" />
+        <di:waypoint x="1420" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jqdlbn_di" bpmnElement="Flow_0jqdlbn">
+        <di:waypoint x="805" y="295" />
+        <di:waypoint x="770" y="295" />
+        <di:waypoint x="770" y="440" />
+        <di:waypoint x="663" y="440" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>`;
 
 var xmlAfter = `<?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_AI_Invoice_Processing" targetNamespace="https://komgis.com/bpmn/ai-invoice-processing-payment-approval">
-  <bpmn:message id="Message_Invoice" name="Supplier Invoice"/><bpmn:message id="Message_Correction_Request" name="Correction Request"/>
-  <bpmn:collaboration id="Collaboration_AI_Invoice_Processing">
-    <bpmn:participant id="Participant_Supplier" name="Supplier" processRef="Process_Supplier"/>
-    <bpmn:participant id="Participant_Company" name="Company / Finance Team + AI Automation" processRef="Process_AI_Invoice"/>
-    <bpmn:messageFlow id="MessageFlow_Invoice" name="Invoice submitted" sourceRef="Task_Submit_Invoice" targetRef="Start_Invoice_Received"/>
-    <bpmn:messageFlow id="MessageFlow_Correction" name="Correction requested" sourceRef="Task_Request_Correction" targetRef="Event_Correction_Requested"/>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_Invoice_Checking_AI_Layer" targetNamespace="https://komgis.com/bpmn/invoice-checking-ai-layer" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.13.2">
+  <bpmn:collaboration id="Collaboration_Invoice_Checking_AI_Layer">
+    <bpmn:participant id="Participant_Company" name="Company / Invoice Checking with AI Automation Layer" processRef="Process_Invoice_Checking_AI_Layer" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_Supplier" name="Supplier Invoice Submission" isExecutable="false">
-    <bpmn:startEvent id="Start_Supplier" name="Invoice ready"/><bpmn:sequenceFlow id="Flow_S1" sourceRef="Start_Supplier" targetRef="Task_Submit_Invoice"/>
-    <bpmn:task id="Task_Submit_Invoice" name="Submit invoice by email, portal or upload"/><bpmn:sequenceFlow id="Flow_S2" sourceRef="Task_Submit_Invoice" targetRef="Event_Correction_Requested"/>
-    <bpmn:intermediateCatchEvent id="Event_Correction_Requested" name="Receive correction request"><bpmn:messageEventDefinition messageRef="Message_Correction_Request"/></bpmn:intermediateCatchEvent>
-    <bpmn:sequenceFlow id="Flow_S3" sourceRef="Event_Correction_Requested" targetRef="Task_Provide_Correction"/>
-    <bpmn:task id="Task_Provide_Correction" name="Provide corrected invoice or missing information"/><bpmn:sequenceFlow id="Flow_S4" sourceRef="Task_Provide_Correction" targetRef="End_Supplier"/>
-    <bpmn:endEvent id="End_Supplier" name="Correction sent"/>
-  </bpmn:process>
-  <bpmn:process id="Process_AI_Invoice" name="AI Invoice Processing and Payment Approval Workflow" isExecutable="false">
-    <bpmn:laneSet id="LaneSet_AI_Invoice">
-      <bpmn:lane id="Lane_Intake" name="Invoice Intake System"><bpmn:flowNodeRef>Start_Invoice_Received</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Capture_Invoice</bpmn:flowNodeRef></bpmn:lane>
-      <bpmn:lane id="Lane_AI" name="AI Automation"><bpmn:flowNodeRef>Task_Extract_Data</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Validate_Fields</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Check_PO</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Check_GR</bpmn:flowNodeRef><bpmn:flowNodeRef>Gateway_Discrepancy</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Flag_Discrepancy</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Prepare_Package</bpmn:flowNodeRef></bpmn:lane>
-      <bpmn:lane id="Lane_Department" name="Responsible Department"><bpmn:flowNodeRef>Task_Resolve_Discrepancy</bpmn:flowNodeRef><bpmn:flowNodeRef>Gateway_Resolved</bpmn:flowNodeRef></bpmn:lane>
-      <bpmn:lane id="Lane_Finance" name="Finance / Approver"><bpmn:flowNodeRef>Task_Route_Approval</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Review_Approve</bpmn:flowNodeRef><bpmn:flowNodeRef>Gateway_Approved</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Mark_Approved</bpmn:flowNodeRef><bpmn:flowNodeRef>Task_Request_Correction</bpmn:flowNodeRef><bpmn:flowNodeRef>End_Approved</bpmn:flowNodeRef><bpmn:flowNodeRef>End_Correction_Requested</bpmn:flowNodeRef></bpmn:lane>
+  <bpmn:process id="Process_Invoice_Checking_AI_Layer" name="Invoice Checking with AI Automation Layer" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Invoice_Checking_AI">
+      <bpmn:lane id="Lane_Payment_Approval" name="Next Level Approval">
+        <bpmn:flowNodeRef>End_Invoice_Sent_For_Approval</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Finance" name="Finance User">
+        <bpmn:flowNodeRef>Task_Review_AI_Summary</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Invoice_Ready</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Correct_And_Upload</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_AI_Automation" name="AI Automation">
+        <bpmn:flowNodeRef>Task_AI_Extract_Invoice_Data</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Load_Order_Pricing</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Check_And_Summarize</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AI_Send_To_Approval</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Intake" name="Invoice Intake">
+        <bpmn:flowNodeRef>Start_Invoice_Received</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Register_Invoice</bpmn:flowNodeRef>
+      </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:startEvent id="Start_Invoice_Received" name="Invoice received"><bpmn:messageEventDefinition messageRef="Message_Invoice"/></bpmn:startEvent><bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Invoice_Received" targetRef="Task_Capture_Invoice"/>
-    <bpmn:task id="Task_Capture_Invoice" name="Capture invoice from email, portal or upload"/><bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Capture_Invoice" targetRef="Task_Extract_Data"/>
-    <bpmn:serviceTask id="Task_Extract_Data" name="AI extracts invoice data"/><bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Extract_Data" targetRef="Task_Validate_Fields"/>
-    <bpmn:serviceTask id="Task_Validate_Fields" name="Validate required fields and format"/><bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Validate_Fields" targetRef="Task_Check_PO"/>
-    <bpmn:serviceTask id="Task_Check_PO" name="Check invoice against purchase order"/><bpmn:sequenceFlow id="Flow_5" sourceRef="Task_Check_PO" targetRef="Task_Check_GR"/>
-    <bpmn:serviceTask id="Task_Check_GR" name="Check against goods receipt"/><bpmn:sequenceFlow id="Flow_6" sourceRef="Task_Check_GR" targetRef="Gateway_Discrepancy"/>
-    <bpmn:exclusiveGateway id="Gateway_Discrepancy" name="Missing or inconsistent information?"/>
-    <bpmn:sequenceFlow id="Flow_7_No" name="No" sourceRef="Gateway_Discrepancy" targetRef="Task_Prepare_Package"/>
-    <bpmn:sequenceFlow id="Flow_7_Yes" name="Yes" sourceRef="Gateway_Discrepancy" targetRef="Task_Flag_Discrepancy"/>
-    <bpmn:serviceTask id="Task_Flag_Discrepancy" name="AI flags discrepancy and recommends next action"/><bpmn:sequenceFlow id="Flow_8" sourceRef="Task_Flag_Discrepancy" targetRef="Task_Resolve_Discrepancy"/>
-    <bpmn:userTask id="Task_Resolve_Discrepancy" name="Department resolves missing or inconsistent information"/><bpmn:sequenceFlow id="Flow_9" sourceRef="Task_Resolve_Discrepancy" targetRef="Gateway_Resolved"/>
-    <bpmn:exclusiveGateway id="Gateway_Resolved" name="Can discrepancy be resolved internally?"/>
-    <bpmn:sequenceFlow id="Flow_10_Yes" name="Yes" sourceRef="Gateway_Resolved" targetRef="Task_Prepare_Package"/>
-    <bpmn:sequenceFlow id="Flow_10_No" name="No" sourceRef="Gateway_Resolved" targetRef="Task_Request_Correction"/>
-    <bpmn:serviceTask id="Task_Prepare_Package" name="Prepare invoice approval package"/><bpmn:sequenceFlow id="Flow_11" sourceRef="Task_Prepare_Package" targetRef="Task_Route_Approval"/>
-    <bpmn:task id="Task_Route_Approval" name="Route invoice to correct department or approver"/><bpmn:sequenceFlow id="Flow_12" sourceRef="Task_Route_Approval" targetRef="Task_Review_Approve"/>
-    <bpmn:userTask id="Task_Review_Approve" name="Human reviews and approves invoice for payment"/><bpmn:sequenceFlow id="Flow_13" sourceRef="Task_Review_Approve" targetRef="Gateway_Approved"/>
-    <bpmn:exclusiveGateway id="Gateway_Approved" name="Payment approved?"/>
-    <bpmn:sequenceFlow id="Flow_14_Yes" name="Yes" sourceRef="Gateway_Approved" targetRef="Task_Mark_Approved"/>
-    <bpmn:sequenceFlow id="Flow_14_No" name="No" sourceRef="Gateway_Approved" targetRef="Task_Request_Correction"/>
-    <bpmn:task id="Task_Mark_Approved" name="Mark invoice approved and ready for payment"/><bpmn:sequenceFlow id="Flow_15" sourceRef="Task_Mark_Approved" targetRef="End_Approved"/>
-    <bpmn:sendTask id="Task_Request_Correction" name="Request correction or missing information from supplier"/><bpmn:sequenceFlow id="Flow_16" sourceRef="Task_Request_Correction" targetRef="End_Correction_Requested"/>
-    <bpmn:endEvent id="End_Approved" name="Invoice approved for payment"/>
-    <bpmn:endEvent id="End_Correction_Requested" name="Correction requested"/>
+    <bpmn:startEvent id="Start_Invoice_Received" name="Invoice received">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_Register_Invoice" name="Register invoice">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:serviceTask id="Task_AI_Extract_Invoice_Data" name="AI extracts invoice data">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:incoming>Flow_9</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_AI_Load_Order_Pricing" name="AI loads order and pricing list from database">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_AI_Check_And_Summarize" name="AI checks invoice and prepares summary">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_Review_AI_Summary" name="Review AI check summary in chat">
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_Invoice_Ready" name="Invoice ready?">
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+      <bpmn:outgoing>Flow_7_Yes</bpmn:outgoing>
+      <bpmn:outgoing>Flow_7_No</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_AI_Send_To_Approval" name="AI simulates sending to next approval">
+      <bpmn:incoming>Flow_7_Yes</bpmn:incoming>
+      <bpmn:outgoing>Flow_8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_Correct_And_Upload" name="Correct invoice and upload again">
+      <bpmn:incoming>Flow_7_No</bpmn:incoming>
+      <bpmn:outgoing>Flow_9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="End_Invoice_Sent_For_Approval" name="Invoice sent for approval">
+      <bpmn:incoming>Flow_8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_Invoice_Received" targetRef="Task_Register_Invoice" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Register_Invoice" targetRef="Task_AI_Extract_Invoice_Data" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_AI_Extract_Invoice_Data" targetRef="Task_AI_Load_Order_Pricing" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_AI_Load_Order_Pricing" targetRef="Task_AI_Check_And_Summarize" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_AI_Check_And_Summarize" targetRef="Task_Review_AI_Summary" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Task_Review_AI_Summary" targetRef="Gateway_Invoice_Ready" />
+    <bpmn:sequenceFlow id="Flow_7_Yes" name="Approve" sourceRef="Gateway_Invoice_Ready" targetRef="Task_AI_Send_To_Approval" />
+    <bpmn:sequenceFlow id="Flow_7_No" name="Correct" sourceRef="Gateway_Invoice_Ready" targetRef="Task_Correct_And_Upload" />
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="Task_AI_Send_To_Approval" targetRef="End_Invoice_Sent_For_Approval" />
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Task_Correct_And_Upload" targetRef="Task_AI_Extract_Invoice_Data" />
   </bpmn:process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_AI_Invoice_Processing">
-    <bpmndi:BPMNPlane id="BPMNPlane_AI_Invoice_Processing" bpmnElement="Collaboration_AI_Invoice_Processing">
-      <bpmndi:BPMNShape id="Participant_Supplier_di" bpmnElement="Participant_Supplier" isHorizontal="true"><dc:Bounds x="100" y="70" width="1540" height="150"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Participant_Company_di" bpmnElement="Participant_Company" isHorizontal="true"><dc:Bounds x="100" y="260" width="1540" height="560"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_Intake_di" bpmnElement="Lane_Intake" isHorizontal="true"><dc:Bounds x="130" y="260" width="1510" height="105"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_AI_di" bpmnElement="Lane_AI" isHorizontal="true"><dc:Bounds x="130" y="365" width="1510" height="190"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_Department_di" bpmnElement="Lane_Department" isHorizontal="true"><dc:Bounds x="130" y="555" width="1510" height="120"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_Finance_di" bpmnElement="Lane_Finance" isHorizontal="true"><dc:Bounds x="130" y="675" width="1510" height="145"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Start_Supplier_di" bpmnElement="Start_Supplier"><dc:Bounds x="200" y="127" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Submit_Invoice_di" bpmnElement="Task_Submit_Invoice"><dc:Bounds x="290" y="105" width="170" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_Correction_Requested_di" bpmnElement="Event_Correction_Requested"><dc:Bounds x="1260" y="127" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Provide_Correction_di" bpmnElement="Task_Provide_Correction"><dc:Bounds x="1350" y="105" width="180" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="End_Supplier_di" bpmnElement="End_Supplier"><dc:Bounds x="1570" y="127" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Start_Invoice_Received_di" bpmnElement="Start_Invoice_Received"><dc:Bounds x="200" y="295" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Capture_Invoice_di" bpmnElement="Task_Capture_Invoice"><dc:Bounds x="290" y="273" width="170" height="80"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Extract_Data_di" bpmnElement="Task_Extract_Data"><dc:Bounds x="510" y="405" width="150" height="75"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Validate_Fields_di" bpmnElement="Task_Validate_Fields"><dc:Bounds x="700" y="405" width="150" height="75"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Check_PO_di" bpmnElement="Task_Check_PO"><dc:Bounds x="890" y="405" width="150" height="75"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Check_GR_di" bpmnElement="Task_Check_GR"><dc:Bounds x="1080" y="405" width="150" height="75"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_Discrepancy_di" bpmnElement="Gateway_Discrepancy" isMarkerVisible="true"><dc:Bounds x="1270" y="417" width="50" height="50"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Flag_Discrepancy_di" bpmnElement="Task_Flag_Discrepancy"><dc:Bounds x="1370" y="470" width="160" height="75"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Prepare_Package_di" bpmnElement="Task_Prepare_Package"><dc:Bounds x="1370" y="385" width="160" height="70"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Resolve_Discrepancy_di" bpmnElement="Task_Resolve_Discrepancy"><dc:Bounds x="1080" y="580" width="190" height="75"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_Resolved_di" bpmnElement="Gateway_Resolved" isMarkerVisible="true"><dc:Bounds x="1320" y="592" width="50" height="50"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Route_Approval_di" bpmnElement="Task_Route_Approval"><dc:Bounds x="950" y="710" width="170" height="75"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Review_Approve_di" bpmnElement="Task_Review_Approve"><dc:Bounds x="1160" y="710" width="175" height="75"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_Approved_di" bpmnElement="Gateway_Approved" isMarkerVisible="true"><dc:Bounds x="1380" y="722" width="50" height="50"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Mark_Approved_di" bpmnElement="Task_Mark_Approved"><dc:Bounds x="1480" y="690" width="150" height="70"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="End_Approved_di" bpmnElement="End_Approved"><dc:Bounds x="1665" y="707" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_Request_Correction_di" bpmnElement="Task_Request_Correction"><dc:Bounds x="1480" y="770" width="150" height="70"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="End_Correction_Requested_di" bpmnElement="End_Correction_Requested"><dc:Bounds x="1665" y="787" width="36" height="36"/></bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_S1_di" bpmnElement="Flow_S1"><di:waypoint x="236" y="145"/><di:waypoint x="290" y="145"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_S2_di" bpmnElement="Flow_S2"><di:waypoint x="460" y="145"/><di:waypoint x="1260" y="145"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_S3_di" bpmnElement="Flow_S3"><di:waypoint x="1296" y="145"/><di:waypoint x="1350" y="145"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_S4_di" bpmnElement="Flow_S4"><di:waypoint x="1530" y="145"/><di:waypoint x="1570" y="145"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1"><di:waypoint x="236" y="313"/><di:waypoint x="290" y="313"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2"><di:waypoint x="460" y="313"/><di:waypoint x="485" y="313"/><di:waypoint x="485" y="443"/><di:waypoint x="510" y="443"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3"><di:waypoint x="660" y="443"/><di:waypoint x="700" y="443"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4"><di:waypoint x="850" y="443"/><di:waypoint x="890" y="443"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5"><di:waypoint x="1040" y="443"/><di:waypoint x="1080" y="443"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6"><di:waypoint x="1230" y="443"/><di:waypoint x="1270" y="442"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_7_No_di" bpmnElement="Flow_7_No"><di:waypoint x="1320" y="442"/><di:waypoint x="1370" y="420"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_7_Yes_di" bpmnElement="Flow_7_Yes"><di:waypoint x="1295" y="467"/><di:waypoint x="1295" y="508"/><di:waypoint x="1370" y="508"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8"><di:waypoint x="1450" y="545"/><di:waypoint x="1450" y="618"/><di:waypoint x="1270" y="618"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9"><di:waypoint x="1270" y="618"/><di:waypoint x="1320" y="617"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_10_Yes_di" bpmnElement="Flow_10_Yes"><di:waypoint x="1345" y="592"/><di:waypoint x="1345" y="420"/><di:waypoint x="1370" y="420"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_10_No_di" bpmnElement="Flow_10_No"><di:waypoint x="1370" y="617"/><di:waypoint x="1555" y="617"/><di:waypoint x="1555" y="770"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11"><di:waypoint x="1450" y="455"/><di:waypoint x="1450" y="675"/><di:waypoint x="1035" y="675"/><di:waypoint x="1035" y="710"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12"><di:waypoint x="1120" y="748"/><di:waypoint x="1160" y="748"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13"><di:waypoint x="1335" y="748"/><di:waypoint x="1380" y="747"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_14_Yes_di" bpmnElement="Flow_14_Yes"><di:waypoint x="1430" y="747"/><di:waypoint x="1480" y="725"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_14_No_di" bpmnElement="Flow_14_No"><di:waypoint x="1405" y="772"/><di:waypoint x="1405" y="805"/><di:waypoint x="1480" y="805"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_15_di" bpmnElement="Flow_15"><di:waypoint x="1630" y="725"/><di:waypoint x="1665" y="725"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_16_di" bpmnElement="Flow_16"><di:waypoint x="1630" y="805"/><di:waypoint x="1665" y="805"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MessageFlow_Invoice_di" bpmnElement="MessageFlow_Invoice"><di:waypoint x="375" y="185"/><di:waypoint x="218" y="295"/></bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MessageFlow_Correction_di" bpmnElement="MessageFlow_Correction"><di:waypoint x="1555" y="770"/><di:waypoint x="1278" y="163"/></bpmndi:BPMNEdge>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Invoice_Checking_AI_Layer">
+    <bpmndi:BPMNPlane id="BPMNPlane_Invoice_Checking_AI_Layer" bpmnElement="Collaboration_Invoice_Checking_AI_Layer">
+      <bpmndi:BPMNShape id="Participant_Company_di" bpmnElement="Participant_Company" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="2020" height="600" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Payment_Approval_di" bpmnElement="Lane_Payment_Approval" isHorizontal="true">
+        <dc:Bounds x="190" y="520" width="1990" height="160" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Finance_di" bpmnElement="Lane_Finance" isHorizontal="true">
+        <dc:Bounds x="190" y="370" width="1990" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_AI_Automation_di" bpmnElement="Lane_AI_Automation" isHorizontal="true">
+        <dc:Bounds x="190" y="200" width="1990" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Intake_di" bpmnElement="Lane_Intake" isHorizontal="true">
+        <dc:Bounds x="190" y="80" width="1990" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Invoice_Received_di" bpmnElement="Start_Invoice_Received">
+        <dc:Bounds x="250" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="228" y="163" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Register_Invoice_di" bpmnElement="Task_Register_Invoice">
+        <dc:Bounds x="330" y="100" width="150" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Extract_Invoice_Data_di" bpmnElement="Task_AI_Extract_Invoice_Data">
+        <dc:Bounds x="540" y="245" width="170" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Load_Order_Pricing_di" bpmnElement="Task_AI_Load_Order_Pricing">
+        <dc:Bounds x="780" y="245" width="210" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Check_And_Summarize_di" bpmnElement="Task_AI_Check_And_Summarize">
+        <dc:Bounds x="1040" y="245" width="210" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Review_AI_Summary_di" bpmnElement="Task_Review_AI_Summary">
+        <dc:Bounds x="1290" y="405" width="220" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Invoice_Ready_di" bpmnElement="Gateway_Invoice_Ready" isMarkerVisible="true">
+        <dc:Bounds x="1570" y="420" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1558" y="475" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AI_Send_To_Approval_di" bpmnElement="Task_AI_Send_To_Approval">
+        <dc:Bounds x="1680" y="245" width="210" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Correct_And_Upload_di" bpmnElement="Task_Correct_And_Upload">
+        <dc:Bounds x="1680" y="410" width="210" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Invoice_Sent_For_Approval_di" bpmnElement="End_Invoice_Sent_For_Approval">
+        <dc:Bounds x="2050" y="582" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2026" y="623" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="286" y="140" />
+        <di:waypoint x="330" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="480" y="140" />
+        <di:waypoint x="510" y="140" />
+        <di:waypoint x="510" y="285" />
+        <di:waypoint x="540" y="285" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="710" y="285" />
+        <di:waypoint x="780" y="285" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="990" y="285" />
+        <di:waypoint x="1040" y="285" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="1250" y="285" />
+        <di:waypoint x="1270" y="285" />
+        <di:waypoint x="1270" y="445" />
+        <di:waypoint x="1290" y="445" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="1510" y="445" />
+        <di:waypoint x="1570" y="445" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_Yes_di" bpmnElement="Flow_7_Yes">
+        <di:waypoint x="1595" y="420" />
+        <di:waypoint x="1595" y="285" />
+        <di:waypoint x="1680" y="285" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1604" y="342" width="43" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_No_di" bpmnElement="Flow_7_No">
+        <di:waypoint x="1620" y="445" />
+        <di:waypoint x="1680" y="445" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1632" y="422" width="44" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="1890" y="285" />
+        <di:waypoint x="1980" y="285" />
+        <di:waypoint x="1980" y="600" />
+        <di:waypoint x="2050" y="600" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="1785" y="410" />
+        <di:waypoint x="1785" y="215" />
+        <di:waypoint x="625" y="215" />
+        <di:waypoint x="625" y="245" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>`;
