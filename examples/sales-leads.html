@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sales Lead Follow-up — KomGIS Examples</title>
   <link rel="stylesheet" href="https://unpkg.com/bpmn-js@17/dist/assets/bpmn-font/css/bpmn-embedded.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true,theme:'dark'});</script>
   <style>
     :root{--bg:#0c0c0b;--surface:#131312;--line:#252522;--text:#f2f0eb;--muted:#7a7870;--lime:#c6f135;--max:1200px;--r:4px}
     *{box-sizing:border-box;margin:0;padding:0}
@@ -50,6 +52,12 @@
       .foot{flex-direction:column;align-items:flex-start}
       .bpmnContainer{height:220px}
     }
+    .mermaidWrap{margin-top:32px}
+    .mermaidCaption{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .mermaidNote{color:var(--muted);font-size:.88rem;line-height:1.75;max-width:760px;margin-bottom:14px}
+    .mermaidContainer{width:fit-content;max-width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto;padding:20px}
+    .mermaidContainer pre{margin:0;background:none;border:none}
+    .mermaidContainer svg{display:block;margin:0 auto}
   </style>
 </head>
 <body>
@@ -104,6 +112,31 @@
       </div>
       <div class="bpmnContainer" id="bpmnAfter"></div>
       <p class="bpmnHint">Scroll to zoom · Click and drag to pan</p>
+      <div class="mermaidWrap">
+        <div class="mermaidCaption">Agent architecture — LangGraph implementation</div>
+        <p class="mermaidNote">The diagram shows the agent's qualification and assignment flow. Each &#9208; node is a human-in-the-loop pause point where the sales user reviews and guides the AI's work — from confirming the lead summary and approving the score, through to selecting the communication channel and assigning a sales rep.</p>
+        <div class="mermaidContainer">
+          <pre class="mermaid">
+flowchart TD
+    START([START]) --> load_lead
+    load_lead["**load_lead**\nFetch lead + conversation\nmark in_progress"] --> summarize_lead
+    summarize_lead["**summarize_lead**\nLLM summary of lead"] --> await_summary_feedback
+    await_summary_feedback{{"&#9208; await_summary_feedback\nuser comment or skip"}}
+    await_summary_feedback -- "comment (or blank)" --> score_lead
+    score_lead["**score_lead**\nLLM scores 1-10\nhot / warm / cold"] --> await_score_approval
+    await_score_approval{{"&#9208; await_score_approval\napprove / edit / rescore"}}
+    await_score_approval -- "approved" --> persist_qualification
+    await_score_approval -- "rescore" --> score_lead
+    persist_qualification["**persist_qualification**\nPATCH score + category + summary\nstatus = qualified"] --> await_channel_selection
+    await_channel_selection{{"&#9208; await_channel_selection\nemail / phone / SMS / WhatsApp"}}
+    await_channel_selection -- "channel chosen" --> load_sales_agents
+    load_sales_agents["**load_sales_agents**\nFetch reps + assigned_count\nsort by load"] --> await_agent_selection
+    await_agent_selection{{"&#9208; await_agent_selection\nuser picks a rep"}}
+    await_agent_selection -- "rep chosen" --> finalize_assignment
+    finalize_assignment["**finalize_assignment**\nPATCH channel + assigned_agent\nstatus = assigned"] --> END([END])
+          </pre>
+        </div>
+      </div>
     </div>
 
     <div class="section">

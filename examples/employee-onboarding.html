@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Employee Onboarding — KomGIS Examples</title>
   <link rel="stylesheet" href="https://unpkg.com/bpmn-js@17/dist/assets/bpmn-font/css/bpmn-embedded.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true,theme:'dark'});</script>
   <style>
     :root{--bg:#0c0c0b;--surface:#131312;--line:#252522;--text:#f2f0eb;--muted:#7a7870;--lime:#c6f135;--max:1200px;--r:4px}
     *{box-sizing:border-box;margin:0;padding:0}
@@ -50,6 +52,12 @@
       .foot{flex-direction:column;align-items:flex-start}
       .bpmnContainer{height:220px}
     }
+    .mermaidWrap{margin-top:32px}
+    .mermaidCaption{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .mermaidNote{color:var(--muted);font-size:.88rem;line-height:1.75;max-width:760px;margin-bottom:14px}
+    .mermaidContainer{width:fit-content;max-width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto;padding:20px}
+    .mermaidContainer pre{margin:0;background:none;border:none}
+    .mermaidContainer svg{display:block;margin:0 auto}
   </style>
 </head>
 <body>
@@ -104,6 +112,35 @@
       </div>
       <div class="bpmnContainer" id="bpmnAfter"></div>
       <p class="bpmnHint">Scroll to zoom · Click and drag to pan</p>
+      <div class="mermaidWrap">
+        <div class="mermaidCaption">Agent architecture — LangGraph implementation</div>
+        <p class="mermaidNote">The diagram shows the agent's conversational routing logic. Each message from the new hire triggers a full graph run. The agent routes based on the current onboarding phase — collecting missing data, delivering the personalized briefing, answering Q&amp;A, or finalizing the case. State persists across turns via LangGraph's MemorySaver so the agent picks up exactly where it left off.</p>
+        <div class="mermaidContainer">
+          <pre class="mermaid">
+flowchart TD
+    START(( START ))
+    END_NODE(( END ))
+    START -->|route_turn| RT{route_turn}
+    RT -->|no case loaded| load_case
+    RT -->|phase == needs_corrections| apply_corrections
+    RT -->|phase == qa| qa_dispatch
+    RT -->|phase == done| noop
+    load_case["load_case\nFetch case + employee from Django\nMark case in_progress\nEmit welcome message"] --> validate_form
+    apply_corrections["apply_corrections\nParse employee reply\nExtract corrected fields\nPATCH Employee in DB"] --> validate_form
+    validate_form["validate_form\nLLM structured-output\nchecks REQUIRED_FIELDS\nfor missing / invalid data"]
+    validate_form -->|validation_missing non-empty| ask_for_corrections
+    validate_form -->|validation_missing empty| brief_employee
+    ask_for_corrections["ask_for_corrections\nEmit chat message listing missing fields\nSet phase = needs_corrections\nLog message to DB"] --> END_NODE
+    brief_employee["brief_employee\nLLM generates personalized briefing\nSet phase = qa\nLog message to DB"] --> END_NODE
+    qa_dispatch["qa_dispatch\nLog employee message\nLLM classifies intent:\nquestion or done"]
+    qa_dispatch -->|last_intent == question| answer_question
+    qa_dispatch -->|last_intent == done| finalize_and_notify_hr
+    answer_question["answer_question\nRAG-style reply grounded in policies\nLog message to DB"] --> END_NODE
+    finalize_and_notify_hr["finalize_and_notify_hr\nLLM drafts closing message + HR email\nMark case completed\nSet phase = done"] --> END_NODE
+    noop["noop\nPhase is done — no further action"] --> END_NODE
+          </pre>
+        </div>
+      </div>
     </div>
 
     <div class="section">

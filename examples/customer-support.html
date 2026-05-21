@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Customer Support Requests — KomGIS Examples</title>
   <link rel="stylesheet" href="https://unpkg.com/bpmn-js@17/dist/assets/bpmn-font/css/bpmn-embedded.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true,theme:'dark'});</script>
   <style>
     :root{--bg:#0c0c0b;--surface:#131312;--line:#252522;--text:#f2f0eb;--muted:#7a7870;--lime:#c6f135;--max:1200px;--r:4px}
     *{box-sizing:border-box;margin:0;padding:0}
@@ -63,6 +65,12 @@
       .bpmnContainer{height:220px}
       .foot{flex-direction:column;align-items:flex-start}
     }
+    .mermaidWrap{margin-top:32px}
+    .mermaidCaption{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .mermaidNote{color:var(--muted);font-size:.88rem;line-height:1.75;max-width:760px;margin-bottom:14px}
+    .mermaidContainer{width:fit-content;max-width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto;padding:20px}
+    .mermaidContainer pre{margin:0;background:none;border:none}
+    .mermaidContainer svg{display:block;margin:0 auto}
   </style>
 </head>
 <body>
@@ -129,6 +137,35 @@
       <div class="bpmnWrap">
         <div class="bpmnCaption">Process diagram — AI-assisted workflow</div>
         <div class="bpmnContainer" id="bpmnAfter"></div>
+      </div>
+      <div class="mermaidWrap">
+        <div class="mermaidCaption">Agent architecture — LangGraph implementation</div>
+        <p class="mermaidNote">The diagram shows how the AI agent is built using LangGraph. Yellow nodes are human-in-the-loop (HITL) checkpoints — the employee confirms the classification, adds context from the customer's history, and approves the draft reply. At each checkpoint they can reject and send the agent back to redo that step.</p>
+        <div class="mermaidContainer">
+          <pre class="mermaid">
+flowchart TD
+    START([START]) --> load_complaint
+    load_complaint["**load_complaint**\nFetch complaint + customer history\nfrom Django API;\nmark complaint in-progress"] --> classify
+    classify["**classify**\nLLM classifies complaint category\n+ urgency with rationale"] --> await_classification_approval
+    await_classification_approval{"**await_classification_approval**\n&#9208; HITL interrupt\nEmployee reviews classification"}
+    await_classification_approval -- "approved" --> persist_classification
+    await_classification_approval -- "rejected (with comment)" --> classify
+    persist_classification["**persist_classification**\nPATCH /api/complaints/{id}/\nwith confirmed class + urgency"] --> summarize_history
+    summarize_history["**summarize_history**\nLLM summarizes all prior messages\nwith this customer;\nflags if history is empty"] --> await_history_feedback
+    await_history_feedback{"**await_history_feedback**\n&#9208; HITL interrupt\nEmployee adds guidance (or skips)"}
+    await_history_feedback -- "comment captured" --> draft_response
+    draft_response["**draft_response**\nLLM drafts reply using complaint,\nclassification, history + comment"] --> await_draft_approval
+    await_draft_approval{"**await_draft_approval**\n&#9208; HITL interrupt\nEmployee approves or requests revision"}
+    await_draft_approval -- "approved" --> send_and_persist
+    await_draft_approval -- "revision requested" --> draft_response
+    send_and_persist["**send_and_persist**\nPOST outbound message\nmark complaint processed"] --> END([END])
+    style await_classification_approval fill:#fef3c7,stroke:#d97706,color:#000
+    style await_history_feedback fill:#fef3c7,stroke:#d97706,color:#000
+    style await_draft_approval fill:#fef3c7,stroke:#d97706,color:#000
+    style START fill:#d1fae5,stroke:#059669,color:#000
+    style END fill:#d1fae5,stroke:#059669,color:#000
+          </pre>
+        </div>
       </div>
     </div>
 

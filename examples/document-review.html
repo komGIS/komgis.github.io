@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document Review — KomGIS Examples</title>
   <link rel="stylesheet" href="https://unpkg.com/bpmn-js@17/dist/assets/bpmn-font/css/bpmn-embedded.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true,theme:'dark'});</script>
   <style>
     :root{--bg:#0c0c0b;--surface:#131312;--line:#252522;--text:#f2f0eb;--muted:#7a7870;--lime:#c6f135;--max:1200px;--r:4px}
     *{box-sizing:border-box;margin:0;padding:0}
@@ -51,6 +53,12 @@
       .bpmnContainer{height:220px}
       .foot{flex-direction:column;align-items:flex-start}
     }
+    .mermaidWrap{margin-top:32px}
+    .mermaidCaption{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .mermaidNote{color:var(--muted);font-size:.88rem;line-height:1.75;max-width:760px;margin-bottom:14px}
+    .mermaidContainer{width:fit-content;max-width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto;padding:20px}
+    .mermaidContainer pre{margin:0;background:none;border:none}
+    .mermaidContainer svg{display:block;margin:0 auto}
   </style>
 </head>
 <body>
@@ -112,6 +120,35 @@
       <div class="bpmnWrap">
         <div class="bpmnCaption">Process diagram — AI-assisted workflow</div>
         <div class="bpmnContainer" id="bpmnAfter"></div>
+      </div>
+      <div class="mermaidWrap">
+        <div class="mermaidCaption">Agent architecture — LangGraph implementation</div>
+        <p class="mermaidNote">The diagram shows the agent's document processing and decision flow. After automatically loading and summarizing all documents, the agent enters a Q&amp;A loop where the agent can ask follow-up questions before the AI suggests a final decision. Orange nodes are human-in-the-loop pause points where the agent controls what happens next.</p>
+        <div class="mermaidContainer">
+          <pre class="mermaid">
+flowchart TD
+    START([START]) --> load_context
+    load_context["**load_context**\nFetch claim + documents\nMark claim in review"] --> summarize_docs
+    summarize_docs["**summarize_docs**\nLLM: summarise all attached docs"] --> extract_data
+    extract_data["**extract_data**\nLLM: structured extraction\n(parties, amounts, flags)\nPersist to Django"] --> present_summary
+    present_summary["**present_summary**\nPost summary + red-flags to chat"] --> await_qa
+    await_qa{{"**await_qa** &#9208;\ninterrupt — Q&amp;A gateway"}}
+    await_qa -- "action = ask" --> answer_question
+    answer_question["**answer_question**\nLLM: answer the question\nAppend to qa_history"] -- "loop back" --> await_qa
+    await_qa -- "action = proceed" --> check_policy
+    check_policy["**check_policy**\nFetch policy docs from Django\n(product-scoped + global)"] --> suggest_decision
+    suggest_decision["**suggest_decision**\nLLM: recommend approve / reject\nPersist recommendation to Django"] --> await_final_decision
+    await_final_decision{{"**await_final_decision** &#9208;\ninterrupt — final decision gateway"}}
+    await_final_decision -- "decision = approved" --> approve_and_email
+    await_final_decision -- "decision = rejected" --> reject_and_record
+    approve_and_email["**approve_and_email**\nLLM: draft finance email\nPATCH claim approved"] --> END_NODE([END])
+    reject_and_record["**reject_and_record**\nCreate internal record\nPATCH claim rejected"] --> END_NODE
+    style await_qa fill:#f5a623,color:#000
+    style await_final_decision fill:#f5a623,color:#000
+    style START fill:#4caf50,color:#fff
+    style END_NODE fill:#e53935,color:#fff
+          </pre>
+        </div>
       </div>
     </div>
 

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Invoice Review and Approval — KomGIS Examples</title>
   <link rel="stylesheet" href="https://unpkg.com/bpmn-js@17/dist/assets/bpmn-font/css/bpmn-embedded.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true,theme:'dark'});</script>
   <style>
     :root{--bg:#0c0c0b;--surface:#131312;--line:#252522;--text:#f2f0eb;--muted:#7a7870;--lime:#c6f135;--max:1200px;--r:4px}
     *{box-sizing:border-box;margin:0;padding:0}
@@ -51,6 +53,12 @@
       .bpmnContainer{height:220px}
       .foot{flex-direction:column;align-items:flex-start}
     }
+    .mermaidWrap{margin-top:32px}
+    .mermaidCaption{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .mermaidNote{color:var(--muted);font-size:.88rem;line-height:1.75;max-width:760px;margin-bottom:14px}
+    .mermaidContainer{width:fit-content;max-width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto;padding:20px}
+    .mermaidContainer pre{margin:0;background:none;border:none}
+    .mermaidContainer svg{display:block;margin:0 auto}
   </style>
 </head>
 <body>
@@ -112,6 +120,35 @@
       <div class="bpmnWrap">
         <div class="bpmnCaption">Process diagram — AI-assisted workflow</div>
         <div class="bpmnContainer" id="bpmnAfter"></div>
+      </div>
+      <div class="mermaidWrap">
+        <div class="mermaidCaption">Agent architecture — LangGraph implementation</div>
+        <p class="mermaidNote">The diagram shows the agent's step-by-step checking logic. Blue nodes are automated AI steps that run without any human input. The purple node is the single human-in-the-loop decision point where the finance user chooses to approve the invoice, request a correction, or trigger a re-check after uploading a revised version.</p>
+        <div class="mermaidContainer">
+          <pre class="mermaid">
+flowchart TD
+    START([START]) --> load_invoice
+    load_invoice["**load_invoice**\nFetch invoice, order and pricing list\nfrom Django API"] --> extract_and_validate
+    extract_and_validate["**extract_and_validate**\nValidate required fields,\nformats and header values"] --> check_against_order
+    check_against_order["**check_against_order**\nCompare invoice lines\nagainst PO / goods receipt"] --> check_against_pricing
+    check_against_pricing["**check_against_pricing**\nCompare unit prices\nagainst customer pricing list"] --> summarize_check
+    summarize_check["**summarize_check**\nGenerate markdown summary of findings\npersist InvoiceCheck to Django"] --> await_user_decision
+    await_user_decision{{"**await_user_decision**\n&#9208; HITL interrupt\nApprove / Request correction / Re-check"}}
+    await_user_decision -->|approve| send_for_approval
+    await_user_decision -->|correct| mark_for_correction
+    await_user_decision -->|recheck| load_invoice
+    send_for_approval["**send_for_approval**\nMark invoice approved\nvia Django API"] --> END_A([END])
+    mark_for_correction["**mark_for_correction**\nMark invoice needs_correction\nEmployee uploads corrected invoice"] --> END_B([END])
+    style await_user_decision fill:#f0e6ff,stroke:#7c3aed,color:#000
+    style load_invoice fill:#e0f2fe,stroke:#0369a1,color:#000
+    style extract_and_validate fill:#e0f2fe,stroke:#0369a1,color:#000
+    style check_against_order fill:#e0f2fe,stroke:#0369a1,color:#000
+    style check_against_pricing fill:#e0f2fe,stroke:#0369a1,color:#000
+    style summarize_check fill:#e0f2fe,stroke:#0369a1,color:#000
+    style send_for_approval fill:#dcfce7,stroke:#16a34a,color:#000
+    style mark_for_correction fill:#fff7ed,stroke:#c2410c,color:#000
+          </pre>
+        </div>
       </div>
     </div>
 
