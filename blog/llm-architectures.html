@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From Single LLM Call to Multi-Agent System: The Full Spectrum — KomGIS Blog</title>
+  <meta name="description" content="Single call, chain, workflow, ReAct, reflection, deep agent, multi-agent — each pattern solves a different class of problem. Here is how to tell them apart and when to use each one." />
+  <style>
+    :root{--bg:#0c0c0b;--surface:#131312;--line:#252522;--text:#f2f0eb;--muted:#7a7870;--lime:#c6f135;--max:1200px;--r:4px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(var(--max),calc(100% - 56px));margin:auto}
+
+    header{position:sticky;top:0;z-index:50;background:rgba(12,12,11,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    nav{height:68px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:1.05rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    .links{display:flex;align-items:center;gap:32px;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+    .links a:hover{color:var(--text)}
+    .links a.active{color:var(--text)}
+    .navCta{padding:9px 20px;background:var(--lime);color:#0c0c0b;border-radius:var(--r);font-size:.85rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .navCta:hover{background:#d4ff3a}
+    .menu{display:none;background:transparent;border:1px solid var(--line);color:var(--text);border-radius:var(--r);padding:8px 12px;font-size:1rem;cursor:pointer}
+
+    .articleHero{padding:56px 0 48px;border-bottom:1px solid var(--line)}
+    .articleMeta{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+    .articleTitle{font-size:clamp(2rem,4.5vw,3.8rem);font-weight:900;letter-spacing:-.055em;line-height:1.08;max-width:900px}
+
+    .articleWrap{max-width:720px;padding:56px 0 96px}
+    .backLink{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:48px;transition:.15s}
+    .backLink:hover{color:var(--text)}
+    .articleWrap h2{font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:var(--text);margin:44px 0 12px}
+    .articleWrap p{color:var(--muted);font-size:1rem;line-height:1.85;margin-bottom:20px}
+    .articleWrap ul{color:var(--muted);font-size:1rem;line-height:1.85;padding-left:20px;margin-bottom:20px;display:flex;flex-direction:column;gap:6px}
+    .articleWrap li::marker{color:var(--lime)}
+
+    /* flow diagrams */
+    .flow{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:28px 0 32px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px 28px}
+    .fnode{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:7px 14px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--text);white-space:nowrap}
+    .fnode.accent{border-color:var(--lime);color:var(--lime)}
+    .farrow{color:var(--muted);font-size:.85rem;padding:0 10px}
+    .floop{display:flex;flex-direction:column;align-items:center;gap:0;border:1px dashed var(--line);border-radius:var(--r);padding:12px 16px;margin:0 8px}
+    .floop .flabel{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+    .floop .frow{display:flex;align-items:center;gap:0}
+
+    /* pattern tags */
+    .tag{display:inline-block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px;border-radius:2px;border:1px solid var(--line);color:var(--muted);margin-bottom:6px}
+
+    /* comparison table */
+    .compTable{width:100%;border-collapse:collapse;margin:28px 0 32px;font-size:.88rem}
+    .compTable th{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+    .compTable td{padding:12px 14px;border-bottom:1px solid var(--line);color:var(--muted);vertical-align:top;line-height:1.55}
+    .compTable td:first-child{color:var(--text);font-weight:600;white-space:nowrap}
+    .compTable tr:last-child td{border-bottom:none}
+
+    footer{padding:32px 0;border-top:1px solid var(--line)}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    .footLeft{font-size:.82rem;color:var(--muted);letter-spacing:.04em}
+    .footerLinks{display:flex;gap:24px;flex-wrap:wrap}
+    .footerLinks a{font-size:.82rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;transition:.15s}
+    .footerLinks a:hover{color:var(--text)}
+
+    @media(max-width:1020px){
+      .links{display:none}.menu{display:block}
+      .links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:flex-start;background:var(--bg);padding:20px 28px;border-bottom:1px solid var(--line);gap:18px}
+      .navCta{display:none}
+    }
+    @media(max-width:640px){
+      .wrap{width:min(var(--max),calc(100% - 32px))}
+      .flow{padding:18px 16px;gap:4px}
+      .fnode{font-size:.7rem;padding:6px 10px}
+      .foot{flex-direction:column;align-items:flex-start}
+      .compTable{font-size:.8rem}
+      .compTable td,.compTable th{padding:9px 10px}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav class="wrap">
+    <a class="logo" href="../index.html">KomGIS</a>
+    <div class="links" id="links">
+      <a href="../index.html#services">Services</a>
+      <a href="../index.html#method">How it works</a>
+      <a href="../index.html#examples">Examples</a>
+      <a href="../index.html#customers">Results</a>
+      <a href="../index.html#tech">Setup</a>
+      <a href="index.html" class="active">Blog</a>
+    </div>
+    <a class="navCta" href="../index.html#contact">Get in touch</a>
+    <button class="menu" id="menu" aria-label="Menu">☰</button>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="articleHero">
+      <div class="articleMeta">May 21, 2026 &nbsp;·&nbsp; 8 min read</div>
+      <h1 class="articleTitle">From Single LLM Call to Multi-Agent System: The Full Spectrum</h1>
+    </div>
+
+    <div class="articleWrap">
+      <a class="backLink" href="index.html">← Back to Blog</a>
+
+      <p>When you first start building with large language models, the architecture looks simple: send a prompt, get a response. But as the tasks get harder — longer, more ambiguous, requiring external data, or needing to self-correct — that simple pattern breaks down. Each new challenge has spawned a new design pattern.</p>
+
+      <p>Today there are seven distinct patterns in common use, ranging from a single LLM call to orchestrated networks of specialized agents. They are not interchangeable. Each one suits a different class of problem, and choosing the wrong one either underserves the task or wastes compute and money.</p>
+
+      <p>Here is how they differ, when to use each one, and what goes wrong when you pick the wrong one.</p>
+
+
+      <!-- ─── 1. SINGLE LLM CALL ─── -->
+      <h2>1. Single LLM Call</h2>
+      <span class="tag">Simplest</span>
+
+      <div class="flow">
+        <div class="fnode">Input</div>
+        <div class="farrow">→</div>
+        <div class="fnode accent">LLM</div>
+        <div class="farrow">→</div>
+        <div class="fnode">Output</div>
+      </div>
+
+      <p>One prompt goes in, one response comes out. No memory, no tools, no loops. The model processes the input and returns a result in a single pass.</p>
+
+      <p>This covers most of what people initially do with LLMs: summarizing a document, translating a paragraph, drafting a short email, classifying a support ticket. If the task fits entirely within the model's context window and does not require external information, a single call is the right choice.</p>
+
+      <p>The failure mode is trying to push tasks here that are too complex. A single call cannot update a database, cannot look up current information, cannot check its own output for errors, and cannot handle tasks that are genuinely multi-step. If the output frequently needs correction or the task requires information not in the prompt, you have outgrown this pattern.</p>
+
+      <p><strong>Use when:</strong> the task is self-contained, the answer is in the input, and a single response is sufficient.</p>
+
+
+      <!-- ─── 2. CHAIN ─── -->
+      <h2>2. Chain</h2>
+      <span class="tag">Structured · Linear</span>
+
+      <div class="flow">
+        <div class="fnode accent">LLM 1</div>
+        <div class="farrow">→</div>
+        <div class="fnode accent">LLM 2</div>
+        <div class="farrow">→</div>
+        <div class="fnode accent">LLM 3</div>
+        <div class="farrow">→</div>
+        <div class="fnode">Output</div>
+      </div>
+
+      <p>A chain connects multiple LLM calls in a fixed sequence. The output of one step becomes the input of the next. Each step has a specific, narrow responsibility.</p>
+
+      <p>A practical example: step one extracts key facts from a customer complaint, step two determines the category and priority, step three drafts a reply using both the facts and the category. Each step is simpler and more accurate than asking one model to do all three at once.</p>
+
+      <p>The advantage is that each call can be optimized independently — different prompts, different models, different parameters. Complex tasks get decomposed into manageable pieces. The limitation is that the flow is fixed. If step two produces an unexpected result, the chain has no way to adapt — it just passes that bad output forward.</p>
+
+      <p><strong>Use when:</strong> the task naturally decomposes into sequential, well-defined steps with predictable outputs at each stage.</p>
+
+
+      <!-- ─── 3. WORKFLOW ─── -->
+      <h2>3. Workflow</h2>
+      <span class="tag">Structured · Conditional</span>
+
+      <div class="flow">
+        <div class="fnode">Trigger</div>
+        <div class="farrow">→</div>
+        <div class="fnode accent">LLM</div>
+        <div class="farrow">→</div>
+        <div class="fnode">Route</div>
+        <div class="farrow">→</div>
+        <div class="fnode">API / Rule / Human</div>
+        <div class="farrow">→</div>
+        <div class="fnode">Result</div>
+      </div>
+
+      <p>A workflow is a structured process that mixes LLM calls with non-LLM steps: API requests, database lookups, conditional logic, rule-based routing, and human review checkpoints. The flow is defined upfront by the developer, not decided by the AI at runtime.</p>
+
+      <p>In a workflow, the AI handles the parts that require language understanding — reading a document, extracting fields, drafting text. Everything else is handled deterministically: if the invoice amount exceeds a threshold, route it for approval; if the category is billing, assign it to the billing team. Rules are cheaper, faster, and more auditable than asking an LLM to make those decisions.</p>
+
+      <p>The key distinction from a chain: a workflow can branch, loop, call external systems, and include humans in the process. The key distinction from an agent: the structure is predetermined. The AI is embedded at specific steps, not in control of the flow.</p>
+
+      <p><strong>Use when:</strong> the process has known decision points, involves external systems, or requires human approval at certain stages.</p>
+
+
+      <!-- ─── 4. REACT AGENT ─── -->
+      <h2>4. ReAct Agent</h2>
+      <span class="tag">Autonomous · Tool Use · Loop</span>
+
+      <div class="flow">
+        <div class="fnode">Goal</div>
+        <div class="farrow">→</div>
+        <div class="floop">
+          <div class="frow">
+            <div class="fnode accent">Think</div>
+            <div class="farrow">→</div>
+            <div class="fnode accent">Act</div>
+            <div class="farrow">→</div>
+            <div class="fnode">Observe</div>
+          </div>
+          <div class="flabel">repeat until done</div>
+        </div>
+        <div class="farrow">→</div>
+        <div class="fnode">Answer</div>
+      </div>
+
+      <p>ReAct stands for Reasoning and Acting. The model interleaves two behaviors in a loop: it reasons about what to do next, then takes an action (calling a tool or API), then observes the result, then reasons about what to do next. This continues until it has enough information to produce a final answer.</p>
+
+      <p>Tools are the key enabler. A ReAct agent can search the web, run code, query a database, send an email, or call any API it has been given access to. The model decides which tool to use, with what inputs, and when to stop.</p>
+
+      <p>This makes ReAct agents genuinely capable for open-ended tasks: research something I don't know in advance, pull data from multiple sources and combine them, or complete a task that requires back-and-forth with external systems. The model is in the driver's seat.</p>
+
+      <p>The tradeoff is reliability. Because the model decides the path, it can take wrong turns, call tools unnecessarily, get stuck in loops, or make poor judgment calls. Production systems that use ReAct agents need guardrails: maximum step counts, tool call validation, and human review for consequential actions.</p>
+
+      <p><strong>Use when:</strong> the task requires dynamic tool use and the exact steps cannot be predetermined.</p>
+
+
+      <!-- ─── 5. REFLECTION AGENT ─── -->
+      <h2>5. Reflection Agent</h2>
+      <span class="tag">Self-correcting · Quality Loop</span>
+
+      <div class="flow">
+        <div class="fnode">Input</div>
+        <div class="farrow">→</div>
+        <div class="floop">
+          <div class="frow">
+            <div class="fnode accent">Generate</div>
+            <div class="farrow">→</div>
+            <div class="fnode accent">Critique</div>
+            <div class="farrow">→</div>
+            <div class="fnode accent">Revise</div>
+          </div>
+          <div class="flabel">until quality threshold met</div>
+        </div>
+        <div class="farrow">→</div>
+        <div class="fnode">Final Output</div>
+      </div>
+
+      <p>A reflection agent reviews and improves its own output. The core loop is: generate a response, critique it against a set of criteria, revise based on the critique. This can run for multiple iterations until the output meets a quality bar.</p>
+
+      <p>The critique step is often a separate model call with a different prompt — one that specifically looks for errors, omissions, or weaknesses in the generated output. The revision step then addresses those issues. Some implementations use the same model for both; others use a smaller, faster model for critique and a larger one for generation.</p>
+
+      <p>Reflection works well for tasks where quality is hard to specify upfront but easy to recognize: writing that needs a specific tone, analysis that should cover certain angles, code that must meet certain standards. It also helps with factual accuracy — the critique step can explicitly check whether claims are supported by the source material.</p>
+
+      <p>The cost is latency and token usage: each loop adds time and calls. The loop also needs a stopping condition — a quality threshold, a maximum iteration count, or an explicit "done" signal from the critique.</p>
+
+      <p><strong>Use when:</strong> output quality matters more than speed, and the criteria for good output can be expressed as a critique prompt.</p>
+
+
+      <!-- ─── 6. DEEP AGENT ─── -->
+      <h2>6. Deep Agent</h2>
+      <span class="tag">Long-horizon · Planner · Researcher</span>
+
+      <div class="flow">
+        <div class="fnode">Goal</div>
+        <div class="farrow">→</div>
+        <div class="fnode accent">Plan</div>
+        <div class="farrow">→</div>
+        <div class="floop">
+          <div class="frow">
+            <div class="fnode accent">Search</div>
+            <div class="farrow">→</div>
+            <div class="fnode accent">Read</div>
+            <div class="farrow">→</div>
+            <div class="fnode accent">Update Plan</div>
+          </div>
+          <div class="flabel">many iterations</div>
+        </div>
+        <div class="farrow">→</div>
+        <div class="fnode accent">Synthesize</div>
+        <div class="farrow">→</div>
+        <div class="fnode">Report</div>
+      </div>
+
+      <p>A deep agent is designed for tasks that require sustained, multi-step investigation over many iterations — far more than a standard ReAct agent would run. It is characterized by an explicit planning phase, a long research loop, and a final synthesis step that integrates everything gathered.</p>
+
+      <p>The planning phase is what distinguishes it. Before taking any action, the agent decomposes the goal into sub-questions and builds a research plan. As it works through that plan and encounters new information, it updates the plan — new sub-questions open up, old ones get answered or dropped. The loop can run for dozens of steps across many sources.</p>
+
+      <p>Deep agents are the architecture behind tools like AI research assistants that produce long, sourced reports from a single prompt. Given "analyze the competitive landscape for electric vehicle charging in Europe," a deep agent will plan, search, read, synthesize, look for gaps, search again, and eventually produce a structured report — doing in minutes what would take a human analyst hours.</p>
+
+      <p>The cost is significant: high latency (minutes, not seconds), high token usage, and errors that compound over a long chain. These agents need robust state management to track what has been read, careful deduplication to avoid processing the same sources repeatedly, and clear stopping conditions to know when enough research is enough.</p>
+
+      <p><strong>Use when:</strong> the task requires comprehensive research across many sources and the answer cannot be known until the investigation is complete.</p>
+
+
+      <!-- ─── 7. MULTI-AGENT SYSTEM ─── -->
+      <h2>7. Multi-Agent System</h2>
+      <span class="tag">Parallel · Specialized · Scalable</span>
+
+      <div class="flow" style="flex-direction:column;align-items:flex-start;gap:12px">
+        <div style="display:flex;align-items:center;gap:0">
+          <div class="fnode">Task</div>
+          <div class="farrow">→</div>
+          <div class="fnode accent">Orchestrator</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding-left:48px;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+            <div class="farrow" style="transform:rotate(90deg)">→</div>
+            <div class="fnode">Agent A<br><small style="color:var(--muted);font-size:.65rem;letter-spacing:0;text-transform:none">Research</small></div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-left:16px">
+            <div class="farrow" style="transform:rotate(90deg)">→</div>
+            <div class="fnode">Agent B<br><small style="color:var(--muted);font-size:.65rem;letter-spacing:0;text-transform:none">Analysis</small></div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-left:16px">
+            <div class="farrow" style="transform:rotate(90deg)">→</div>
+            <div class="fnode">Agent C<br><small style="color:var(--muted);font-size:.65rem;letter-spacing:0;text-transform:none">Writing</small></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:0;padding-left:48px">
+          <div class="farrow" style="transform:rotate(90deg);margin-right:4px">→</div>
+          <div class="fnode accent" style="margin-left:8px">Aggregator</div>
+          <div class="farrow">→</div>
+          <div class="fnode">Final Output</div>
+        </div>
+      </div>
+
+      <p>A multi-agent system coordinates multiple independent agents — each with its own role, tools, and context — to complete a task that no single agent could handle efficiently alone. An orchestrator breaks the goal into sub-tasks, dispatches them to specialized agents, and aggregates their outputs into a final result.</p>
+
+      <p>The specialization is the point. A research agent knows how to search and read. An analysis agent knows how to structure and interpret data. A writing agent knows how to produce readable prose. Each one is optimized for its narrow job. They can also run in parallel, which dramatically reduces total wall-clock time on complex tasks.</p>
+
+      <p>Multi-agent systems handle scale and complexity that would overwhelm a single agent. Coding assistants that simultaneously write code, run tests, check security, and generate documentation are multi-agent systems. So are enterprise automation platforms that handle intake, routing, processing, and notification across different departments.</p>
+
+      <p>The engineering cost is real: inter-agent communication, shared state management, error handling when one agent fails, and ensuring that agents do not contradict each other. These systems are powerful but require careful design. Start with a single agent and move to multiple agents only when you have a concrete reason — parallelism, specialization, or scale that genuinely demands it.</p>
+
+      <p><strong>Use when:</strong> the task is large enough to benefit from specialization or parallelism, and a single agent becomes a bottleneck.</p>
+
+
+      <!-- ─── COMPARISON TABLE ─── -->
+      <h2>Choosing the right pattern</h2>
+
+      <p>The seven patterns form a spectrum from simple and predictable to powerful and complex. More capability almost always means more cost, more latency, and more engineering effort. The right choice is the simplest one that reliably handles the task.</p>
+
+      <table class="compTable">
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Control</th>
+            <th>Tools</th>
+            <th>Self-corrects</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Single Call</td>
+            <td>Full</td>
+            <td>No</td>
+            <td>No</td>
+            <td>Contained, predictable tasks</td>
+          </tr>
+          <tr>
+            <td>Chain</td>
+            <td>Full</td>
+            <td>No</td>
+            <td>No</td>
+            <td>Multi-step tasks with fixed stages</td>
+          </tr>
+          <tr>
+            <td>Workflow</td>
+            <td>Full</td>
+            <td>Yes</td>
+            <td>No</td>
+            <td>Business processes with rules and APIs</td>
+          </tr>
+          <tr>
+            <td>ReAct Agent</td>
+            <td>Model</td>
+            <td>Yes</td>
+            <td>Partial</td>
+            <td>Open-ended tasks needing dynamic tool use</td>
+          </tr>
+          <tr>
+            <td>Reflection Agent</td>
+            <td>Model</td>
+            <td>Optional</td>
+            <td>Yes</td>
+            <td>High-quality output that must meet a bar</td>
+          </tr>
+          <tr>
+            <td>Deep Agent</td>
+            <td>Model</td>
+            <td>Yes</td>
+            <td>Partial</td>
+            <td>Long-horizon research and investigation</td>
+          </tr>
+          <tr>
+            <td>Multi-Agent</td>
+            <td>Shared</td>
+            <td>Yes</td>
+            <td>Yes</td>
+            <td>Complex, parallelizable, large-scale tasks</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>A useful heuristic: start at the top of this list and move down only when you hit a real limitation. If a chain works, don't build a ReAct agent. If a ReAct agent works, don't build a multi-agent system. The simpler pattern is cheaper to run, easier to debug, and more reliable in production.</p>
+
+      <p>The one exception is quality requirements. If accuracy matters enough to justify the cost, a reflection loop is often worth adding even when simpler patterns technically produce an output — because technically producing an output and reliably producing a good one are different things.</p>
+
+      <p>Understanding these patterns is the foundation of building AI systems that actually work in production. The capability of any individual model matters less than how you structure the system around it.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="footLeft">© 2026 KomGIS. Practical AI automation for business teams.</span>
+    <div class="footerLinks">
+      <a href="../index.html#services">Services</a>
+      <a href="../index.html#examples">Examples</a>
+      <a href="../index.html#contact">Contact</a>
+      <a href="index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menu=document.getElementById('menu'),links=document.getElementById('links');
+  menu.onclick=()=>links.classList.toggle('open');
+</script>
+</body>
+</html>
