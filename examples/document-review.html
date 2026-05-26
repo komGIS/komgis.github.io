@@ -59,6 +59,15 @@
     .mermaidContainer{width:fit-content;max-width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto;padding:20px}
     .mermaidContainer pre{margin:0;background:none;border:none}
     .mermaidContainer svg{display:block;margin:0 auto}
+    .metricsGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);margin-top:28px;overflow:hidden}
+    .metricItem{background:var(--surface);padding:28px 24px}
+    .metricItemLabel{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .metricValue{font-size:1.9rem;font-weight:900;letter-spacing:-.04em;line-height:1}
+    .metricOld{color:var(--muted)}
+    .metricNew{color:var(--text)}
+    .metricHighlight{color:var(--lime)}
+    .metricNote{color:var(--muted);font-size:.85rem;line-height:1.7;margin-top:16px;max-width:700px}
+    @media(max-width:1020px){.metricsGrid{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
 <body>
@@ -94,6 +103,31 @@
         <p>In insurance claim processing, for example, each claim arrives with a collection of documents: a claim form, supporting evidence, images, customer contract, and policy terms. An agent has to read through all of it, pull out the facts that matter — dates, amounts, covered items, stated cause — cross-reference them against the applicable policy, and then write up a summary and recommendation before the case can move to a decision.</p>
         <p>This workflow uses AI to handle the reading, summarization, extraction, and policy check automatically. The AI processes all documents the moment the case is opened, presents the agent with a structured summary, answers follow-up questions, and suggests a decision with a clear explanation. The agent reviews the summary, challenges it if needed, and makes the final call. The reading work is removed; the judgment stays with the person.</p>
       </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="section">
+      <div class="sectionLabel">Impact at a glance</div>
+      <p class="metricNote">Theoretical estimates based on a team processing 80 document-heavy cases per month (insurance claims, contract reviews, or similar). The manual baseline assumes 45–90 minutes of reading and extraction work per case before the actual assessment can begin, with full case turnaround of 1–3 days.</p>
+      <div class="metricsGrid">
+        <div class="metricItem">
+          <div class="metricItemLabel">Manual reading &amp; extraction</div>
+          <div class="metricValue metricOld">45–90 min</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">With AI automation</div>
+          <div class="metricValue metricNew">~8 min</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">Hours saved per month</div>
+          <div class="metricValue metricHighlight">~50 hrs</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">Processing cost reduction</div>
+          <div class="metricValue metricHighlight">~75%</div>
+        </div>
+      </div>
+      <p class="metricNote">The majority of saved time comes from eliminating the manual reading and extraction phase. In the AI-assisted process, the agent opens a case and immediately sees a complete structured summary — facts extracted, policy checked, decision suggested. Their ~8 minutes goes on reading the summary, asking any follow-up questions, and making the final call. Case turnaround drops from 1–3 days to same-day for straightforward cases, because the agent no longer waits for a free slot to read through the documents themselves.</p>
     </div>
 
     <div class="section">

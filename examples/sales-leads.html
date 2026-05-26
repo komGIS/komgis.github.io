@@ -58,6 +58,15 @@
     .mermaidContainer{width:fit-content;max-width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto;padding:20px}
     .mermaidContainer pre{margin:0;background:none;border:none}
     .mermaidContainer svg{display:block;margin:0 auto}
+    .metricsGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);margin-top:28px;overflow:hidden}
+    .metricItem{background:var(--surface);padding:28px 24px}
+    .metricItemLabel{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .metricValue{font-size:1.9rem;font-weight:900;letter-spacing:-.04em;line-height:1}
+    .metricOld{color:var(--muted)}
+    .metricNew{color:var(--text)}
+    .metricHighlight{color:var(--lime)}
+    .metricNote{color:var(--muted);font-size:.85rem;line-height:1.7;margin-top:16px;max-width:700px}
+    @media(max-width:1020px){.metricsGrid{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
 <body>
@@ -92,6 +101,31 @@
         <p>Every sales team deals with the same bottleneck: leads arrive faster than they can be evaluated. A form submission, a LinkedIn message, an email from a campaign — each one requires someone to read it, look up the company, judge fit and intent, decide on a next step, and log everything in the CRM. When volume is high, corners get cut. Promising leads wait too long. Weak leads consume time that should go elsewhere.</p>
         <p>This workflow shows how AI changes that dynamic. The AI reads each incoming lead, researches the prospect using available information, scores it against predefined qualification criteria, summarizes what the prospect actually needs, and recommends a next action — all before a human sees it. The sales rep spends their time on judgment, relationships, and conversations, not on research and data entry.</p>
       </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="section">
+      <div class="sectionLabel">Impact at a glance</div>
+      <p class="metricNote">Theoretical estimates based on a sales team receiving 100 inbound leads per month. The manual baseline assumes 15–20 minutes per lead for capturing the submission, researching the company and contact, scoring fit, and writing a summary and follow-up email from scratch.</p>
+      <div class="metricsGrid">
+        <div class="metricItem">
+          <div class="metricItemLabel">Manual time per lead</div>
+          <div class="metricValue metricOld">15–20 min</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">With AI automation</div>
+          <div class="metricValue metricNew">~2 min</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">Hours saved per month</div>
+          <div class="metricValue metricHighlight">~27 hrs</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">Qualification cost reduction</div>
+          <div class="metricValue metricHighlight">~80%</div>
+        </div>
+      </div>
+      <p class="metricNote">The AI handles the research, scoring, summary, and draft email before any human sees the lead. The rep's two minutes is spent confirming the score, adjusting the draft if needed, and sending. Low-scoring leads never reach the rep's queue at all — they go directly into a nurture sequence. At 100 leads per month, this returns roughly 27 hours of sales time to conversations that are likely to close, rather than to sorting and research work that could be automated.</p>
     </div>
 
     <div class="section">

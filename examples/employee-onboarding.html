@@ -58,6 +58,15 @@
     .mermaidContainer{width:fit-content;max-width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto;padding:20px}
     .mermaidContainer pre{margin:0;background:none;border:none}
     .mermaidContainer svg{display:block;margin:0 auto}
+    .metricsGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);margin-top:28px;overflow:hidden}
+    .metricItem{background:var(--surface);padding:28px 24px}
+    .metricItemLabel{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .metricValue{font-size:1.9rem;font-weight:900;letter-spacing:-.04em;line-height:1}
+    .metricOld{color:var(--muted)}
+    .metricNew{color:var(--text)}
+    .metricHighlight{color:var(--lime)}
+    .metricNote{color:var(--muted);font-size:.85rem;line-height:1.7;margin-top:16px;max-width:700px}
+    @media(max-width:1020px){.metricsGrid{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
 <body>
@@ -92,6 +101,31 @@
         <p>Onboarding a new employee involves a surprising number of moving parts. IT needs to set up accounts and access. Facilities needs to prepare a workspace. The manager needs to schedule an introduction meeting. HR needs to track that all of it happens. And the new hire needs to know where to go, what to do, and who to ask — often before they have any familiarity with the organization.</p>
         <p>In most companies, this coordination is handled manually: emails sent by HR, checklists maintained in spreadsheets, policy questions answered one by one. When something slips, it is noticed only later — when the new employee's laptop hasn't arrived, or their system access is still pending on day three. This example shows how AI can coordinate the entire onboarding process automatically, leaving HR to focus on judgment and relationship work rather than logistics.</p>
       </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="section">
+      <div class="sectionLabel">Impact at a glance</div>
+      <p class="metricNote">Theoretical estimates based on an HR team onboarding 10 new employees per month. The manual baseline assumes 5–7 hours of HR administrator time per hire spread across checklist preparation, answering questions, chasing missing documents, coordinating with IT and managers, and preparing the completion summary.</p>
+      <div class="metricsGrid">
+        <div class="metricItem">
+          <div class="metricItemLabel">Manual HR time per hire</div>
+          <div class="metricValue metricOld">5–7 hrs</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">With AI automation</div>
+          <div class="metricValue metricNew">~40 min</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">Hours saved per month</div>
+          <div class="metricValue metricHighlight">~42 hrs</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">HR admin cost reduction</div>
+          <div class="metricValue metricHighlight">~60%</div>
+        </div>
+      </div>
+      <p class="metricNote">The AI handles checklist generation, invitation sending, question answering, document validation, team notifications, and the completion summary automatically. HR's remaining 40 minutes per hire is a single review of the completion report before formally closing the record. At 10 hires per month, that frees roughly 42 hours of HR administrator time — time that can go toward hiring, culture, or development work rather than logistics. An additional benefit is consistency: every new hire gets the same quality of experience regardless of how busy the HR team is.</p>
     </div>
 
     <div class="section">

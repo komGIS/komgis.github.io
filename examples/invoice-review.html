@@ -59,6 +59,15 @@
     .mermaidContainer{width:fit-content;max-width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto;padding:20px}
     .mermaidContainer pre{margin:0;background:none;border:none}
     .mermaidContainer svg{display:block;margin:0 auto}
+    .metricsGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);margin-top:28px;overflow:hidden}
+    .metricItem{background:var(--surface);padding:28px 24px}
+    .metricItemLabel{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .metricValue{font-size:1.9rem;font-weight:900;letter-spacing:-.04em;line-height:1}
+    .metricOld{color:var(--muted)}
+    .metricNew{color:var(--text)}
+    .metricHighlight{color:var(--lime)}
+    .metricNote{color:var(--muted);font-size:.85rem;line-height:1.7;margin-top:16px;max-width:700px}
+    @media(max-width:1020px){.metricsGrid{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
 <body>
@@ -94,6 +103,31 @@
         <p>In most finance teams this is done manually. A clerk reads the invoice, enters the data into the accounting system, opens the purchase order in a separate screen, opens the goods receipt in another, and works through a comparison line by line. If something does not match, they contact the purchasing or receiving department to investigate. If the supplier needs to correct something, they send a request and wait. A straightforward invoice takes thirty minutes to an hour; anything with discrepancies takes longer.</p>
         <p>This workflow uses AI to handle the extraction, validation, and comparison steps automatically. The AI reads the invoice the moment it arrives, runs all checks against the purchase order and goods receipt, flags issues with a recommended action, and prepares an approval package. The finance manager sees a structured summary and makes a single decision. The mechanical checking work is removed; the judgment stays with the person.</p>
       </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="section">
+      <div class="sectionLabel">Impact at a glance</div>
+      <p class="metricNote">Theoretical estimates based on a finance team processing 150 supplier invoices per month. The manual baseline assumes 30–60 minutes per invoice for data entry, line-by-line comparison against the purchase order and goods receipt, and routing the approval package by hand.</p>
+      <div class="metricsGrid">
+        <div class="metricItem">
+          <div class="metricItemLabel">Manual time per invoice</div>
+          <div class="metricValue metricOld">30–60 min</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">With AI automation</div>
+          <div class="metricValue metricNew">~2 min</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">Hours saved per month</div>
+          <div class="metricValue metricHighlight">~65 hrs</div>
+        </div>
+        <div class="metricItem">
+          <div class="metricItemLabel">Processing cost reduction</div>
+          <div class="metricValue metricHighlight">~65%</div>
+        </div>
+      </div>
+      <p class="metricNote">The AI handles extraction, validation, and all comparison checks in seconds. The finance manager's remaining task is a two-minute review of the AI's structured summary — green ticks for passed checks, flagged items for anything that needs attention. At 150 invoices per month, that is approximately 65 hours of clerk and manager time returned to higher-value work each month. Invoices with discrepancies still require human investigation, but the AI's description of each issue means the manager starts from a complete picture rather than having to find the problem themselves.</p>
     </div>
 
     <div class="section">
