@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Every change versioned, tested and reversible · Building AI Applications</title>
+<meta name="description" content="Version control, CI with evaluation gates, prompt and model versioning, progressive releases and instant rollback.">
+<meta property="og:title" content="Every change versioned, tested and reversible · Building AI Applications">
+<meta property="og:description" content="Version control, CI with evaluation gates, prompt and model versioning, progressive releases and instant rollback.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#83bd72">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 14 · DevOps &amp; LLMOps</p>
+    <h1>Every change versioned, tested and reversible</h1>
+    <p class="lead">Version control, CI with evaluation gates, prompt and model versioning, progressive releases and instant rollback.</p>
+    <p class="post-meta muted">2 min read · Based on Chapter 14 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/14-devops-llmops.jpg" aria-label="Chapter 14 overview video"><source src="../assets/videos/14-devops-llmops.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>In an AI application, behaviour changes when the code changes, and also when a prompt, a model version, an index or a guardrail changes. Chapter 14 brings DevOps discipline to all of them.</p>
+<h2>Version everything that changes behaviour</h2>
+<table>
+<thead>
+<tr>
+<th>Artefact</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code</td>
+<td>Git, with branches and reviews</td>
+</tr>
+<tr>
+<td>Prompts</td>
+<td>Versioned files (for example YAML) with changelogs, not strings buried in code</td>
+</tr>
+<tr>
+<td>Models</td>
+<td>Pinned model IDs in configuration, never "latest"</td>
+</tr>
+<tr>
+<td>Datasets</td>
+<td>Golden datasets and training data with versions</td>
+</tr>
+<tr>
+<td>Indexes</td>
+<td>Index versions tied to the embedding model and chunking settings</td>
+</tr>
+<tr>
+<td>Guardrails and infrastructure</td>
+<td>Configuration and infrastructure as code</td>
+</tr>
+</tbody>
+</table>
+<p>Every production answer can then be traced to the exact versions that produced it.</p>
+<h2>Automated tests with a fake LLM</h2>
+<p>Unit tests should be fast, free and deterministic. Replace the LLM with a fake that returns recorded responses, and test parsing, validation, tools and workflow logic without network calls or cost.</p>
+<h2>Gate AI changes on evaluations</h2>
+<p>In CI, every change to a prompt, model or retrieval setting runs the evaluation suite. The pipeline compares quality, cost and latency with the current release and blocks the change if any metric falls below its threshold.</p>
+<h2>Release progressively</h2>
+<ul>
+<li><strong>Shadow</strong>: run the new version on real traffic without showing the result, and compare.</li>
+<li><strong>Canary</strong>: send a small share of traffic to the new version, watch the metrics, then increase.</li>
+<li><strong>Blue-green</strong>: switch all traffic at once, with the old version ready.</li>
+</ul>
+<h2>Make rollback instant</h2>
+<p>Each artefact needs its own rollback: redeploy the previous image, restore the previous prompt version, re-pin the previous model, or switch back to the previous index. Practise it before you need it.</p>
+<h2>Manage environments</h2>
+<p>Keep development, staging and production close to each other, with <strong>separate credentials and budgets</strong> and <strong>safe data</strong>: anonymised or synthetic data outside production.</p>
+<h2>Key takeaways</h2>
+<ul>
+<li>Version everything that changes behaviour.</li>
+<li>Gate AI changes on quality, cost and latency.</li>
+<li>Release progressively and make rollback instant.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 14 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="13-fine-tuning.html"><span class="muted">← Previous</span>When prompting is not enough</a><span></span></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

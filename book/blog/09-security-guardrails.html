@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safe, compliant and in control · Building AI Applications</title>
+<meta name="description" content="Prompt injection, excessive agency, data leakage, layered guardrails, GDPR and the EU AI Act.">
+<meta property="og:title" content="Safe, compliant and in control · Building AI Applications">
+<meta property="og:description" content="Prompt injection, excessive agency, data leakage, layered guardrails, GDPR and the EU AI Act.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#c54fcf">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 09 · Security &amp; guardrails</p>
+    <h1>Safe, compliant and in control</h1>
+    <p class="lead">Prompt injection, excessive agency, data leakage, layered guardrails, GDPR and the EU AI Act.</p>
+    <p class="post-meta muted">2 min read · Based on Chapter 9 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/09-security-guardrails.jpg" aria-label="Chapter 9 overview video"><source src="../assets/videos/09-security-guardrails.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>AI applications inherit every classic security risk and add new ones. Chapter 9 builds a threat model for AI systems and a layered defence.</p>
+<h2>The AI-specific threat model</h2>
+<ul>
+<li><strong>Prompt injection</strong>: instructions hidden in user input or, more dangerously, in content the agent reads, such as emails, web pages and documents (<em>indirect</em> injection).</li>
+<li><strong>Excessive agency</strong>: an agent with more tools or permissions than its task needs, which an attacker can then use.</li>
+<li><strong>Data leakage</strong>: personal or confidential data exposed through answers, logs, traces or third-party providers.</li>
+<li><strong>Insecure output handling</strong>: model output passed unchecked to a browser, database or shell.</li>
+</ul>
+<h2>Agents act as the user, never more</h2>
+<p>An agent acts on behalf of a user and must never have more permissions than that user. Enforce this in code: in tool implementations and in retrieval filters, not in the prompt. A prompt can ask the model not to show salary data; only an access filter can guarantee it.</p>
+<h2>Minimise and mask sensitive data</h2>
+<p>Send the model only what the task needs. Detect and mask personal data (names, IBANs, phone numbers) before it leaves your boundary where possible. Choose providers and regions with appropriate agreements.</p>
+<h2>Layer the guardrails</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identity and access</strong></td>
+<td>Authentication, per-user authorization, tool permissions</td>
+</tr>
+<tr>
+<td><strong>Sensitive-data masking</strong></td>
+<td>PII detection and redaction, secrets scanning</td>
+</tr>
+<tr>
+<td><strong>Deterministic guardrails</strong></td>
+<td>Input limits, schemas, allow-lists, tool policies, approval for consequential actions</td>
+</tr>
+<tr>
+<td><strong>LLM guardrails</strong></td>
+<td>Injection detection, safety classification, groundedness checks</td>
+</tr>
+<tr>
+<td><strong>Governance and audit</strong></td>
+<td>Use-case register, risk classification, audit logs, human oversight</td>
+</tr>
+</tbody>
+</table>
+<p>Deterministic layers are cheap and reliable; LLM guardrails catch what rules cannot. Use both.</p>
+<h2>GDPR and the EU AI Act</h2>
+<p>Design for GDPR from day one, especially the <strong>right to erasure</strong>. Personal data now lives in vector stores, memories, traces and caches as well as databases. Classify each use case under the EU AI Act: high-risk systems need risk management, documentation, human oversight and logging. Decisions with legal effect on people need a human in the loop.</p>
+<h2>Key takeaways</h2>
+<ul>
+<li>Threat-model prompt injection, excessive agency and leakage.</li>
+<li>Agents never get more permissions than their user.</li>
+<li>Layer deterministic and LLM guardrails; design for GDPR from day one.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 9 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="08-llm-deployment.html"><span class="muted">← Previous</span>Where the model runs, and why</a><a class="next" href="10-app-monitoring.html"><span class="muted">Next →</span>See every request, error and resource</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

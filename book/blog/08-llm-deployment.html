@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where the model runs, and why · Building AI Applications</title>
+<meta name="description" content="Frontier APIs, cloud AI services, local models and dedicated GPUs, combined behind one model gateway.">
+<meta property="og:title" content="Where the model runs, and why · Building AI Applications">
+<meta property="og:description" content="Frontier APIs, cloud AI services, local models and dedicated GPUs, combined behind one model gateway.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#a855f7">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 08 · LLM deployment</p>
+    <h1>Where the model runs, and why</h1>
+    <p class="lead">Frontier APIs, cloud AI services, local models and dedicated GPUs, combined behind one model gateway.</p>
+    <p class="post-meta muted">2 min read · Based on Chapter 8 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/08-llm-deployment.jpg" aria-label="Chapter 8 overview video"><source src="../assets/videos/08-llm-deployment.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>The model is the most expensive and the most strategic dependency of an AI application. Chapter 8 compares the ways to run it and shows how to combine them.</p>
+<h2>The options</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Strengths</th>
+<th>Trade-offs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Frontier LLM API</strong></td>
+<td>Best quality on hard tasks, no operations, fast start</td>
+<td>Data leaves your environment, per-token cost, provider dependency</td>
+</tr>
+<tr>
+<td><strong>Frontier agent app</strong></td>
+<td>Ready-made agents for knowledge work, extended with tools and skills</td>
+<td>Less control over the workflow</td>
+</tr>
+<tr>
+<td><strong>Cloud AI service</strong> (Bedrock, Azure, Vertex)</td>
+<td>Frontier models inside your cloud account and region</td>
+<td>Cloud-specific setup, regional model availability</td>
+</tr>
+<tr>
+<td><strong>Local LLM</strong> (Ollama, LM Studio)</td>
+<td>Free at the margin, fully private, good for development</td>
+<td>Smaller models, limited throughput</td>
+</tr>
+<tr>
+<td><strong>Remote shared GPU</strong></td>
+<td>Open models without buying hardware</td>
+<td>Variable availability and performance</td>
+</tr>
+<tr>
+<td><strong>Dedicated GPU</strong> (vLLM on your own servers)</td>
+<td>Sovereignty, predictable cost at high volume</td>
+<td>Operations, capacity planning, often lower quality on hard tasks</td>
+</tr>
+</tbody>
+</table>
+<h2>Building on APIs vs extending agent apps</h2>
+<p>For <strong>process automation</strong>, such as claims intake or invoice processing, build on APIs: you need control over each step, evaluation and integration. For <strong>knowledge work</strong>, such as research, analysis and writing, extending an existing agent app with your tools, skills and data is often faster and better than building your own.</p>
+<h2>Check the terms, not just the benchmarks</h2>
+<p>Before sending business data to any provider, check the data-processing agreement, the retention and training policies, the processing regions and the certifications. Regulators will ask.</p>
+<h2>Combine options behind a gateway</h2>
+<p>A <strong>model gateway</strong> (for example LiteLLM, or a cloud AI gateway) exposes one endpoint and routes to several back-ends. It gives you:</p>
+<ul>
+<li><strong>fallbacks</strong> when a provider is down or rate-limited;</li>
+<li><strong>routing</strong>: small models for easy requests, frontier models for hard ones;</li>
+<li>one place for <strong>keys, budgets, logging and caching</strong>;</li>
+<li>freedom to <strong>switch providers</strong> without changing application code.</li>
+</ul>
+<h2>Key takeaways</h2>
+<ul>
+<li>Frontier APIs give the best quality for the least effort.</li>
+<li>Self-hosting buys sovereignty at the price of operations.</li>
+<li>A model gateway adds fallbacks and avoids lock-in.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 8 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="07-app-deployment.html"><span class="muted">← Previous</span>Containerise once, deploy anywhere</a><a class="next" href="09-security-guardrails.html"><span class="muted">Next →</span>Safe, compliant and in control</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

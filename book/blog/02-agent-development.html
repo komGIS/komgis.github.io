@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design the workflow before you write a prompt · Building AI Applications</title>
+<meta name="description" content="A ten-step method for designing AI workflows, from splitting the work into steps to the hooks that keep agents in check.">
+<meta property="og:title" content="Design the workflow before you write a prompt · Building AI Applications">
+<meta property="og:description" content="A ten-step method for designing AI workflows, from splitting the work into steps to the hooks that keep agents in check.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#32cad7">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 02 · Agent development</p>
+    <h1>Design the workflow before you write a prompt</h1>
+    <p class="lead">A ten-step method for designing AI workflows, from splitting the work into steps to the hooks that keep agents in check.</p>
+    <p class="post-meta muted">3 min read · Based on Chapter 2 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/02-agent-development.jpg" aria-label="Chapter 2 overview video"><source src="../assets/videos/02-agent-development.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>Agent development is the heart of an AI application, and the longest chapter of the book. Its central idea is simple: <strong>design the workflow before you write a prompt.</strong> The book gives a ten-step method. Each step asks one question and leaves one written result.</p>
+<h2>The ten steps</h2>
+<ol>
+<li><strong>Define the steps.</strong> Split the work into fixed steps with clear inputs and outputs, and make the branches explicit.</li>
+<li><strong>Deterministic or AI?</strong> For every step, use code if code can do it. Use AI for decisions and planning, for classification, scoring, summarization and generation, and for goal-driven work with automatic feedback.</li>
+<li><strong>Choose the AI pattern.</strong> Use the least complicated pattern that does the work (see below).</li>
+<li><strong>Select the components.</strong> Decide which prompts, tools, skills and sub-agents each agent needs, with a name and a description.</li>
+<li><strong>Place humans.</strong> Add a human after every low-confidence critical decision, and before every action on the environment, such as sending an email or changing a file.</li>
+<li><strong>Define memory.</strong> Separate the working memory of one run from the external memory that persists across runs.</li>
+<li><strong>Design the context.</strong> For every LLM call, list exactly what goes into the context and which part of memory each item comes from.</li>
+<li><strong>Design the components.</strong> Write the prompts, tool schemas, skills and sub-agent definitions as versioned files.</li>
+<li><strong>Design external memory.</strong> After every run, save experience such as outcomes, corrections and lessons, so the next run starts smarter.</li>
+<li><strong>Design hooks.</strong> Use linters, validators, guards and audit logs for the rules that must always hold, whatever the model decides.</li>
+</ol>
+<h2>The pattern ladder</h2>
+<p>Step 3 is where most over-engineering happens. The book orders the options from simple to complex:</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Use it when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Single LLM call</td>
+<td>The task is done in one step: classify, extract, summarise, answer</td>
+</tr>
+<tr>
+<td>LLM chain / RAG</td>
+<td>Fixed pre- or post-processing is known in advance, such as retrieval</td>
+</tr>
+<tr>
+<td>ReAct agent</td>
+<td>The next tools or steps must be chosen at run time</td>
+</tr>
+<tr>
+<td>Reflection agent</td>
+<td>An automatic quality signal (tests, rules, rubric) can judge the output</td>
+</tr>
+<tr>
+<td>Deep agent</td>
+<td>A generated plan, unknown skills or tools, and actions on an environment</td>
+</tr>
+<tr>
+<td>AI harness</td>
+<td>A persistent agent that keeps memory and works with you over time</td>
+</tr>
+</tbody>
+</table>
+<p>Climb only when the simpler pattern demonstrably fails. If no pattern fits, the step is too big: split it.</p>
+<h2>Prompts, tools, skills and sub-agents</h2>
+<p>Where know-how belongs is one of the most practical decisions in the chapter:</p>
+<ul>
+<li>know-how that is <strong>always</strong> needed goes in the <strong>prompt</strong>;</li>
+<li>know-how that is needed <strong>sometimes</strong>, in cases that cannot be predicted, goes in a <strong>skill</strong>, loaded on demand;</li>
+<li>access to the <strong>outside world</strong> goes in a <strong>tool</strong>;</li>
+<li>context-heavy sub-tasks go to a <strong>sub-agent</strong> with its own clean context.</li>
+</ul>
+<h2>The workhorse architecture</h2>
+<p>In the book's claims example, twelve steps produce only two agents, and both are bounded. One is a read-only investigation agent with a step limit; the other drafts replies with at most three reflection rounds. Everything else is code, single LLM calls or RAG chains. A deterministic backbone with bounded AI steps is the enterprise workhorse: flexible where cases vary, and predictable everywhere else.</p>
+<h2>Key takeaways</h2>
+<ul>
+<li>Design before you prompt: ten steps, one design sheet.</li>
+<li>Use code where it can do the work, and AI only where it must.</li>
+<li>Choose the least complex AI pattern for every step.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 2 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="01-business-case.html"><span class="muted">← Previous</span>Is AI the right tool? Start with the problem, not the model</a><a class="next" href="03-data-engineering.html"><span class="muted">Next →</span>Trusted data in, before any model sees it</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

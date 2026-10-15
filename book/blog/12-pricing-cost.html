@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quality per euro, by design · Building AI Applications</title>
+<meta name="description" content="Selecting models on your own data, routing to the cheapest capable model, calculating cost per task and optimising without losing quality.">
+<meta property="og:title" content="Quality per euro, by design · Building AI Applications">
+<meta property="og:description" content="Selecting models on your own data, routing to the cheapest capable model, calculating cost per task and optimising without losing quality.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#f28534">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 12 · Pricing &amp; cost</p>
+    <h1>Quality per euro, by design</h1>
+    <p class="lead">Selecting models on your own data, routing to the cheapest capable model, calculating cost per task and optimising without losing quality.</p>
+    <p class="post-meta muted">2 min read · Based on Chapter 12 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/12-pricing-cost.jpg" aria-label="Chapter 12 overview video"><source src="../assets/videos/12-pricing-cost.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>AI costs scale with usage in a way that classic software costs do not. Chapter 12 shows how to select models, predict cost per task and reduce it without hurting quality. All prices in the book are illustrative; use your provider's current price list.</p>
+<h2>Select models on your own data</h2>
+<p>Public leaderboards are a starting point, not an answer. Compare candidates on <strong>your</strong> golden dataset and weigh reasoning ability, context window, structured-output and tool-calling reliability, multimodality, latency, price, data-processing terms and the availability of fallbacks.</p>
+<h2>Route to the cheapest capable model</h2>
+<p>Most requests do not need the largest model. Two patterns:</p>
+<ul>
+<li><strong>Routing</strong>: a classifier or rules send easy requests to a small model and hard ones to a frontier model.</li>
+<li><strong>Cascading</strong>: try the small model first, validate the result (schema, confidence, checks) and escalate only when validation fails.</li>
+</ul>
+<p>Cascades with validation are simple to build and often cut cost substantially.</p>
+<h2>Calculate cost per task</h2>
+<p>Count tokens per step: input, output and cached input. Multiply by the price, and add embeddings, OCR and infrastructure. For agents, the number of steps varies, so estimate from the distribution in your traces and enforce <strong>run budgets</strong> so one runaway task cannot burn a month's allowance.</p>
+<h2>API or self-hosting?</h2>
+<p>Self-hosting open models pays off only with <strong>high, steady volume</strong> and the skills to operate GPUs. Below that break-even, APIs are cheaper and better.</p>
+<h2>Optimise, then re-check quality</h2>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>Typical effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt caching</td>
+<td>Large savings on repeated prefixes</td>
+</tr>
+<tr>
+<td>Batch APIs</td>
+<td>Lower price for non-urgent work</td>
+</tr>
+<tr>
+<td>Context reduction</td>
+<td>Fewer input tokens per call</td>
+</tr>
+<tr>
+<td>Routing and cascades</td>
+<td>Small models for easy cases</td>
+</tr>
+<tr>
+<td>Reasoning-effort control</td>
+<td>Less thinking for easy tasks</td>
+</tr>
+</tbody>
+</table>
+<p>After every optimisation, re-run your evaluations. A cheaper system that gives worse answers is not an optimisation.</p>
+<h2>Key takeaways</h2>
+<ul>
+<li>Select models on your own evaluation data.</li>
+<li>Route each request to the cheapest capable model.</li>
+<li>Re-check quality after every cost optimisation.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 12 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="11-agent-monitoring.html"><span class="muted">← Previous</span>See what the agent did, and why</a><a class="next" href="13-fine-tuning.html"><span class="muted">Next →</span>When prompting is not enough</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

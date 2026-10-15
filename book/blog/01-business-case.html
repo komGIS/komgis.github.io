@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is AI the right tool? Start with the problem, not the model · Building AI Applications</title>
+<meta name="description" content="Before choosing a model, define the problem, its cost and how you will know it worked. Many tasks are best solved with ordinary code.">
+<meta property="og:title" content="Is AI the right tool? Start with the problem, not the model · Building AI Applications">
+<meta property="og:description" content="Before choosing a model, define the problem, its cost and how you will know it worked. Many tasks are best solved with ordinary code.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#2dd4bf">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 01 · Business case</p>
+    <h1>Is AI the right tool? Start with the problem, not the model</h1>
+    <p class="lead">Before choosing a model, define the problem, its cost and how you will know it worked. Many tasks are best solved with ordinary code.</p>
+    <p class="post-meta muted">3 min read · Based on Chapter 1 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/01-business-case.jpg" aria-label="Chapter 1 overview video"><source src="../assets/videos/01-business-case.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>Most AI projects that disappoint do not fail on technology. They fail because nobody wrote down which problem they solve, what that problem costs today, and what result would count as success. Chapter 1 of <em>Building AI Applications</em> is about doing that work first.</p>
+<h2>Define the problem and its cost</h2>
+<p>Start with a problem statement that a business owner would sign: who is affected, how often it happens, and what it costs in time, money, errors or lost customers. In the book's running example, an insurer's claims team spends a large share of each day reading emails, copying data into the claims system and drafting standard replies. That is a concrete, measurable problem.</p>
+<p>Then ask the uncomfortable question: is AI the right tool? If the rules are known and the inputs are structured, ordinary code is cheaper, faster and easier to test. AI earns its place when the input is unstructured (emails, documents, images, speech) or when the task needs judgement that cannot be written as rules.</p>
+<h2>Model the process before you automate it</h2>
+<p>The chapter uses BPMN to model the <em>as-is</em> process and the <em>to-be</em> process. The diagram makes three things visible:</p>
+<ul>
+<li>which steps stay with people, which become deterministic code and which need an AI component;</li>
+<li>where approvals and exceptions happen;</li>
+<li>where errors are expensive, which later tells you where a human must stay in the loop.</li>
+</ul>
+<p>A good to-be model is already half of the architecture.</p>
+<h2>Quantify the return on investment</h2>
+<p>ROI calculations for AI are often too optimistic, because they assume full adoption and perfect accuracy. A realistic calculation includes:</p>
+<ul>
+<li><strong>adoption over time</strong>, since not everyone uses the tool from day one;</li>
+<li><strong>accuracy and review effort</strong>, since humans still check part of the output;</li>
+<li><strong>running costs</strong>: model usage, infrastructure, monitoring and maintenance;</li>
+<li><strong>one-off costs</strong>: development, data preparation and change management.</li>
+</ul>
+<p>If the business case only works with perfect numbers, it does not work.</p>
+<h2>Design for the people who will use it</h2>
+<p>AI that people do not trust does not get used. Design for <strong>augmentation</strong> rather than replacement, make the AI's reasoning and sources <strong>visible</strong>, and make its output <strong>easy to correct</strong>. Adoption is a plan with owners, training and feedback channels, not a launch email.</p>
+<h2>Agree how you will measure success</h2>
+<p>Finally, agree KPIs before you build, on four layers: business results (time per case, cost per case), adoption (active users, acceptance rate), AI quality (accuracy, groundedness) and operations (latency, availability, cost per task). Record a baseline and a go/no-go rule for the pilot. Then the decision to scale is a measurement, not an opinion.</p>
+<h2>Key takeaways</h2>
+<ul>
+<li>Define the problem and its cost before choosing a technology.</li>
+<li>Quantify ROI with realistic adoption, accuracy and running costs.</li>
+<li>Agree KPIs, baselines and go/no-go rules in advance.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 1 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><span></span><a class="next" href="02-agent-development.html"><span class="muted">Next →</span>Design the workflow before you write a prompt</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trusted data in, before any model sees it · Building AI Applications</title>
+<meta name="description" content="Connectors, extraction, validation and quality scoring that turn messy business data into input an AI application can trust.">
+<meta property="og:title" content="Trusted data in, before any model sees it · Building AI Applications">
+<meta property="og:description" content="Connectors, extraction, validation and quality scoring that turn messy business data into input an AI application can trust.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#36c0f0">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 03 · Data engineering</p>
+    <h1>Trusted data in, before any model sees it</h1>
+    <p class="lead">Connectors, extraction, validation and quality scoring that turn messy business data into input an AI application can trust.</p>
+    <p class="post-meta muted">2 min read · Based on Chapter 3 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/03-data-engineering.jpg" aria-label="Chapter 3 overview video"><source src="../assets/videos/03-data-engineering.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>An AI application is only as good as the data it receives. In practice, data engineering takes more effort than prompt engineering and model selection combined. Chapter 3 covers the pipeline that turns emails, documents, databases and recordings into clean, validated input.</p>
+<h2>Sources and connectors</h2>
+<p>Business data arrives in every shape: structured records in databases and APIs, semi-structured forms and invoices, unstructured emails and contracts, images, audio and video. Each needs a connector: an API client, a webhook receiver, change data capture on a database, a mailbox poller or a file watcher.</p>
+<p>Choose connectors by <strong>freshness</strong>, <strong>volume</strong> and <strong>permission needs</strong>. Above all, carry the source system's access rights along as metadata. If a user may not see a document in SharePoint, the AI must not show it to them either.</p>
+<h2>Processing: from raw to structured</h2>
+<p>The processing stages are:</p>
+<ul>
+<li><strong>extraction</strong>: text and tables from PDFs, Office files and HTML;</li>
+<li><strong>OCR</strong> for scans and photos, with confidence scores;</li>
+<li><strong>structuring</strong>: an LLM turns free text into typed records against a schema;</li>
+<li><strong>summarization</strong>, <strong>normalization</strong> (dates, currencies, names), <strong>deduplication</strong> and <strong>filtering</strong>.</li>
+</ul>
+<p>Use the simplest reliable extractor for each content type. Keep vision LLMs for what classic tools cannot do, and cross-check critical fields such as amounts and policy numbers.</p>
+<h2>Validate in two passes</h2>
+<p>Validate <strong>deterministically first</strong>: schemas, required fields, formats, ranges, checksums and cross-field rules. Only then validate <strong>semantically</strong> with an LLM, for checks that are hard to write as rules, such as whether a description fits the declared damage type or whether two documents contradict each other.</p>
+<p>Records that fail do not disappear. They go to <strong>quarantine</strong> with a reason, where someone can fix them or the pipeline can retry.</p>
+<h2>Measure data quality continuously</h2>
+<p>Data quality is a metric, not a one-off clean-up. Track completeness, validity, consistency and freshness per source, and alert when they drift. Anything an LLM inferred rather than read should be labelled as inferred.</p>
+<h2>Keep originals and lineage</h2>
+<p>Store raw originals unchanged, record lineage from file to parsed text to record, and make every stage re-runnable. When you improve an extractor next month, you can then reprocess history instead of starting from scratch.</p>
+<h2>Key takeaways</h2>
+<ul>
+<li>Keep raw originals, record lineage, make every stage re-runnable.</li>
+<li>Validate deterministically first, semantically second.</li>
+<li>Measure data quality continuously and quarantine failures.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 3 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="02-agent-development.html"><span class="muted">← Previous</span>Design the workflow before you write a prompt</a><a class="next" href="04-testing-evals.html"><span class="muted">Next →</span>Know that it works, and keep knowing</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

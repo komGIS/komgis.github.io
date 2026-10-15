@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interfaces people trust and can correct · Building AI Applications</title>
+<meta name="description" content="Chat is not the only answer. Choosing the right interaction pattern and designing for trust, streaming and correction.">
+<meta property="og:title" content="Interfaces people trust and can correct · Building AI Applications">
+<meta property="og:description" content="Chat is not the only answer. Choosing the right interaction pattern and designing for trust, streaming and correction.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#577ff3">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 05 · UI development</p>
+    <h1>Interfaces people trust and can correct</h1>
+    <p class="lead">Chat is not the only answer. Choosing the right interaction pattern and designing for trust, streaming and correction.</p>
+    <p class="post-meta muted">2 min read · Based on Chapter 5 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/05-ui-development.jpg" aria-label="Chapter 5 overview video"><source src="../assets/videos/05-ui-development.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>The interface decides whether an AI application gets used. Chapter 5 argues that chat is only one option, and often not the best one, and that trust has to be designed in.</p>
+<h2>Pick the interaction pattern that fits the task</h2>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Embedded AI features</strong></td>
+<td>Workflows that already have an application: a "summarise" or "draft reply" button where people work</td>
+</tr>
+<tr>
+<td><strong>Review inbox</strong></td>
+<td>High-volume processing, where AI prepares cases and people approve, edit or reject them</td>
+</tr>
+<tr>
+<td><strong>Copilot sidebar</strong></td>
+<td>Assistance next to an existing tool, with context from the current screen</td>
+</tr>
+<tr>
+<td><strong>Chat</strong></td>
+<td>Exploration and open questions over documents and data</td>
+</tr>
+<tr>
+<td><strong>Voice</strong></td>
+<td>Phone channels and hands-free situations</td>
+</tr>
+</tbody>
+</table>
+<p>A claims team that processes hundreds of emails a day is better served by a review inbox than by a chat window.</p>
+<h2>Design for trust</h2>
+<p>Users trust an AI system that shows its work and lets them fix it:</p>
+<ul>
+<li><strong>provenance</strong>: citations and links to the source documents;</li>
+<li><strong>uncertainty</strong>: confidence indicators and highlighted fields that need attention;</li>
+<li><strong>editability</strong>: every AI output can be changed before it is used;</li>
+<li><strong>feedback</strong>: thumbs, corrections and reasons, captured as data for improvement;</li>
+<li><strong>graceful failure</strong>: clear messages and a manual path when the AI cannot help.</li>
+</ul>
+<p>Watch out for automation bias. When the system is right most of the time, reviewers stop checking. Highlight the uncertain parts and measure review time and override rates.</p>
+<h2>Streaming and long-running work are architecture</h2>
+<p>LLM responses take seconds and agent runs can take minutes. Stream tokens to the UI (server-sent events or WebSockets), show progress for multi-step runs, and make runs <strong>resumable</strong>, with state owned by the backend. A user who closes the tab should not lose the result. Plan this from the start; it is hard to add later.</p>
+<h2>Prototype fast, then build for production</h2>
+<p>Python UI tools such as Streamlit or Gradio are good for prototypes and internal tools. For customer-facing or high-usage applications, plan a production frontend with proper authentication, accessibility, state management and design.</p>
+<h2>Key takeaways</h2>
+<ul>
+<li>Pick the interface that fits the task, not the trend.</li>
+<li>Design for trust: sources, uncertainty, easy correction.</li>
+<li>Streaming and resumable runs are architecture, not polish.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 5 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="04-testing-evals.html"><span class="muted">← Previous</span>Know that it works, and keep knowing</a><a class="next" href="06-database-storage.html"><span class="muted">Next →</span>The right store for every kind of data</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

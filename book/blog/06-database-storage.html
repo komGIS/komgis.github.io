@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The right store for every kind of data · Building AI Applications</title>
+<meta name="description" content="Relational, object, vector, graph and telemetry stores, and why &quot;Postgres plus object storage&quot; is the right place to start.">
+<meta property="og:title" content="The right store for every kind of data · Building AI Applications">
+<meta property="og:description" content="Relational, object, vector, graph and telemetry stores, and why &quot;Postgres plus object storage&quot; is the right place to start.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#6d64f2">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 06 · Database &amp; storage</p>
+    <h1>The right store for every kind of data</h1>
+    <p class="lead">Relational, object, vector, graph and telemetry stores, and why &quot;Postgres plus object storage&quot; is the right place to start.</p>
+    <p class="post-meta muted">2 min read · Based on Chapter 6 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/06-database-storage.jpg" aria-label="Chapter 6 overview video"><source src="../assets/videos/06-database-storage.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>An AI application stores more kinds of data than a classic web application: business records, original files, embeddings, knowledge graphs, conversation state, traces and evaluation results. Chapter 6 maps each to the right store.</p>
+<h2>Separate concerns</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Store</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Business records, users, runs, approvals</td>
+<td><strong>Relational database</strong></td>
+<td>Transactions, constraints, reporting</td>
+</tr>
+<tr>
+<td>Original files, images, audio</td>
+<td><strong>Object storage</strong></td>
+<td>Cheap, durable, immutable originals</td>
+</tr>
+<tr>
+<td>Chunks and embeddings for retrieval</td>
+<td><strong>Vector index</strong></td>
+<td>Similarity search with metadata filters</td>
+</tr>
+<tr>
+<td>Entities and relationships</td>
+<td><strong>Graph</strong> (when needed)</td>
+<td>Multi-hop questions, GraphRAG</td>
+</tr>
+<tr>
+<td>Traces, logs, metrics</td>
+<td><strong>Telemetry stores</strong></td>
+<td>High volume, time-based queries, retention</td>
+</tr>
+</tbody>
+</table>
+<h2>Start with "Postgres plus object storage"</h2>
+<p>PostgreSQL with JSONB, pgvector and full-text search covers relational data, documents, vectors and keyword search in one system, with one backup and one security model. Add object storage for files and Redis for queues and caching. Add specialised stores, such as a dedicated vector database or a graph database, only when measurements show you need them.</p>
+<h2>Profile the information before you choose</h2>
+<p>The companion chapter on knowledge management adds an important step: profile how information is laid out in each document type before choosing storage. Is it fragmented across sections, hidden in tables or formatting, contradictory, versioned? Free text belongs in the vector store, exact numbers and dates in relational tables, and relationships in a graph. Most real knowledge bases are hybrid, with stores linked by shared IDs.</p>
+<h2>Keep originals and lineage</h2>
+<p>Store originals immutably and keep lineage from file to parsed text, to chunk, to embedding, including the embedding model version. When you change the model or the chunking strategy, you can rebuild the index from the source instead of guessing what was in it.</p>
+<h2>Access control and retention</h2>
+<ul>
+<li>Enforce access control <strong>in queries</strong>, with metadata filters based on the user's rights, never in prompts.</li>
+<li>Treat traces and logs as sensitive data: they contain prompts, documents and personal data. Give them retention and deletion policies, because the right to erasure applies there too.</li>
+</ul>
+<h2>Key takeaways</h2>
+<ul>
+<li>Relational for transactions, objects for files, vectors for retrieval.</li>
+<li>Store originals immutably; keep lineage to every embedding.</li>
+<li>Enforce access control in queries, never in prompts.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 6 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="05-ui-development.html"><span class="muted">← Previous</span>Interfaces people trust and can correct</a><a class="next" href="07-app-deployment.html"><span class="muted">Next →</span>Containerise once, deploy anywhere</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

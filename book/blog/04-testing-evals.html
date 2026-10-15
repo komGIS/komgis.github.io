@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Know that it works, and keep knowing · Building AI Applications</title>
+<meta name="description" content="Golden datasets, graders and evaluation gates that turn &quot;it looked fine in the demo&quot; into measurable quality.">
+<meta property="og:title" content="Know that it works, and keep knowing · Building AI Applications">
+<meta property="og:description" content="Golden datasets, graders and evaluation gates that turn &quot;it looked fine in the demo&quot; into measurable quality.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#44a4f6">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 04 · Testing &amp; evals</p>
+    <h1>Know that it works, and keep knowing</h1>
+    <p class="lead">Golden datasets, graders and evaluation gates that turn &quot;it looked fine in the demo&quot; into measurable quality.</p>
+    <p class="post-meta muted">2 min read · Based on Chapter 4 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/04-testing-evals.jpg" aria-label="Chapter 4 overview video"><source src="../assets/videos/04-testing-evals.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>Traditional software tests check that the same input gives the same output. AI systems are probabilistic, so "it worked in the demo" is not evidence. Chapter 4 shows how to measure quality systematically, before release and in production.</p>
+<h2>Test at four levels</h2>
+<p>Test each of these separately, because each fails in its own way:</p>
+<ul>
+<li><strong>components</strong>: single prompts and tools, such as whether extraction returns the right fields;</li>
+<li><strong>retrieval</strong>: whether the right passages are found (recall, precision);</li>
+<li><strong>end-to-end results</strong>: whether the final answer is correct, grounded and useful;</li>
+<li><strong>agent trajectories</strong>: whether the agent took sensible steps, called the right tools and stayed within its limits.</li>
+</ul>
+<h2>Build the golden dataset in week one</h2>
+<p>A golden dataset is a set of realistic inputs with expected outputs or grading rubrics. It is the most valuable asset of an AI project. Build it early and grow it continuously:</p>
+<ul>
+<li><strong>typical cases</strong> that cover the everyday workload;</li>
+<li><strong>edge cases</strong>: missing data, unusual formats, ambiguous requests;</li>
+<li><strong>adversarial cases</strong>: prompt injection and attempts to extract data;</li>
+<li><strong>regression cases</strong>: every production failure becomes a new test.</li>
+</ul>
+<p>LLMs can help generate candidates, but a domain expert must verify the labels.</p>
+<h2>Grade with the cheapest reliable method</h2>
+<p>Use, in this order:</p>
+<ol>
+<li><strong>deterministic checks</strong>: exact match, schema validation, numeric tolerance, required citations;</li>
+<li><strong>LLM-as-judge</strong> for open-ended quality such as tone, completeness and faithfulness, calibrated against human ratings;</li>
+<li><strong>human review</strong> for calibration, audits and high-stakes cases.</li>
+</ol>
+<p>A judge that is never compared with humans is an opinion, not a measurement.</p>
+<h2>Gate releases on evaluations</h2>
+<p>Every change to a prompt, model, retrieval setting or agent logic runs the evaluation suite in CI. The release passes only if quality, cost and latency stay within agreed thresholds. This makes prompt changes as safe as code changes (see also the DevOps chapter).</p>
+<h2>Keep evaluating in production</h2>
+<p>Production traffic is different from your test set. Online evaluators score a sample of live runs, user feedback (thumbs, edits, overrides) is captured, and negative cases flow back into the golden dataset. Evaluation is a loop, not a phase.</p>
+<h2>Key takeaways</h2>
+<ul>
+<li>Build the golden dataset in week one; grow it with every failure.</li>
+<li>Grade with the cheapest reliable method.</li>
+<li>Gate releases on evaluations, then keep evaluating in production.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 4 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="03-data-engineering.html"><span class="muted">← Previous</span>Trusted data in, before any model sees it</a><a class="next" href="05-ui-development.html"><span class="muted">Next →</span>Interfaces people trust and can correct</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

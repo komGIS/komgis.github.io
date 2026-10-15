@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>See what the agent did, and why · Building AI Applications</title>
+<meta name="description" content="Tracing LLM calls, tools and human decisions, catching silent failures, and closing the loop from feedback to fix.">
+<meta property="og:title" content="See what the agent did, and why · Building AI Applications">
+<meta property="og:description" content="Tracing LLM calls, tools and human decisions, catching silent failures, and closing the loop from feedback to fix.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#ef6170">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 11 · Agent monitoring</p>
+    <h1>See what the agent did, and why</h1>
+    <p class="lead">Tracing LLM calls, tools and human decisions, catching silent failures, and closing the loop from feedback to fix.</p>
+    <p class="post-meta muted">2 min read · Based on Chapter 11 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/11-agent-monitoring.jpg" aria-label="Chapter 11 overview video"><source src="../assets/videos/11-agent-monitoring.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>Application monitoring tells you that a request took four seconds. Agent monitoring tells you <em>why</em>: which prompt version ran, what was retrieved, which tools were called, what the model answered and whether a human changed it. Chapter 11 covers this second layer.</p>
+<h2>Trace everything the agent does</h2>
+<p>A good agent trace records, for every run:</p>
+<ul>
+<li>each <strong>LLM call</strong>, with prompt version, model, tokens, latency and cost;</li>
+<li>each <strong>retrieval</strong>, with query, returned chunks and scores;</li>
+<li>each <strong>tool call</strong>, with arguments, result and errors;</li>
+<li>each <strong>guardrail</strong> decision and each <strong>human-in-the-loop</strong> action;</li>
+<li>metadata such as user, tenant, environment and release.</li>
+</ul>
+<p>Tools such as LangSmith and Langfuse make these traces searchable, and OpenTelemetry's GenAI conventions make them portable.</p>
+<h2>Treat traces as sensitive data</h2>
+<p>Traces contain prompts, documents and answers, and often personal data. Mask fields, sample where volume is high, restrict access, and apply retention and deletion policies, including for erasure requests.</p>
+<h2>Catch silent failures</h2>
+<p>The most dangerous agent failures raise no exception: a confident wrong answer, a missed document, a tool called with the wrong customer ID. Catch them with:</p>
+<ul>
+<li><strong>online evaluators</strong> that score a sample of production runs for groundedness, correctness and policy;</li>
+<li><strong>user feedback</strong>: thumbs, edits, overrides and abandonment;</li>
+<li><strong>behaviour metrics</strong>: steps per run, tool error rates, loops and escalations.</li>
+</ul>
+<h2>Agent KPIs</h2>
+<p>Track quality, cost and latency <strong>per run</strong> and per step, alongside adoption: acceptance rate, edit rate and time saved. These tell you whether the agent is getting better or worse after each release.</p>
+<h2>Close the loop</h2>
+<p>Monitoring only pays off when it changes the system. The loop is: negative feedback, then annotation by an expert, then a new case in the golden dataset, then an experiment with a fix, then a release gated by evaluations.</p>
+<h2>Key takeaways</h2>
+<ul>
+<li>Trace every LLM call, tool call and human decision.</li>
+<li>Catch silent failures with online evaluators and feedback.</li>
+<li>Close the loop: feedback, dataset, experiment, release.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 11 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="10-app-monitoring.html"><span class="muted">← Previous</span>See every request, error and resource</a><a class="next" href="12-pricing-cost.html"><span class="muted">Next →</span>Quality per euro, by design</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

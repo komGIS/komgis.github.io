@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>See every request, error and resource · Building AI Applications</title>
+<meta name="description" content="OpenTelemetry, structured logs, resilient error handling and Grafana dashboards for AI applications.">
+<meta property="og:title" content="See every request, error and resource · Building AI Applications">
+<meta property="og:description" content="OpenTelemetry, structured logs, resilient error handling and Grafana dashboards for AI applications.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#e24aa6">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 10 · App monitoring</p>
+    <h1>See every request, error and resource</h1>
+    <p class="lead">OpenTelemetry, structured logs, resilient error handling and Grafana dashboards for AI applications.</p>
+    <p class="post-meta muted">2 min read · Based on Chapter 10 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/10-app-monitoring.jpg" aria-label="Chapter 10 overview video"><source src="../assets/videos/10-app-monitoring.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>AI applications have more moving parts than classic web apps: queues, workers, vector stores, GPUs and external model providers. Chapter 10 covers how to see what all of them are doing.</p>
+<h2>Instrument once with OpenTelemetry</h2>
+<p>OpenTelemetry gives you vendor-neutral <strong>metrics</strong>, <strong>logs</strong> and <strong>traces</strong>, all correlated by a trace ID. One user request can then be followed through the API, the queue, the worker, the retrieval step and the LLM provider. Auto-instrumentation covers web frameworks, HTTP clients and databases with a few lines of setup. A collector in the middle redacts sensitive fields and exports to your back-end.</p>
+<h2>What to monitor</h2>
+<ul>
+<li><strong>Events</strong>: business-level facts such as "claim processed", "approval requested" or "reply sent".</li>
+<li><strong>Logs</strong>: structured JSON, correlated with traces, with personal data redacted.</li>
+<li><strong>Infrastructure</strong>: CPU, memory, disk, container restarts, and GPU utilisation and memory for self-hosted models.</li>
+<li><strong>Networking</strong>: latency and errors to every dependency, including each external LLM provider.</li>
+<li><strong>Errors</strong>: rates, types, and which fallback path was taken.</li>
+</ul>
+<h2>Handle errors deliberately</h2>
+<p>LLM providers rate-limit, time out and occasionally go down. Build resilience in:</p>
+<ul>
+<li><strong>retries</strong> with exponential back-off and jitter for transient errors;</li>
+<li><strong>fallbacks</strong> to another model or provider;</li>
+<li><strong>circuit breakers</strong> that stop hammering a failing dependency;</li>
+<li><strong>quarantine</strong> and <strong>dead-letter queues</strong> for inputs that always fail.</li>
+</ul>
+<p>Then monitor each mechanism. A fallback that fires constantly is an incident, not a success.</p>
+<h2>Dashboards and alerts</h2>
+<p>Build Grafana dashboards around the <strong>golden signals</strong> (latency, traffic, errors, saturation) plus your business KPIs. Alert on <strong>user-facing symptoms</strong>, such as a growing queue, rising error rates or slow responses, rather than every internal blip, and attach a runbook to every alert.</p>
+<h2>Local first, then choose a back-end</h2>
+<p>An all-in-one local stack (Grafana, Prometheus, Loki and Tempo in one container) is enough for development. For production, choose self-hosted or managed back-ends based on data control and budget.</p>
+<h2>Key takeaways</h2>
+<ul>
+<li>Instrument with OpenTelemetry, correlated by trace ID.</li>
+<li>Handle errors deliberately, and monitor every fallback.</li>
+<li>Alert on user-facing symptoms, with runbooks.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 10 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="09-security-guardrails.html"><span class="muted">← Previous</span>Safe, compliant and in control</a><a class="next" href="11-agent-monitoring.html"><span class="muted">Next →</span>See what the agent did, and why</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When prompting is not enough · Building AI Applications</title>
+<meta name="description" content="When fine-tuning is worth it, how to build the dataset, how to train locally or remotely, and how to prove it helped.">
+<meta property="og:title" content="When prompting is not enough · Building AI Applications">
+<meta property="og:description" content="When fine-tuning is worth it, how to build the dataset, how to train locally or remotely, and how to prove it helped.">
+<meta property="og:image" content="../assets/book/social.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html"><span class="brand-mark">AI</span><span>Building AI Applications</span></a>
+    <nav class="site-nav" aria-label="Main"><a href="../index.html">Book</a><a href="../videos.html">Videos</a><a href="../blog/index.html" aria-current="page">Blog</a></nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="post" style="--c:#d8a625">
+  <header class="post-head wrap narrow">
+    <p class="kicker"><a href="index.html">Blog</a> · Chapter 13 · Fine-tuning</p>
+    <h1>When prompting is not enough</h1>
+    <p class="lead">When fine-tuning is worth it, how to build the dataset, how to train locally or remotely, and how to prove it helped.</p>
+    <p class="post-meta muted">2 min read · Based on Chapter 13 of <em>Building AI Applications</em></p>
+  </header>
+  <div class="wrap narrow">
+    <figure class="post-video">
+      <video class="video" controls preload="none" playsinline poster="../assets/videos/posters/13-fine-tuning.jpg" aria-label="Chapter 13 overview video"><source src="../assets/videos/13-fine-tuning.mp4" type="video/mp4"></video>
+      <figcaption class="muted">The chapter in 25 seconds</figcaption>
+    </figure>
+    <div class="prose"><p>Fine-tuning is powerful, and often unnecessary. Chapter 13 explains when it is worth the effort and how to do it properly when it is.</p>
+<h2>Fine-tune for behaviour, not knowledge</h2>
+<p>Fine-tuning changes <strong>how</strong> a model responds: format, style, tone, and consistency on a narrow task. It is a poor way to teach <strong>facts</strong>, which change and need citations. Use RAG for knowledge.</p>
+<p>Good reasons to fine-tune:</p>
+<ul>
+<li>a narrow, high-volume task where a smaller tuned model can replace a large general one;</li>
+<li>a strict output format or domain style that prompting cannot hold reliably;</li>
+<li>latency or cost targets that a large model cannot meet.</li>
+</ul>
+<h2>Beat the baseline first</h2>
+<p>Before training anything, build the strongest <strong>prompted baseline</strong> you can: good instructions, examples, retrieval and the right model. Fine-tuning must beat that baseline on your golden dataset. Otherwise it is cost without benefit.</p>
+<h2>The dataset decides the result</h2>
+<p>Training data comes from human-in-the-loop corrections, production logs, expert-written examples, distillation from a larger model and careful synthetic generation. Whatever the source, it must be:</p>
+<ul>
+<li><strong>clean</strong> and correctly labelled;</li>
+<li><strong>deduplicated</strong> and <strong>balanced</strong> across case types;</li>
+<li><strong>validated</strong> by experts;</li>
+<li><strong>versioned</strong>;</li>
+<li><strong>leakage-free</strong>, with no test cases in the training set.</li>
+</ul>
+<h2>Train locally or remotely</h2>
+<ul>
+<li><strong>Locally</strong>: Unsloth makes LoRA and QLoRA fine-tuning fast and memory-efficient on a single GPU.</li>
+<li><strong>Remotely</strong>: Hugging Face, GPU clouds and managed fine-tuning services scale to larger models and datasets.</li>
+</ul>
+<p>LoRA adapters are small, so you can keep several and switch between them.</p>
+<h2>Test before you deploy</h2>
+<p>Evaluate the tuned model on:</p>
+<ul>
+<li><strong>task performance</strong> against the baseline on the golden dataset;</li>
+<li><strong>general capability</strong>, to check that the model has not forgotten how to follow instructions;</li>
+<li><strong>robustness and safety</strong>, including adversarial inputs and refusal behaviour;</li>
+<li><strong>efficiency</strong>: latency, throughput and cost.</li>
+</ul>
+<h2>Key takeaways</h2>
+<ul>
+<li>Fine-tune for behaviour and format; use RAG for knowledge.</li>
+<li>A strong prompted baseline must be beaten first.</li>
+<li>Dataset quality decides the result.</li>
+</ul></div>
+    <aside class="book-cta">
+      <img src="../assets/book/cover.jpg" width="120" height="170" alt="">
+      <div>
+        <h2>Go deeper in the book</h2>
+        <p class="muted">Chapter 13 has the full detail: decision tables, code examples and checklists.</p>
+        <a class="btn btn-primary" href="../assets/book/Building_AI_Applications.pdf">Download the book (PDF)</a>
+      </div>
+    </aside>
+    <nav class="pager" aria-label="More posts"><a class="prev" href="12-pricing-cost.html"><span class="muted">← Previous</span>Quality per euro, by design</a><a class="next" href="14-devops-llmops.html"><span class="muted">Next →</span>Every change versioned, tested and reversible</a></nav>
+  </div>
+</article>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Building AI Applications</div>
+      <div class="muted">From Business Case to Production Agents · Edition 1.0 · 2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="../assets/book/Building_AI_Applications.pdf">Download PDF</a>
+      <a href="../videos.html">Videos</a>
+      <a href="../blog/index.html">Blog</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
